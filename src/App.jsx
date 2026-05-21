@@ -88,7 +88,7 @@ function App() {
     <div className="app-shell">
       <header className="topbar">
         <button className="brand" onClick={() => setView('inicio')} type="button">
-          <img src="/assets/brand/nexoclx-061-icon-source.png" alt="" />
+          <img src={`${import.meta.env.BASE_URL}assets/brand/nexoclx-061-icon-source.png`} alt="" />
           <span>
             <strong>NexoClx 061</strong>
             <small>extrahospitalaria y traslado crítico</small>

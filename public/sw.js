@@ -1,15 +1,20 @@
 const CACHE_NAME = 'nexoclx-061-v1'
+const BASE_PATH = '/nexoclx-061/'
 const CORE_ASSETS = [
-  '/',
-  '/manifest.webmanifest',
-  '/favicon.png',
-  '/assets/icons/icon-192.png',
-  '/assets/icons/icon-512.png',
-  '/assets/brand/nexoclx-061-icon-source.png',
+  BASE_PATH,
+  `${BASE_PATH}manifest.webmanifest`,
+  `${BASE_PATH}favicon.png`,
+  `${BASE_PATH}assets/icons/icon-192.png`,
+  `${BASE_PATH}assets/icons/icon-512.png`,
+  `${BASE_PATH}assets/brand/nexoclx-061-icon-source.png`,
 ]
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS)))
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) =>
+      Promise.allSettled(CORE_ASSETS.map((asset) => cache.add(asset))),
+    ),
+  )
   self.skipWaiting()
 })
 
@@ -36,7 +41,7 @@ self.addEventListener('fetch', (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy))
           return response
         })
-        .catch(() => caches.match('/'))
+        .catch(() => caches.match(BASE_PATH))
     }),
   )
 })

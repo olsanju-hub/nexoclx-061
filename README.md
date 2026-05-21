@@ -22,7 +22,7 @@ Interfaz mobile-first, compacta y sobria. Usa fondo gris-azulado `#f2f2f7`, supe
 
 Implementado: Vite, React, JavaScript, CSS propio, PWA, manifest, service worker básico, iconos desde `public/assets/brand/nexoclx-061-icon-source.png`, búsqueda global, tabs de protocolos y build estático.
 
-Pendiente: validación clínica local, criterios territoriales de activación/destino, dosis protocolizadas no verificadas, despliegue público.
+Pendiente: validación clínica local, criterios territoriales de activación/destino y dosis protocolizadas no verificadas.
 
 Nota clínica: La adaptación a protocolo local 061 queda pendiente antes de uso asistencial.
 
@@ -124,7 +124,7 @@ La bibliografía activa está en `src/data/bibliography.js`, con `referenceId`, 
 - Pruebas de usuario en ambulancia/móvil real.
 - Persistencia local de checks marcados si se decide necesario.
 - Mapa local de hospitales útiles y códigos.
-- Despliegue público en fase posterior.
+- Despliegue público GitHub Pages activo.
 
 ## Pendiente clínico
 
@@ -165,7 +165,7 @@ Estado actual:
 
 - Repositorio creado en GitHub si `gh` está autenticado y el comando de publicación se ejecuta correctamente.
 - Repositorio GitHub creado: `https://github.com/olsanju-hub/nexoclx-061`.
-- Despliegue público pendiente.
-- Vercel o GitHub Pages se configurarán en una fase posterior.
+- Despliegue público GitHub Pages activo: `https://olsanju-hub.github.io/nexoclx-061/`.
+- Vercel no está configurado.
 
-No hay configuración de Vercel ni GitHub Pages en esta V1.
+No hay configuración de Vercel en esta V1.
