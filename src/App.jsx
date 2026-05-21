@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { bibliography, bibliographyById } from './data/bibliography'
+import { bibliography, bibliographyById, clinicalGovernanceNote } from './data/bibliography'
 import { calculators } from './data/calculators'
 import { medicationById } from './data/medications'
 import { modules, procedures, procedureById } from './data/modules'
@@ -102,7 +102,7 @@ function App() {
         <p className="clinical-warning">
           NexoClx 061 es una herramienta de apoyo clínico. No sustituye el juicio clínico, los
           protocolos oficiales del servicio de emergencias, la coordinación médica ni la valoración
-          individual del paciente.
+          individual del paciente. {clinicalGovernanceNote}
         </p>
 
         {view === 'inicio' && (
@@ -191,7 +191,7 @@ function Home({ openItem, setView, setSelectedProcedureId, setSelectedCalculator
     <section className="view-stack">
       <div className="section-head">
         <h1>Qué decidir ahora</h1>
-        <p>Ficha rápida para valorar, estabilizar, trasladar y comunicar.</p>
+        <p>Ficha rápida para evaluar, estabilizar, trasladar y comunicar.</p>
       </div>
 
       <div className="quick-grid">
@@ -307,11 +307,19 @@ function Connections({ protocol, meta }) {
         <div className="drug-grid">
           {protocol.medications.map((id) => {
             const drug = medicationById[id]
+            const isPending = [drug.dose, drug.frequency, drug.maximum, drug.renalHepaticAdjustment]
+              .join(' ')
+              .toLowerCase()
+              .includes('pendiente')
             return (
               <details key={id}>
-                <summary>{drug.genericName}</summary>
+                <summary>
+                  {drug.genericName}
+                  {isPending && <span className="pending-pill">pendiente</span>}
+                </summary>
                 <p><strong>Dosis:</strong> {drug.dose}</p>
                 <p><strong>Vía:</strong> {drug.route}</p>
+                <p><strong>Repetición/máximo:</strong> {drug.frequency} · {drug.maximum}</p>
                 <p><strong>Evitar/precaución:</strong> {drug.contraindications}</p>
                 <p><strong>CIMA:</strong> {drug.cimaUrl}</p>
               </details>
@@ -489,7 +497,7 @@ function BibliographyView() {
     <section className="view-stack">
       <div className="section-head">
         <h1>Bibliografía trazable</h1>
-        <p>Fuentes estructuradas usadas por los protocolos piloto. Bibliografía local privada queda fuera de Git.</p>
+        <p>Fuentes estructuradas usadas por los protocolos piloto. {clinicalGovernanceNote}</p>
       </div>
       <div className="biblio-list">
         {bibliography.map((item) => (

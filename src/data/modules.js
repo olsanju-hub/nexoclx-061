@@ -1,4 +1,4 @@
-import { protocolFlows } from './protocolFlows'
+import { protocolFlows } from './protocolFlows.js'
 
 export const procedures = [
   {
@@ -62,7 +62,7 @@ export const procedures = [
     source: ['gina-2025', 'gold-2026'],
     sections: {
       indicacion: ['Hipoxemia, shock, insuficiencia respiratoria o trabajo respiratorio elevado.'],
-      preparacion: ['SatO2 continua, fuente de oxígeno, mascarilla, reservorio, nebulización y bolsa-válvula si precisa.'],
+      preparacion: ['SatO2 continua, fuente de oxígeno, mascarilla, reservorio, nebulización y bolsa-válvula accesible si ventilación ineficaz o deterioro de conciencia.'],
       pasos: ['Titular a objetivo.', 'Usar alto flujo inicial si amenaza vital.', 'En EPOC/riesgo CO2, objetivo 88-92% si estable.', 'Escalar a VMNI o ventilación asistida si fracaso.'],
       erroresCriticos: ['Dejar hipoxemia por miedo a CO2.', 'Mantener hiperoxia innecesaria sin reevaluar.', 'VMNI sin monitorización o con vómito/bajo GCS.'],
       reevaluacion: ['SatO2, FR, trabajo respiratorio, conciencia y tolerancia cada pocos minutos.'],
@@ -80,7 +80,7 @@ export const procedures = [
     sections: {
       indicacion: ['Hipoperfusión compatible con shock distributivo/hipovolémico y sin datos de sobrecarga.'],
       preparacion: ['Acceso IV/IO, TA seriada, auscultación, SatO2 y plan de traslado.'],
-      pasos: ['Administrar bolo según protocolo local.', 'Reevaluar perfusión, TA, respiración y crepitantes.', 'Repetir solo si mejora o persiste hipoperfusión sin sobrecarga.', 'Frenar si sospecha cardiogénica/EAP.'],
+      pasos: ['Administrar bolo solo con protocolo local activo o indicación médica coordinada.', 'Reevaluar perfusión, TA, respiración y crepitantes.', 'Repetir solo si mejora o persiste hipoperfusión sin sobrecarga.', 'Frenar si sospecha cardiogénica, EAP o sobrecarga.'],
       erroresCriticos: ['Bolos grandes sin reevaluación.', 'No controlar hemorragia.', 'Retrasar traslado por fluidos no esenciales.'],
       reevaluacion: ['Tras cada bolo: TA, FC, relleno, piel, conciencia, SatO2, auscultación.'],
       escalar: ['Shock persistente, necesidad de vasopresor, lactato alto, deterioro respiratorio o UCI.'],

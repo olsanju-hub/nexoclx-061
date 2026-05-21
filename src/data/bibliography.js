@@ -121,6 +121,9 @@ export const bibliography = [
   },
 ]
 
+export const clinicalGovernanceNote =
+  'La adaptación a protocolo local 061 queda pendiente antes de uso asistencial.'
+
 export const bibliographyById = Object.fromEntries(
   bibliography.map((reference) => [reference.referenceId, reference]),
 )

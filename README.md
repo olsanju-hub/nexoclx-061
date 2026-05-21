@@ -24,6 +24,8 @@ Implementado: Vite, React, JavaScript, CSS propio, PWA, manifest, service worker
 
 Pendiente: validación clínica local, criterios territoriales de activación/destino, dosis protocolizadas no verificadas, despliegue público.
 
+Nota clínica: La adaptación a protocolo local 061 queda pendiente antes de uso asistencial.
+
 ## Estructura funcional
 
 - Inicio: buscador, accesos rápidos, protocolos frecuentes.
@@ -57,6 +59,8 @@ Fuentes base:
 - CIMA/AEMPS para ácido acetilsalicílico, nitroglicerina, salbutamol y adrenalina.
 
 La carpeta `.local-biblio/` está ignorada por Git para bibliografía privada o no publicable.
+
+La bibliografía institucional incluida no convierte automáticamente la V1 en protocolo asistencial: La adaptación a protocolo local 061 queda pendiente antes de uso asistencial.
 
 ## Estructura técnica
 
@@ -125,6 +129,7 @@ La bibliografía activa está en `src/data/bibliography.js`, con `referenceId`, 
 ## Pendiente clínico
 
 - Validar criterios de activación con protocolo oficial del servicio 061 correspondiente.
+- Adaptar la V1 a protocolo local 061 antes de uso asistencial.
 - Confirmar dosis de antiagregación, corticoides, ipratropio, diuréticos, benzodiacepinas, vasopresores y antibióticos si entran en alcance.
 - Confirmar competencias, dotación y presentación exacta de fármacos.
 

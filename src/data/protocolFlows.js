@@ -21,7 +21,7 @@ export const protocolFlows = [
       ],
       Valoración: [
         'ABCDE y monitorización continua desde el primer contacto.',
-        'ECG de 12 derivaciones precoz; transmitir o enseñar al centro coordinador si procede.',
+        'ECG de 12 derivaciones precoz; transmitir o mostrar al centro coordinador cuando el sistema lo permita sin retrasar traslado.',
         'TA, SatO2, dolor, signos de insuficiencia cardiaca; TA bilateral si sospecha disección.',
         'Glucemia si alteración de conciencia; Killip si hay congestión o shock.',
       ],
@@ -118,7 +118,7 @@ export const protocolFlows = [
         'Oxígeno titulado al objetivo; alto flujo inicial si amenaza vital.',
         'Pedir recurso avanzado si agotamiento, deterioro neurológico, shock o fracaso de oxígeno/bronco.',
         'VMNI si disponible, indicada y monitorizable; no retrasar traslado si deteriora.',
-        'Hospital útil si precisa UCI, ventilación, hemodinámica o causa no controlada.',
+        'Hospital útil si requiere UCI, ventilación, hemodinámica o control de causa no resuelta en ruta.',
       ],
       Tratamiento: [
         'Oxígeno: 94-98% general; 88-92% si EPOC/riesgo CO2 y el paciente lo permite.',
@@ -157,7 +157,7 @@ export const protocolFlows = [
         'ABCDE completo con TA seriada, FC, FR, SatO2, temperatura, GCS y glucemia.',
         'ECG y búsqueda dirigida de foco o causa de shock.',
         'Lactato si disponible sin retrasar traslado.',
-        'Valorar respuesta a fluidos con perfusión, TA, auscultación, trabajo respiratorio y conciencia.',
+        'Tras fluidos, reevaluar perfusión, TA, auscultación, trabajo respiratorio y conciencia.',
       ],
       Decisión: [
         'Clasificar práctico: distributivo, hipovolémico, cardiogénico, obstructivo o no claro.',
