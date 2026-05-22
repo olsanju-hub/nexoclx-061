@@ -28,12 +28,12 @@ export const protocols = [
   },
   {
     id: 'shock-sepsis',
-    clinicalScope: 'Paciente inestable con hipoperfusión, shock indiferenciado o sospecha de sepsis grave.',
+    clinicalScope: 'Paciente inestable/shock/hipoperfusión como síndrome prehospitalario, con patrón dominante para orientar soporte y destino.',
     reviewedAt: '2026-05-22',
     confidence: 'media',
-    internalNotes: 'No activar antibiótico/vasopresor sin protocolo local; mantener fluidos con reevaluación.',
+    internalNotes: 'Criterios de destino/UCI, volumen de fluidos, vasopresores y antibiótico prehospitalario requieren protocolo local 061 verificable.',
     bibliography: ['ssc-2021', 'cima-adrenalina'],
-    verificationStatus: 'Fluidoterapia descrita de forma prudente; volumen y vasopresores pendientes de protocolo local.',
+    verificationStatus: 'Reconocimiento, ABCDE, oxígeno, control de hemorragia y fluidos con reevaluación trazados; volumen, destino, vasopresores y antibióticos quedan pendientes de protocolo local 061.',
   },
 ]
 
