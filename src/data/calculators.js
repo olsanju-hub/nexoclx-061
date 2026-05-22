@@ -124,7 +124,7 @@ export const calculators = [
     id: 'fluid-bolus',
     title: 'Bolo de cristaloide por peso',
     category: 'Hemodinámico',
-    status: 'pending-local-protocol',
+    status: 'local-only',
     relatedProtocols: ['shock-sepsis'],
     variables: ['Peso estimado', 'ml/kg elegido'],
     formula: 'Peso (kg) x ml/kg. En V1 se usa como cálculo de volumen, no como indicación automática.',

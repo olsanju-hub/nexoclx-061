@@ -36,10 +36,10 @@ export const protocolFlows = [
       ],
       Tratamiento: [
         'Oxígeno solo si hipoxemia real, insuficiencia respiratoria o shock; evitar hiperoxia rutinaria si SatO2 adecuada.',
-        'Ácido acetilsalicílico solo con protocolo local 061 activo y sin alergia, sangrado activo ni sospecha de disección: dosis pendiente de protocolo local 061.',
-        'Nitroglicerina SL 0,4-0,8 mg solo si protocolo local 061 la activa y no hay hipotensión, shock, sospecha VD/disección ni PDE5 reciente.',
-        'Analgesia y antiagregación adicional: pendiente de protocolo local 061; no mostrar como pauta automática.',
-        'Arritmias: si inestable, priorizar ABCDE, monitor/desfibrilador y algoritmo oficial del servicio; fármacos pendientes de protocolo local 061.',
+        'Ácido acetilsalicílico si sospecha SCA y no hay alergia, sangrado activo, enfermedad hemorrágica ni sospecha de disección.',
+        'Nitroglicerina SL solo con dolor isquémico/EAP, paciente sentado, TA estable y sin shock, sospecha VD/disección ni PDE5 reciente.',
+        'Analgesia, antiagregación adicional y fármacos de arritmias requieren protocolo local 061 o indicación de coordinación.',
+        'Reevaluar dolor, TA, SatO2, ritmo y perfusión tras cada intervención.',
       ],
       Traslado: [
         'Monitor ECG continuo, desfibrilador preparado y vía venosa funcional antes de iniciar traslado si no retrasa una salida crítica.',
@@ -84,8 +84,8 @@ export const protocolFlows = [
       ],
       Tratamiento: [
         'Oxígeno solo si hipoxemia o insuficiencia respiratoria; no oxígeno rutinario si SatO2 adecuada.',
-        'Corregir hipoglucemia si existe: fármaco, vía y dosis pendientes de protocolo local 061.',
-        'Convulsión: proteger vía aérea, evitar lesiones y tratar solo con pauta verificada; fármaco/dosis pendiente de protocolo local 061.',
+        'Hipoglucemia documentada: corregir solo con pauta local verificada; en V1 no se muestra fármaco/dosis operativa.',
+        'Convulsión: proteger vía aérea, evitar lesiones y usar fármaco solo si existe pauta local verificada.',
         'No bajar PA de forma rutinaria antes de neuroimagen salvo protocolo local, situación extrema o instrucción de coordinación.',
         'No antiagregar ni anticoagular antes de neuroimagen salvo protocolo oficial específico.',
       ],
@@ -107,7 +107,7 @@ export const protocolFlows = [
     calculators: ['abcde-check', 'sbar-check', 'transfer-check'],
     procedures: ['abcde', 'oxigenoterapia', 'sbar-prealerta', 'traslado-critico'],
     medications: ['oxygen', 'salbutamol', 'ipratropium', 'systemic-corticosteroid-pending', 'adrenaline-im', 'nitroglycerin', 'diuretic-pending'],
-    bibliography: ['gina-2025', 'gold-2026', 'esc-hf-2021', 'cima-salbutamol', 'cima-adrenalina', 'cima-nitroglicerina'],
+    bibliography: ['gina-2025', 'gold-2026', 'esc-hf-2021', 'cima-salbutamol', 'cima-ipratropio', 'cima-adrenalina', 'cima-nitroglicerina'],
     tabs: {
       Sospecha: [
         'Protocolo sindrómico: disnea grave/insuficiencia respiratoria; no cerrar etiología sin evolución, exploración y datos disponibles.',
@@ -131,9 +131,9 @@ export const protocolFlows = [
       ],
       Tratamiento: [
         'Hipoxemia/IR: oxígeno titulado; evitar oxígeno indiscriminado en EPOC/riesgo de hipercapnia si SatO2 permite objetivo controlado.',
-        'Broncoespasmo dominante: salbutamol nebulizado 2,5-5 mg; ipratropio y corticoide solo con pauta verificada, pendiente de protocolo local 061.',
-        'Anafilaxia: adrenalina IM 0,5 mg adulto si criterios clínicos; repetición y soporte adicional pendientes de protocolo local 061.',
-        'EAP/congestión dominante: nitroglicerina solo con seguridad hemodinámica y protocolo local 061; diurético pendiente de protocolo local 061.',
+        'Broncoespasmo dominante: salbutamol nebulizado; añadir ipratropio si monoterapia beta-adrenérgica no consigue broncodilatación óptima.',
+        'Anafilaxia: adrenalina IM adulta si compromiso respiratorio/circulatorio; reevaluar TA, pulso y respiración.',
+        'EAP/congestión dominante: nitroglicerina solo con seguridad hemodinámica; diurético requiere protocolo local 061.',
         'VMNI: soporte si indicada; mala respuesta si persiste agotamiento, hipoxemia, shock, conciencia alterada o intolerancia, avisar a coordinación.',
       ],
       Traslado: [
@@ -179,9 +179,9 @@ export const protocolFlows = [
       Tratamiento: [
         'Oxígeno si hipoxemia, shock o insuficiencia respiratoria.',
         'Acceso IV/IO si no retrasa traslado; control de hemorragia si existe.',
-        'Cristaloide solo si patrón hipovolémico/distributivo lo justifica; bolos con reevaluación, volumen pendiente de protocolo local 061.',
+        'Cristaloide solo si patrón hipovolémico/distributivo lo justifica; tamaño de bolo y repetición requieren protocolo local 061.',
         'Evitar fluidos agresivos si sospecha cardiogénica, EAP o sobrecarga; detener si empeora disnea, crepitantes o perfusión no mejora.',
-        'Anafilaxia: adrenalina IM 0,5 mg adulto si criterios clínicos; repetición pendiente de protocolo local 061.',
+        'Anafilaxia: adrenalina IM adulta si compromiso respiratorio/circulatorio; reevaluar TA, pulso y respiración.',
         'Vasopresor o antibiótico prehospitalario: solo con protocolo local, monitorización, competencia y dosis verificada; no rutina.',
       ],
       Traslado: [

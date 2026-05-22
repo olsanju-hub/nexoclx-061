@@ -30,10 +30,9 @@ const norm = (value) =>
 const statusLabels = {
   ...medicationStatusLabels,
   verified: 'verificado',
-  'pending-local-protocol': 'pendiente de protocolo local 061',
-  'pending-cima': 'pendiente de verificación CIMA',
-  'pending-source': 'pendiente de fuente oficial',
+  'local-only': 'requiere protocolo local 061',
   inactive: 'inactivo',
+  'removed-from-active-flow': 'retirado del flujo activo',
 }
 
 const statusLabel = (status) => statusLabels[status] || status || 'sin estado'
@@ -309,6 +308,12 @@ function ProtocolsView({
 }
 
 function Connections({ protocol, meta }) {
+  const activeMedicationIds = protocol.medications.filter((id) => medicationById[id]?.status === 'verified')
+  const localOnlyMedicationNames = protocol.medications
+    .map((id) => medicationById[id])
+    .filter((drug) => drug && drug.status !== 'verified')
+    .map((drug) => drug.genericName)
+
   return (
     <div className="connections">
       <details className="secondary-panel">
@@ -318,18 +323,14 @@ function Connections({ protocol, meta }) {
         <Connector title="Bibliografía activa" items={protocol.bibliography} map={bibliographyById} />
       </details>
       <section className="treatment-block">
-        <h3>Tratamientos conectados</h3>
+        <h3>Tratamientos farmacológicos verificados</h3>
         <div className="drug-grid">
-          {protocol.medications.map((id) => {
+          {activeMedicationIds.map((id) => {
             const drug = medicationById[id]
-            const isPending = drug.status && drug.status !== 'verified'
             const useInProtocol = drug.protocolIndications?.[protocol.id] || drug.indications.join(', ')
             return (
               <details key={id}>
-                <summary>
-                  {drug.genericName}
-                  {isPending && <span className="pending-pill">{statusLabel(drug.status)}</span>}
-                </summary>
+                <summary>{drug.genericName}</summary>
                 <p><strong>Uso en este protocolo:</strong> {useInProtocol}</p>
                 <p><strong>Dosis:</strong> {drug.dose}</p>
                 <p><strong>Vía:</strong> {drug.route}</p>
@@ -341,6 +342,11 @@ function Connections({ protocol, meta }) {
             )
           })}
         </div>
+        {localOnlyMedicationNames.length > 0 && (
+          <p className="local-note">
+            Tratamientos no operativos en V1, requieren protocolo local 061 o indicación del centro coordinador: {localOnlyMedicationNames.join(', ')}.
+          </p>
+        )}
       </section>
       <details className="secondary-panel">
         <summary>Revisión y notas</summary>

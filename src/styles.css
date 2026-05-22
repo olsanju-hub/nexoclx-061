@@ -277,6 +277,13 @@ summary { font-weight: 780; color: var(--accent-600); cursor: pointer; }
   vertical-align: middle;
 }
 details p, .meta-box p, .biblio-list p { margin: 5px 0; font-size: 0.8rem; color: var(--text-soft); }
+.local-note {
+  border-top: 1px solid var(--line);
+  margin: 7px 0 0;
+  padding-top: 7px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
 small { color: var(--text-muted); }
 .calc-box, .checklist {
   display: grid;
