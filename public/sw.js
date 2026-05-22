@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nexoclx-061-shell-v2'
+const CACHE_NAME = 'nexoclx-061-shell-v3'
 const BASE_PATH = '/nexoclx-061/'
 const CORE_ASSETS = [
   BASE_PATH,

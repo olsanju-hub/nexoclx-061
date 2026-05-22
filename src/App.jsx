@@ -101,6 +101,7 @@ function App() {
       setSelectedCalculatorId(item.id)
       setView('calculos')
     }
+    setQuery('')
   }
 
   return (
