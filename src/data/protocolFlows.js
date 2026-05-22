@@ -8,9 +8,9 @@ export const protocolFlows = [
     summary: 'ECG precoz, código infarto, hospital con hemodinámica y complicaciones en ruta.',
     keywords: ['dolor torácico', 'infarto', 'código infarto', 'scacest', 'scasest', 'hemodinámica', 'nitratos', 'aspirina', 'vegetatismo'],
     priority: 'tiempo-dependiente',
-    calculators: ['killip', 'shock-index', 'sbar-check', 'transfer-check'],
+    calculators: ['killip', 'sbar-check', 'transfer-check'],
     procedures: ['abcde', 'sbar-prealerta', 'traslado-critico', 'oxigenoterapia'],
-    medications: ['oxygen', 'acetylsalicylic-acid', 'nitroglycerin'],
+    medications: ['oxygen', 'acetylsalicylic-acid', 'nitroglycerin', 'sca-analgesia-pending', 'additional-antiplatelet-pending', 'arrhythmia-drugs-pending'],
     bibliography: ['esc-acs-2023', 'cima-aas', 'cima-nitroglicerina'],
     tabs: {
       Sospecha: [
@@ -59,7 +59,7 @@ export const protocolFlows = [
     priority: 'tiempo-dependiente',
     calculators: ['gcs', 'befast', 'sbar-check', 'transfer-check'],
     procedures: ['abcde', 'sbar-prealerta', 'traslado-critico'],
-    medications: ['oxygen'],
+    medications: ['oxygen', 'glucose-correction-pending', 'anticonvulsant-pending'],
     bibliography: ['aha-asa-ais-2026'],
     tabs: {
       Sospecha: [
@@ -104,9 +104,9 @@ export const protocolFlows = [
     summary: 'Hipoxemia, broncoespasmo, EAP, EPOC/asma, anafilaxia y soporte ventilatorio.',
     keywords: ['disnea', 'saturación baja', 'insuficiencia respiratoria', 'asma', 'epoc', 'broncoespasmo', 'eap', 'edema pulmonar', 'edema agudo de pulmón', 'anafilaxia', 'tep', 'vmni', 'oxígeno'],
     priority: 'amenaza vital',
-    calculators: ['gcs', 'abcde-check', 'transfer-check'],
+    calculators: ['abcde-check', 'sbar-check', 'transfer-check'],
     procedures: ['abcde', 'oxigenoterapia', 'sbar-prealerta', 'traslado-critico'],
-    medications: ['oxygen', 'salbutamol', 'ipratropium', 'adrenaline-im', 'nitroglycerin'],
+    medications: ['oxygen', 'salbutamol', 'ipratropium', 'systemic-corticosteroid-pending', 'adrenaline-im', 'nitroglycerin', 'diuretic-pending'],
     bibliography: ['gina-2025', 'gold-2026', 'esc-hf-2021', 'cima-salbutamol', 'cima-adrenalina', 'cima-nitroglicerina'],
     tabs: {
       Sospecha: [
@@ -153,7 +153,7 @@ export const protocolFlows = [
     priority: 'amenaza vital',
     calculators: ['shock-index', 'abcde-check', 'fluid-bolus', 'sbar-check', 'transfer-check'],
     procedures: ['abcde', 'fluidoterapia-inicial', 'sbar-prealerta', 'traslado-critico', 'oxigenoterapia'],
-    medications: ['oxygen', 'crystalloid-bolus', 'adrenaline-im'],
+    medications: ['oxygen', 'crystalloid-bolus', 'adrenaline-im', 'vasopressor-pending', 'antibiotic-pending'],
     bibliography: ['ssc-2021', 'cima-adrenalina'],
     tabs: {
       Sospecha: [

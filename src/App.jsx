@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { bibliography, bibliographyById, clinicalGovernanceNote } from './data/bibliography'
 import { calculators } from './data/calculators'
-import { medicationById } from './data/medications'
+import { medicationById, medicationStatusLabels } from './data/medications'
 import { modules, procedures, procedureById } from './data/modules'
 import { protocolMetaById } from './data/protocols'
 import { protocolFlows, TAB_ORDER } from './data/protocolFlows'
@@ -26,6 +26,17 @@ const norm = (value) =>
     .toLowerCase()
     .normalize('NFD')
     .replace(/\p{Diacritic}/gu, '')
+
+const statusLabels = {
+  ...medicationStatusLabels,
+  verified: 'verificado',
+  'pending-local-protocol': 'pendiente de protocolo local 061',
+  'pending-cima': 'pendiente de verificación CIMA',
+  'pending-source': 'pendiente de fuente oficial',
+  inactive: 'inactivo',
+}
+
+const statusLabel = (status) => statusLabels[status] || status || 'sin estado'
 
 function App() {
   const [view, setView] = useState('inicio')
@@ -304,26 +315,27 @@ function Connections({ protocol, meta }) {
         <summary>Apoyos operativos</summary>
         <Connector title="Cálculos" items={protocol.calculators} />
         <Connector title="Procedimientos" items={protocol.procedures} map={procedureById} />
+        <Connector title="Bibliografía activa" items={protocol.bibliography} map={bibliographyById} />
       </details>
       <section className="treatment-block">
         <h3>Tratamientos conectados</h3>
         <div className="drug-grid">
           {protocol.medications.map((id) => {
             const drug = medicationById[id]
-            const isPending = [drug.dose, drug.frequency, drug.maximum, drug.renalHepaticAdjustment]
-              .join(' ')
-              .toLowerCase()
-              .includes('pendiente')
+            const isPending = drug.status && drug.status !== 'verified'
+            const useInProtocol = drug.protocolIndications?.[protocol.id] || drug.indications.join(', ')
             return (
               <details key={id}>
                 <summary>
                   {drug.genericName}
-                  {isPending && <span className="pending-pill">pendiente</span>}
+                  {isPending && <span className="pending-pill">{statusLabel(drug.status)}</span>}
                 </summary>
+                <p><strong>Uso en este protocolo:</strong> {useInProtocol}</p>
                 <p><strong>Dosis:</strong> {drug.dose}</p>
                 <p><strong>Vía:</strong> {drug.route}</p>
                 <p><strong>Repetición/máximo:</strong> {drug.frequency} · {drug.maximum}</p>
                 <p><strong>Evitar/precaución:</strong> {drug.contraindications}</p>
+                <p><strong>Estado:</strong> {statusLabel(drug.status)}</p>
                 <p><strong>CIMA:</strong> {drug.cimaUrl}</p>
               </details>
             )
@@ -345,7 +357,9 @@ function Connector({ title, items, map }) {
       <h3>{title}</h3>
       <div className="chips">
         {items.map((id) => (
-          <span key={id}>{map?.[id]?.title || calculators.find((item) => item.id === id)?.title || id}</span>
+          <span key={id}>
+            {map?.[id]?.title || calculators.find((item) => item.id === id)?.title || id}
+          </span>
         ))}
       </div>
     </section>
@@ -403,8 +417,10 @@ function CalculatorsView({ calculator, selectedCalculatorId, setSelectedCalculat
         <CalculatorRunner calculator={calculator} key={selectedCalculatorId} />
         <section className="meta-box">
           <h3>Uso clínico</h3>
+          <p>Estado: {statusLabel(calculator.status)}</p>
           <p>Protocolos relacionados: {calculator.relatedProtocols.join(', ')}</p>
           <p>Limitaciones: {calculator.limitations}</p>
+          {calculator.warnings && <p>Advertencia: {calculator.warnings}</p>}
           <small>Fuente: {calculator.source.join(', ')} · revisión {calculator.reviewedAt}</small>
         </section>
       </article>
@@ -503,11 +519,12 @@ function BibliographyView() {
         <p>Fuentes estructuradas usadas por los protocolos piloto. {clinicalGovernanceNote}</p>
       </div>
       <div className="biblio-list">
-        {bibliography.map((item) => (
+        {bibliography.filter((item) => item.status !== 'inactive').map((item) => (
           <details key={item.referenceId} className="biblio-item">
             <summary>{item.title}</summary>
             <p>{item.institution} · {item.year} · {item.type}</p>
             <p>{item.note}</p>
+            <p>Uso: {[...(item.relatedProtocols || []), ...(item.relatedProcedures || [])].join(', ')}</p>
             <a href={item.url} target="_blank" rel="noreferrer">Abrir fuente</a>
             <small>Confianza: {item.confidence} · revisión {item.reviewedAt} · {item.pendingQuestions}</small>
           </details>
@@ -515,7 +532,7 @@ function BibliographyView() {
       </div>
       <section className="meta-box">
         <h3>Relación de módulos</h3>
-        <p>{modules.length} módulos catalogados. Referencias activas: {Object.keys(bibliographyById).length}.</p>
+        <p>{modules.length} módulos catalogados. Referencias activas: {bibliography.filter((item) => item.status !== 'inactive').length}.</p>
       </section>
     </section>
   )

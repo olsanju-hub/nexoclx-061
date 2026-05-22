@@ -22,7 +22,9 @@ Interfaz mobile-first, compacta y sobria. Usa fondo gris-azulado `#f2f2f7`, supe
 
 Implementado: Vite, React, JavaScript, CSS propio, PWA, manifest, service worker básico, iconos desde `public/assets/brand/nexoclx-061-icon-source.png`, búsqueda global, tabs de protocolos y build estático.
 
-Pendiente: validación clínica local, criterios territoriales de activación/destino y dosis protocolizadas no verificadas.
+Implementado en revisión transversal V1: relaciones homogéneas entre protocolos, procedimientos, cálculos, medicamentos de soporte y bibliografía activa. Los elementos pendientes usan estados normalizados: `verified`, `pending-local-protocol`, `pending-cima`, `pending-source` e `inactive`.
+
+Pendiente: validación clínica local, criterios territoriales de activación/destino, dotación real y dosis protocolizadas no verificadas.
 
 Nota clínica: La adaptación a protocolo local 061 queda pendiente antes de uso asistencial.
 
@@ -40,7 +42,9 @@ La app no usa React Router. `src/App.jsx` mantiene el estado de vista actual, el
 
 ## Conexión clínica
 
-Los protocolos de `protocolFlows.js` enlazan cálculos, procedimientos, medicamentos y referencias. `protocols.js` añade metadatos de revisión y confianza. `medications.js` conserva dosis, vía, precauciones y fuente. `bibliography.js` centraliza trazabilidad.
+Los protocolos de `protocolFlows.js` enlazan cálculos, procedimientos, medicamentos y referencias. `protocols.js` añade metadatos de revisión y confianza. `medications.js` conserva dosis, vía, precauciones, fuente, estado y protocolo relacionado. `bibliography.js` centraliza trazabilidad y vincula cada referencia activa a protocolos o procedimientos reales.
+
+No hay sección principal de medicamentos. Los fármacos aparecen solo dentro del bloque de tratamientos conectados de cada protocolo.
 
 ## Criterio clínico global
 
@@ -99,32 +103,59 @@ src/
 
 ## Cálculos incluidos
 
-GCS, Shock Index, Killip clínico, BEFAST/Cincinnati operativo, checklist ABCDE, checklist SBAR, checklist traslado crítico y cálculo de volumen de bolo por peso.
+- GCS: ictus agudo.
+- Shock Index: shock/sepsis/paciente inestable.
+- Killip clínico: SCA/dolor torácico crítico.
+- BEFAST/Cincinnati operativo: ictus agudo.
+- Checklist ABCDE: insuficiencia respiratoria y shock/sepsis.
+- Checklist SBAR: SCA, ictus, insuficiencia respiratoria y shock/sepsis.
+- Checklist traslado crítico: SCA, ictus, insuficiencia respiratoria y shock/sepsis.
+- Bolo de cristaloide por peso: shock/sepsis, con indicación y volumen pendientes de protocolo local 061.
 
 ## Procedimientos incluidos
 
-ABCDE extrahospitalario, SBAR/prealerta hospitalaria, checklist de traslado crítico, oxigenoterapia y soporte respiratorio básico, fluidoterapia inicial en paciente inestable.
+- ABCDE extrahospitalario: SCA, ictus, insuficiencia respiratoria y shock/sepsis.
+- SBAR/prealerta hospitalaria: SCA, ictus, insuficiencia respiratoria y shock/sepsis.
+- Checklist de traslado crítico: SCA, ictus, insuficiencia respiratoria y shock/sepsis.
+- Oxigenoterapia y soporte respiratorio básico: SCA con hipoxemia, insuficiencia respiratoria y shock/sepsis.
+- Fluidoterapia inicial en paciente inestable: shock/sepsis.
 
 ## Fichas farmacológicas activas
 
-Oxígeno, ácido acetilsalicílico, nitroglicerina, salbutamol, bromuro de ipratropio, adrenalina IM y cristaloide isotónico.
+Medicamentos como soporte interno, sin sección principal visible:
+
+- SCA: oxígeno (`verified`), ácido acetilsalicílico (`pending-local-protocol`), nitroglicerina (`pending-local-protocol`), analgesia en SCA (`pending-local-protocol`), antiagregación adicional (`pending-local-protocol`) y fármacos de arritmias (`pending-local-protocol`).
+- Ictus: oxígeno (`verified`), corrección de hipoglucemia (`pending-local-protocol`) y benzodiacepina/anticonvulsivante (`pending-local-protocol`).
+- Insuficiencia respiratoria: oxígeno (`verified`), salbutamol (`pending-local-protocol`), bromuro de ipratropio (`pending-cima`), corticoide sistémico (`pending-local-protocol`), adrenalina IM (`pending-local-protocol`), nitroglicerina (`pending-local-protocol`) y diurético en EAP (`pending-local-protocol`).
+- Shock/sepsis: oxígeno (`verified`), cristaloide isotónico (`pending-local-protocol`), adrenalina IM (`pending-local-protocol`), vasopresor (`pending-local-protocol`) y antibiótico prehospitalario (`pending-local-protocol`).
 
 ## Bibliografía base usada
 
 La bibliografía activa está en `src/data/bibliography.js`, con `referenceId`, título, año, institución, tipo, nota de uso, nivel de confianza, fecha de revisión interna y dudas pendientes.
+
+Relación activa por protocolo:
+
+- SCA: ESC ACS 2023, CIMA/AEMPS ácido acetilsalicílico, CIMA/AEMPS nitroglicerina.
+- Ictus: AHA/ASA 2026 Acute Ischemic Stroke.
+- Insuficiencia respiratoria: GINA 2025, GOLD 2026, ESC Heart Failure 2021, CIMA/AEMPS salbutamol, CIMA/AEMPS adrenalina, CIMA/AEMPS nitroglicerina.
+- Shock/sepsis: Surviving Sepsis Campaign 2021, CIMA/AEMPS adrenalina.
+
+Las fuentes de procedimientos transversales están enlazadas en `src/data/modules.js`; no se listan como bibliografía activa si no están conectadas a un protocolo o procedimiento real.
 
 ## Bitácora inicial
 
 - 2026-05-22: creación desde cero con Vite + React.
 - 2026-05-22: añadida PWA, manifest, service worker básico e iconos desde imagen fuente.
 - 2026-05-22: añadidos cuatro protocolos piloto y relaciones con procedimientos, cálculos, medicamentos y bibliografía.
+- 2026-05-22: auditados individualmente los cuatro protocolos.
+- 2026-05-22: revisión transversal de conexiones clínicas, estados pendientes y bibliografía activa. Commit de revisión transversal: `chore: connect NexoClx 061 clinical data and tools`.
 
 ## Pendiente funcional
 
 - Pruebas de usuario en ambulancia/móvil real.
 - Persistencia local de checks marcados si se decide necesario.
 - Mapa local de hospitales útiles y códigos.
-- Despliegue público GitHub Pages activo.
+- Seguimiento de despliegue GitHub Pages tras cada push a `main`.
 
 ## Pendiente clínico
 
@@ -132,11 +163,13 @@ La bibliografía activa está en `src/data/bibliography.js`, con `referenceId`, 
 - Adaptar la V1 a protocolo local 061 antes de uso asistencial.
 - Confirmar dosis de antiagregación, corticoides, ipratropio, diuréticos, benzodiacepinas, vasopresores y antibióticos si entran en alcance.
 - Confirmar competencias, dotación y presentación exacta de fármacos.
+- Confirmar volumen/tamaño de bolo de cristaloide, repetición y límites en paciente inestable.
+- Confirmar criterios territoriales de hospital útil: hemodinámica, unidad de ictus, trombectomía, UCI y recursos avanzados.
 
 ## Pendiente bibliográfico
 
 - Añadir protocolos locales oficiales cuando estén disponibles.
-- Revisar enlaces CIMA pendientes para ipratropio y presentaciones concretas.
+- Revisar enlaces CIMA pendientes para ipratropio, analgesia, antiagregación adicional, fármacos de arritmias, glucosa, anticonvulsivantes, corticoides, diuréticos, vasopresores y antibióticos si se incorporan como pauta verificada.
 - Mantener revisión clínica fechada por módulo.
 
 ## Requisitos
