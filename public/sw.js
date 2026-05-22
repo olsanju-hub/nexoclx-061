@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nexoclx-061-v1'
+const CACHE_NAME = 'nexoclx-061-shell-v2'
 const BASE_PATH = '/nexoclx-061/'
 const CORE_ASSETS = [
   BASE_PATH,
@@ -31,16 +31,24 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return
 
+  const requestUrl = new URL(event.request.url)
+  const isAppRequest = requestUrl.origin === self.location.origin && requestUrl.pathname.startsWith(BASE_PATH)
+  const isNavigation = event.request.mode === 'navigate'
+  const isBuildAsset = isAppRequest && requestUrl.pathname.startsWith(`${BASE_PATH}assets/`)
+
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached
-      return fetch(event.request)
-        .then((response) => {
+    fetch(event.request)
+      .then((response) => {
+        if (isAppRequest && response.ok && !isNavigation) {
           const copy = response.clone()
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy))
-          return response
-        })
-        .catch(() => caches.match(BASE_PATH))
-    }),
+        }
+        return response
+      })
+      .catch(() => {
+        if (isNavigation) return caches.match(BASE_PATH)
+        if (isBuildAsset) return caches.match(event.request)
+        return caches.match(event.request)
+      }),
   )
 })

@@ -21,6 +21,15 @@ const quickBlocks = [
   { label: 'Shock Index', view: 'calculos', id: 'shock-index' },
 ]
 
+const frequentProtocolIds = [
+  'parada-cardiorrespiratoria-sva-adulto',
+  'trauma-grave-politrauma',
+  'sca-dolor-toracico',
+  'ictus-agudo',
+  'shock-sepsis',
+  'insuficiencia-respiratoria',
+]
+
 const norm = (value) =>
   value
     .toLowerCase()
@@ -198,6 +207,10 @@ function SearchBox({ query, setQuery, results, openItem }) {
 }
 
 function Home({ openItem, setView, setSelectedProcedureId, setSelectedCalculatorId }) {
+  const frequentProtocols = frequentProtocolIds
+    .map((id) => protocolFlows.find((protocol) => protocol.id === id))
+    .filter(Boolean)
+
   return (
     <section className="view-stack">
       <div className="section-head">
@@ -220,7 +233,7 @@ function Home({ openItem, setView, setSelectedProcedureId, setSelectedCalculator
         ))}
       </div>
 
-      <ClinicalList title="Protocolos frecuentes" items={protocolFlows} onOpen={openItem} />
+      <ClinicalList title="Protocolos frecuentes" items={frequentProtocols} onOpen={openItem} />
 
       <div className="compact-row">
         <button type="button" onClick={() => setView('procedimientos')}>Procedimientos operativos</button>
