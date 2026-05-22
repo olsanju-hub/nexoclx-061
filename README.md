@@ -31,7 +31,7 @@ Nota clínica: La adaptación a protocolo local 061 queda pendiente antes de uso
 ## Estructura funcional
 
 - Inicio: buscador, accesos rápidos, protocolos frecuentes.
-- Protocolos: cuatro fichas con tabs fijas Sospecha, Valoración, Decisión, Tratamiento y Traslado.
+- Protocolos: seis fichas con tabs fijas Sospecha, Valoración, Decisión, Tratamiento y Traslado.
 - Procedimientos: ABCDE, SBAR/prealerta, traslado crítico, oxigenoterapia y fluidoterapia inicial.
 - Cálculos: GCS, Shock Index, Killip, BEFAST, ABCDE, SBAR, traslado crítico y volumen de bolo.
 - Bibliografía: fuentes estructuradas y trazables.
@@ -64,6 +64,8 @@ Fuentes base:
 
 - ESC 2023 ACS.
 - AHA/ASA 2026 Acute Ischemic Stroke.
+- ERC 2025 Adult Advanced Life Support.
+- AHA 2025 Adult Advanced Life Support.
 - GINA 2025.
 - GOLD 2026.
 - ESC 2021 Heart Failure.
@@ -111,25 +113,26 @@ src/
 3. Insuficiencia respiratoria aguda / disnea grave.
 4. Shock / sepsis / paciente inestable.
 5. Trauma grave / politrauma.
+6. Parada cardiorrespiratoria / SVA adulto.
 
 ## Cálculos incluidos
 
-- GCS: ictus agudo y trauma grave/politrauma.
-- Shock Index: shock/sepsis/paciente inestable y trauma grave/politrauma.
+- GCS: ictus agudo, trauma grave/politrauma y pos-ROSC.
+- Shock Index: shock/sepsis/paciente inestable, trauma grave/politrauma y pos-ROSC inestable; no se usa durante parada.
 - Killip clínico: SCA/dolor torácico crítico.
 - BEFAST/Cincinnati operativo: ictus agudo.
-- Checklist ABCDE: insuficiencia respiratoria, shock/sepsis y trauma grave/politrauma.
-- Checklist SBAR: SCA, ictus, insuficiencia respiratoria, shock/sepsis y trauma grave/politrauma.
-- Checklist traslado crítico: SCA, ictus, insuficiencia respiratoria, shock/sepsis y trauma grave/politrauma.
+- Checklist ABCDE: insuficiencia respiratoria, shock/sepsis, trauma grave/politrauma y SVA adulto.
+- Checklist SBAR: SCA, ictus, insuficiencia respiratoria, shock/sepsis, trauma grave/politrauma y SVA adulto.
+- Checklist traslado crítico: SCA, ictus, insuficiencia respiratoria, shock/sepsis, trauma grave/politrauma y SVA adulto.
 - Bolo de cristaloide por peso: shock/sepsis, como ayuda aritmética para pauta de cristaloide verificada con referencia externa.
 
 ## Procedimientos incluidos
 
-- ABCDE extrahospitalario: SCA, ictus, insuficiencia respiratoria, shock/sepsis y trauma grave/politrauma.
-- SBAR/prealerta hospitalaria: SCA, ictus, insuficiencia respiratoria, shock/sepsis y trauma grave/politrauma.
-- Checklist de traslado crítico: SCA, ictus, insuficiencia respiratoria, shock/sepsis y trauma grave/politrauma.
-- Oxigenoterapia y soporte respiratorio básico: SCA con hipoxemia, insuficiencia respiratoria, shock/sepsis y trauma grave/politrauma.
-- Fluidoterapia inicial en paciente inestable: shock/sepsis y trauma grave/politrauma.
+- ABCDE extrahospitalario: SCA, ictus, insuficiencia respiratoria, shock/sepsis, trauma grave/politrauma y SVA adulto.
+- SBAR/prealerta hospitalaria: SCA, ictus, insuficiencia respiratoria, shock/sepsis, trauma grave/politrauma y SVA adulto.
+- Checklist de traslado crítico: SCA, ictus, insuficiencia respiratoria, shock/sepsis, trauma grave/politrauma y SVA adulto.
+- Oxigenoterapia y soporte respiratorio básico: SCA con hipoxemia, insuficiencia respiratoria, shock/sepsis, trauma grave/politrauma y SVA adulto.
+- Fluidoterapia inicial en paciente inestable: shock/sepsis, trauma grave/politrauma y SVA adulto solo si hipovolemia/sospecha específica.
 
 Estado de procedimientos: revisados en V1 como herramientas breves, operativas y transversales. Fluidoterapia mantiene el cálculo por peso como ayuda aritmética y exige reevaluación tras cada carga.
 
@@ -144,6 +147,7 @@ Pautas visibles como tratamiento activo, todas con ficha completa y fuente CIMA/
 - Insuficiencia respiratoria: oxígeno, salbutamol, bromuro de ipratropio, metilprednisolona, adrenalina IM si anafilaxia, nitroglicerina si EAP/congestión y furosemida si EAP congestivo.
 - Shock/sepsis: oxígeno, cristaloide isotónico y adrenalina IM solo si anafilaxia.
 - Trauma grave/politrauma: oxígeno, cristaloide isotónico y morfina si analgesia segura.
+- Parada cardiorrespiratoria/SVA adulto: oxígeno, adrenalina IV/IO, amiodarona y glucosa hipertónica solo si hipoglucemia documentada.
 
 Tratamientos retirados del flujo activo en V1:
 
@@ -162,6 +166,7 @@ Relación activa por protocolo:
 - Insuficiencia respiratoria: GINA 2025, GOLD 2026, ESC Heart Failure 2021, Galicia-061, CIMA/AEMPS salbutamol, ipratropio, metilprednisolona, adrenalina, nitroglicerina y furosemida.
 - Shock/sepsis: Surviving Sepsis Campaign 2021, SERGAS sepsis, Galicia-061, CIMA/AEMPS cloruro sódico 0,9% y adrenalina.
 - Trauma grave/politrauma: Manual Emergencias 061 INGESA/Ceuta, Galicia-061, CIMA/AEMPS morfina y cloruro sódico 0,9%.
+- Parada cardiorrespiratoria/SVA adulto: ERC ALS 2025, AHA ALS 2025, CIMA/AEMPS adrenalina, amiodarona y glucosa hipertónica.
 
 Las fuentes de procedimientos transversales están enlazadas en `src/data/modules.js`; no se listan como bibliografía activa si no están conectadas a un protocolo o procedimiento real.
 
@@ -176,6 +181,7 @@ Las fuentes de procedimientos transversales están enlazadas en `src/data/module
 - 2026-05-22: fase de procedimientos: ABCDE, SBAR, traslado crítico, oxigenoterapia y fluidoterapia revisados como procedimientos transversales compactos.
 - 2026-05-22: completadas pautas farmacológicas con CIMA/AEMPS y referencias operativas oficiales externas; se retiran del flujo activo arritmias específicas, vasopresores y antibiótico prehospitalario.
 - 2026-05-22: añadida V1.1 con protocolo Trauma grave / politrauma, enlazado a ABCDE, SBAR, traslado crítico, GCS, Shock Index, oxigenoterapia, fluidoterapia, oxígeno, cristaloide y morfina.
+- 2026-05-22: añadida V1.1 con protocolo Parada cardiorrespiratoria / SVA adulto, enlazado a ERC/AHA 2025, CIMA/AEMPS adrenalina/amiodarona/glucosa, ABCDE, SBAR, traslado crítico, oxigenoterapia, GCS y Shock Index pos-ROSC.
 
 ## Pendiente funcional
 
@@ -191,6 +197,7 @@ Las fuentes de procedimientos transversales están enlazadas en `src/data/module
 - Confirmar competencias, dotación y presentación exacta de fármacos.
 - Confirmar criterios territoriales de hospital útil: hemodinámica, unidad de ictus, trombectomía, UCI y recursos avanzados.
 - Confirmar criterios territoriales de código trauma, hospital útil, torniquete y red de trauma con el centro coordinador/local.
+- Confirmar criterios territoriales de traslado en parada, finalización/no inicio de RCP, ECPR/hemodinámica pos-ROSC y destino útil con centro coordinador/local.
 - Añadir vasopresores, antibiótico prehospitalario o antiarrítmicos específicos solo si se incorpora protocolo operativo oficial completo.
 
 ## Pendiente bibliográfico

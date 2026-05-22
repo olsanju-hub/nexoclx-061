@@ -44,6 +44,15 @@ export const protocols = [
     bibliography: ['ingesa-061-trauma', 'galicia-061-farmacologica', 'cima-morfina', 'cima-sodium-chloride-09'],
     verificationStatus: 'ABCDE traumático, oxígeno, morfina y cristaloide isotónico quedan trazados; hospital útil, torniquete y criterios de código trauma se adaptan a protocolo local/centro coordinador.',
   },
+  {
+    id: 'parada-cardiorrespiratoria-sva-adulto',
+    clinicalScope: 'Adulto con parada cardiorrespiratoria no pediátrica en entorno extrahospitalario 061, SVA medicalizado y fase pos-ROSC.',
+    reviewedAt: '2026-05-22',
+    confidence: 'alta para algoritmo SVA adulto; media para traslado en parada hasta protocolo local',
+    internalNotes: 'Basado en ERC/AHA 2025 para SVA adulto; CIMA/AEMPS para adrenalina, amiodarona y glucosa; traslado en parada y finalización/no inicio quedan fuera del flujo activo salvo indicación local.',
+    bibliography: ['erc-als-2025', 'aha-als-2025', 'cima-adrenalina', 'cima-amiodarona', 'cima-glucose-33'],
+    verificationStatus: 'Reconocimiento de PCR, RCP, desfibrilación, adrenalina, amiodarona, glucosa si hipoglucemia y pos-ROSC quedan trazados; traslado en parada, ECPR/hemodinámica y criterios de finalizar/no iniciar dependen de protocolo local/centro coordinador.',
+  },
 ]
 
 export const protocolMetaById = Object.fromEntries(protocols.map((protocol) => [protocol.id, protocol]))

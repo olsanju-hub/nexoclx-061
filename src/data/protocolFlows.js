@@ -244,6 +244,56 @@ export const protocolFlows = [
       ],
     },
   },
+  {
+    id: 'parada-cardiorrespiratoria-sva-adulto',
+    title: 'Parada cardiorrespiratoria / SVA adulto',
+    category: 'Crítico',
+    summary: 'Reconocimiento de PCR, RCP de calidad, ritmos, fármacos SVA, ROSC y traslado útil.',
+    keywords: ['rcp', 'parada', 'parada cardiorrespiratoria', 'sva', 'soporte vital avanzado', 'desfibrilación', 'ritmo desfibrilable', 'asistolia', 'actividad eléctrica sin pulso', 'aesp', 'adrenalina', 'amiodarona', 'rosc', 'recuperación circulación espontánea', 'gasping'],
+    priority: 'amenaza vital',
+    calculators: ['gcs', 'shock-index', 'abcde-check', 'sbar-check', 'transfer-check'],
+    procedures: ['abcde', 'sbar-prealerta', 'traslado-critico', 'oxigenoterapia', 'fluidoterapia-inicial'],
+    medications: ['oxygen', 'adrenaline-im', 'amiodarone', 'glucose-hypertonic'],
+    bibliography: ['erc-als-2025', 'aha-als-2025', 'cima-adrenalina', 'cima-amiodarona', 'cima-glucose-33'],
+    tabs: {
+      Sospecha: [
+        'Sospechar PCR si inconsciente, sin respuesta, no respira normal, gasping o ausencia de signos de vida.',
+        'Si personal entrenado busca pulso, no retrasar compresiones por duda prolongada.',
+        'Colapso presenciado o respiración agónica: activar ayuda/centro coordinador y comenzar RCP si no respira normal.',
+        'Seguridad de escena antes de intervenir; pedir DEA/desfibrilador y recurso avanzado desde el inicio.',
+        'Parada traumática, ahogamiento, intoxicación, embarazo o hipotermia requieren manejo específico; no desarrollar en esta ficha.',
+      ],
+      Valoración: [
+        'Comprobar seguridad, respuesta, vía aérea y respiración normal; iniciar RCP si no respira normal.',
+        'Monitor/desfibrilador lo antes posible; clasificar ritmo en desfibrilable o no desfibrilable.',
+        'RCP de alta calidad mientras se prepara desfibrilación, vía aérea, ventilación y acceso IV/IO sin interrumpir compresiones.',
+        'Capnografía si disponible para tubo avanzado/calidad de RCP; no detener compresiones solo por ETCO2.',
+        'Buscar causas reversibles 4H/4T: hipoxia, hipovolemia, hipo/hiperpotasemia/metabólica, hipotermia, trombosis coronaria/pulmonar, taponamiento, neumotórax a tensión y tóxicos.',
+      ],
+      Decisión: [
+        'Iniciar RCP de alta calidad y desfibrilar si ritmo desfibrilable; continuar ciclos según algoritmo SVA adulto.',
+        'Adrenalina precoz en ritmo no desfibrilable; en desfibrilable, tras intentos iniciales fallidos según algoritmo.',
+        'Activar centro coordinador/recurso avanzado; traslado en parada solo si protocolo local 061 o coordinación lo indica.',
+        'Priorizar tratamiento in situ si no hay ROSC y no existe indicación protocolizada de traslado inmediato.',
+        'Tras ROSC: preparar traslado a hospital útil; considerar hemodinámica/UCI si sospecha coronaria o indicación del centro coordinador.',
+      ],
+      Tratamiento: [
+        'Compresiones torácicas de alta calidad, mínimas interrupciones, ventilación con oxígeno y desfibrilación si FV/TV sin pulso.',
+        'Adrenalina 1 mg IV/IO cada 3-5 min durante SVA adulto según ritmo y algoritmo.',
+        'Amiodarona 300 mg IV/IO tras 3 descargas en FV/TV sin pulso; 150 mg adicional tras 5 descargas si persiste o recurre.',
+        'Acceso IV/IO, vía aérea según competencia/dotación y capnografía si disponible; no prolongar pausas por procedimientos.',
+        'Tratar causas reversibles; glucosa hipertónica solo si hipoglucemia documentada.',
+        'Cristaloides solo si hipovolemia/sospecha específica; no fluidos como rutina universal en PCR.',
+      ],
+      Traslado: [
+        'En parada en curso: trasladar solo por protocolo local/centro coordinador; mantener calidad de RCP, desfibrilador, vía aérea, monitorización y seguridad.',
+        'Tras ROSC: monitor ECG continuo, ECG 12 derivaciones si posible, oxigenación/ventilación, TA, ritmo, GCS y temperatura si disponible.',
+        'Hospital útil según sospecha y coordinación: UCI, hemodinámica si coronaria, o centro indicado por red local.',
+        'Prealerta: tiempo sin flujo, tiempo bajo flujo, ritmo inicial, desfibrilaciones, fármacos, causas sospechadas, ROSC, constantes y ETA.',
+        'Si reaparece inestabilidad: reevaluar ABCDE, ritmo, ventilación, perfusión, glucemia si procede y avisar a coordinación.',
+      ],
+    },
+  },
 ]
 
 export const protocolById = Object.fromEntries(protocolFlows.map((protocol) => [protocol.id, protocol]))
