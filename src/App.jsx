@@ -333,14 +333,23 @@ function Connections({ protocol, meta }) {
             return (
               <details key={id}>
                 <summary>{drug.genericName}</summary>
-                <p><strong>Uso en este protocolo:</strong> {useInProtocol}</p>
-                <p><strong>Dosis:</strong> {drug.dose}</p>
-                <p><strong>Vía:</strong> {drug.route}</p>
-                <p><strong>Repetición/máximo:</strong> {drug.frequency} · {drug.maximum}</p>
-                <p><strong>Evitar/precaución:</strong> {drug.contraindications}</p>
-                <p><strong>Fuente:</strong> {drug.source.join(', ')}</p>
-                {drug.operationalNote && <p><strong>Nota:</strong> {drug.operationalNote}</p>}
-                <p><strong>CIMA/AEMPS:</strong> {drug.cimaUrl}</p>
+                <div className="drug-core">
+                  <p className="drug-use">{useInProtocol}</p>
+                  <dl>
+                    <div><dt>Dosis</dt><dd>{drug.dose}</dd></div>
+                    <div><dt>Vía</dt><dd>{drug.route}</dd></div>
+                    <div><dt>Repetir</dt><dd>{drug.frequency}</dd></div>
+                    <div><dt>Máx.</dt><dd>{drug.maximum}</dd></div>
+                    <div><dt>Evitar si</dt><dd>{drug.contraindications}</dd></div>
+                  </dl>
+                </div>
+                <details className="safety-details">
+                  <summary>Seguridad y fuente</summary>
+                  <p><strong>Precauciones:</strong> {drug.precautions}</p>
+                  <p><strong>Fuente:</strong> {drug.source.join(', ')}</p>
+                  {drug.operationalNote && <p><strong>Nota:</strong> {drug.operationalNote}</p>}
+                  <p><strong>CIMA/AEMPS:</strong> {drug.cimaUrl}</p>
+                </details>
               </details>
             )
           })}
@@ -351,7 +360,7 @@ function Connections({ protocol, meta }) {
           </p>
         )}
         <p className="local-note">
-          Las pautas proceden de CIMA/AEMPS, guías oficiales o protocolos operativos oficiales. Adaptar a dotación, competencias y protocolo local del servicio 061 correspondiente.
+          Pautas desde CIMA/AEMPS, guías oficiales o protocolos operativos oficiales; adaptar a dotación, competencias y protocolo local.
         </p>
       </section>
       <details className="secondary-panel">

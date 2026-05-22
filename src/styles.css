@@ -254,6 +254,55 @@ details {
   padding: 7px 0 0;
 }
 summary { font-weight: 780; color: var(--accent-600); cursor: pointer; }
+.drug-grid > details {
+  flex-basis: 100%;
+  padding-top: 6px;
+}
+.drug-grid > details > summary {
+  display: flex;
+  align-items: center;
+  min-height: 24px;
+}
+.drug-core {
+  display: grid;
+  gap: 5px;
+  padding-top: 5px;
+}
+.drug-use {
+  margin: 0;
+  color: var(--text);
+  font-weight: 720;
+}
+.drug-core dl {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+}
+.drug-core dl div {
+  display: grid;
+  grid-template-columns: 66px minmax(0, 1fr);
+  gap: 7px;
+  align-items: baseline;
+}
+.drug-core dt {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 760;
+}
+.drug-core dd {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.79rem;
+}
+.safety-details {
+  flex: initial;
+  margin-top: 4px;
+  padding-top: 5px;
+}
+.safety-details summary {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
 .secondary-panel {
   border-top: 1px solid var(--line);
 }
