@@ -6,7 +6,6 @@ const CORE_ASSETS = [
   `${BASE_PATH}favicon.png`,
   `${BASE_PATH}assets/icons/icon-192.png`,
   `${BASE_PATH}assets/icons/icon-512.png`,
-  `${BASE_PATH}assets/brand/nexoclx-061-icon-source.png`,
 ]
 
 self.addEventListener('install', (event) => {

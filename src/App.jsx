@@ -7,11 +7,11 @@ import { protocolMetaById } from './data/protocols'
 import { protocolFlows, TAB_ORDER } from './data/protocolFlows'
 
 const navItems = [
-  { id: 'inicio', label: 'Inicio' },
-  { id: 'protocolos', label: 'Protocolos' },
-  { id: 'procedimientos', label: 'Procedimientos' },
-  { id: 'calculos', label: 'Cálculos' },
-  { id: 'bibliografia', label: 'Bibliografía' },
+  { id: 'inicio', label: 'Inicio', icon: '⌂' },
+  { id: 'protocolos', label: 'Protocolos', icon: '▤' },
+  { id: 'procedimientos', label: 'Procedimientos', icon: '✓' },
+  { id: 'calculos', label: 'Cálculos', icon: '∑' },
+  { id: 'bibliografia', label: 'Bibliografía', icon: '§' },
 ]
 
 const quickBlocks = [
@@ -88,7 +88,7 @@ function App() {
     <div className="app-shell">
       <header className="topbar">
         <button className="brand" onClick={() => setView('inicio')} type="button">
-          <img src={`${import.meta.env.BASE_URL}assets/brand/nexoclx-061-icon-source.png`} alt="" />
+          <img src={`${import.meta.env.BASE_URL}assets/icons/icon-192.png`} alt="" />
           <span>
             <strong>NexoClx 061</strong>
             <small>extrahospitalaria y traslado crítico</small>
@@ -154,7 +154,8 @@ function App() {
             className={view === item.id ? 'active' : ''}
             onClick={() => setView(item.id)}
           >
-            {item.label}
+            <span aria-hidden="true">{item.icon}</span>
+            <small>{item.label}</small>
           </button>
         ))}
       </nav>
@@ -191,7 +192,6 @@ function Home({ openItem, setView, setSelectedProcedureId, setSelectedCalculator
     <section className="view-stack">
       <div className="section-head">
         <h1>Qué decidir ahora</h1>
-        <p>Ficha rápida para evaluar, estabilizar, trasladar y comunicar.</p>
       </div>
 
       <div className="quick-grid">
@@ -300,9 +300,12 @@ function ProtocolsView({
 function Connections({ protocol, meta }) {
   return (
     <div className="connections">
-      <Connector title="Cálculos" items={protocol.calculators} />
-      <Connector title="Procedimientos" items={protocol.procedures} map={procedureById} />
-      <section>
+      <details className="secondary-panel">
+        <summary>Apoyos operativos</summary>
+        <Connector title="Cálculos" items={protocol.calculators} />
+        <Connector title="Procedimientos" items={protocol.procedures} map={procedureById} />
+      </details>
+      <section className="treatment-block">
         <h3>Tratamientos conectados</h3>
         <div className="drug-grid">
           {protocol.medications.map((id) => {
@@ -327,11 +330,11 @@ function Connections({ protocol, meta }) {
           })}
         </div>
       </section>
-      <section>
-        <h3>Revisión</h3>
+      <details className="secondary-panel">
+        <summary>Revisión y notas</summary>
         <p>{meta.verificationStatus}</p>
         <small>Revisión interna: {meta.reviewedAt} · confianza: {meta.confidence}</small>
-      </section>
+      </details>
     </div>
   )
 }
@@ -501,13 +504,13 @@ function BibliographyView() {
       </div>
       <div className="biblio-list">
         {bibliography.map((item) => (
-          <article key={item.referenceId}>
-            <h2>{item.title}</h2>
+          <details key={item.referenceId} className="biblio-item">
+            <summary>{item.title}</summary>
             <p>{item.institution} · {item.year} · {item.type}</p>
             <p>{item.note}</p>
             <a href={item.url} target="_blank" rel="noreferrer">Abrir fuente</a>
             <small>Confianza: {item.confidence} · revisión {item.reviewedAt} · {item.pendingQuestions}</small>
-          </article>
+          </details>
         ))}
       </div>
       <section className="meta-box">
