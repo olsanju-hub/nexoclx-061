@@ -10,12 +10,12 @@ export const protocols = [
   },
   {
     id: 'ictus-agudo',
-    clinicalScope: 'Déficit neurológico focal brusco candidato a código ictus y traslado a centro útil.',
+    clinicalScope: 'Déficit neurológico focal brusco con sospecha prehospitalaria de ictus y necesidad de código/destino útil según protocolo local.',
     reviewedAt: '2026-05-22',
     confidence: 'alta para detección/traslado; media para criterios de destino hasta protocolo local',
-    internalNotes: 'Actualizar cuando se cargue mapa territorial de unidades de ictus y trombectomía.',
+    internalNotes: 'Actualizar cuando se cargue mapa territorial de unidades de ictus, TC, trombólisis y trombectomía; no fijar ventanas terapéuticas sin protocolo local.',
     bibliography: ['aha-asa-ais-2026'],
-    verificationStatus: 'Sin fármacos específicos en V1 salvo oxígeno y corrección de hipoglucemia pendiente de protocolo local.',
+    verificationStatus: 'Detección, glucemia y prealerta trazadas; activación, destino, PA, hipoglucemia y convulsiones quedan pendientes de protocolo local 061.',
   },
   {
     id: 'insuficiencia-respiratoria',
