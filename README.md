@@ -128,6 +128,8 @@ src/
 - Oxigenoterapia y soporte respiratorio básico: SCA con hipoxemia, insuficiencia respiratoria y shock/sepsis.
 - Fluidoterapia inicial en paciente inestable: shock/sepsis.
 
+Estado de procedimientos: revisados en V1 como herramientas breves, operativas y transversales. No incluyen dosis farmacológicas no verificadas. Fluidoterapia mantiene el cálculo por peso como herramienta aritmética, no como indicación automática de volumen.
+
 ## Fichas farmacológicas activas
 
 Medicamentos como soporte interno, sin sección principal visible:
@@ -167,6 +169,7 @@ Las fuentes de procedimientos transversales están enlazadas en `src/data/module
 - 2026-05-22: auditados individualmente los cuatro protocolos.
 - 2026-05-22: revisión transversal de conexiones clínicas, estados pendientes y bibliografía activa. Commit de revisión transversal: `chore: connect NexoClx 061 clinical data and tools`.
 - 2026-05-22: fase de medicamentos: las tarjetas activas muestran solo fármacos `verified`; los tratamientos dependientes de protocolo local quedan como `local-only`.
+- 2026-05-22: fase de procedimientos: ABCDE, SBAR, traslado crítico, oxigenoterapia y fluidoterapia revisados como procedimientos transversales compactos.
 
 ## Pendiente funcional
 
