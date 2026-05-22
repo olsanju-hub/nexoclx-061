@@ -195,6 +195,55 @@ export const protocolFlows = [
       ],
     },
   },
+  {
+    id: 'trauma-grave-politrauma',
+    title: 'Trauma grave / politrauma',
+    category: 'Trauma',
+    summary: 'ABCDE traumático, hemorragia, shock, hospital útil y traslado crítico.',
+    keywords: ['trauma', 'politrauma', 'accidente', 'atropello', 'precipitación', 'alta energía', 'hemorragia', 'torniquete', 'tce', 'fractura pelvis', 'shock traumático', 'atrapamiento', 'eyección'],
+    priority: 'amenaza vital',
+    calculators: ['gcs', 'shock-index', 'abcde-check', 'sbar-check', 'transfer-check'],
+    procedures: ['abcde', 'sbar-prealerta', 'traslado-critico', 'oxigenoterapia', 'fluidoterapia-inicial'],
+    medications: ['oxygen', 'crystalloid-bolus', 'morphine'],
+    bibliography: ['ingesa-061-trauma', 'galicia-061-farmacologica', 'cima-morfina', 'cima-sodium-chloride-09'],
+    tabs: {
+      Sospecha: [
+        'Sospechar trauma grave si mecanismo de alta energía: atropello, precipitación, accidente de tráfico grave, eyección, atrapamiento o fallecido en mismo vehículo.',
+        'Trauma penetrante en cabeza, cuello, tórax, abdomen o raíz de miembros cambia prioridad.',
+        'Amenaza vital si conciencia alterada, hipotensión, shock, dificultad respiratoria, dolor torácico/abdominal, sangrado masivo o amputación.',
+        'Sospechar lesión pélvica si deformidad, dolor pélvico, inestabilidad o mecanismo compatible; no repetir exploración si hay inestabilidad.',
+        'Quemadura grave asociada, TCE o anticoagulación aumentan prioridad y prealerta.',
+      ],
+      Valoración: [
+        'ABCDE traumático: A con control cervical; B ventilación/tórax; C hemorragia externa, pulso, perfusión, pelvis y shock; D GCS, pupilas y glucemia si conciencia alterada; E exposición e hipotermia.',
+        'Registrar constantes, GCS, mecanismo, tiempo desde trauma, lesiones evidentes, dolor, sangrado, anticoagulación y respuesta a medidas iniciales.',
+        'Buscar neumotórax a tensión si disnea, asimetría ventilatoria, shock, ingurgitación yugular o deterioro brusco.',
+        'Exploración rápida cabeza-pies si mecanismo generalizado o paciente inconsciente; enfocada si lesión localizada y paciente estable.',
+        'Reevaluar cada 5 min si crítico: vía aérea, respiración, circulación, abdomen, lesiones, vendajes, férulas y dispositivos.',
+      ],
+      Decisión: [
+        'Activar recurso avanzado/centro coordinador si trauma grave, amenaza vital, shock, TCE grave, sangrado masivo o necesidad de hospital útil.',
+        'Priorizar traslado si hay amenaza vital; no demorar por exploraciones o medidas no esenciales.',
+        'Hospital útil según red local: trauma/UCI/cirugía/TC/neurocirugía si procede, indicado por centro coordinador.',
+        'Control de hemorragia, inmovilización selectiva y prevención de hipotermia antes de mover si no retrasa salida crítica.',
+        'Prealertar con mecanismo, ABCDE, constantes, GCS, sospecha de lesiones, tratamientos, respuesta, anticoagulación y ETA.',
+      ],
+      Tratamiento: [
+        'Controlar hemorragia externa con presión directa y vendaje compresivo; torniquete si hemorragia masiva de extremidad no controlable y dotación/protocolo lo permite.',
+        'Oxígeno si hipoxemia, shock, TCE grave, insuficiencia respiratoria o situación crítica.',
+        'Cristaloide isotónico si hipoperfusión; evitar normalizar TA de forma agresiva si hemorragia no controlada, salvo TCE u otra indicación protocolizada.',
+        'Morfina IV titulada para dolor intenso si TA, FR, SatO2 y conciencia permiten analgesia segura.',
+        'Prevenir hipotermia, mantener control cervical si mecanismo/lesión lo justifica, no retirar objetos penetrantes y no retrasar traslado por procedimientos no esenciales.',
+      ],
+      Traslado: [
+        'Traslado a hospital útil según trauma grave y centro coordinador; comunicar si precisa UCI, cirugía, TC, neurocirugía o transfusión/activación trauma.',
+        'Prealerta SBAR: mecanismo, hora, constantes iniciales/actuales, GCS, lesiones sospechadas, sangrado, anticoagulación, tratamientos, respuesta y ETA.',
+        'Monitorizar en ruta: TA, FC, SatO2, FR, GCS, dolor, perfusión, sangrado, vendajes, férulas, vía aérea y temperatura.',
+        'Preparar deterioro respiratorio/hemodinámico: oxígeno, vía aérea, aspiración, acceso vascular, control de hemorragia y aviso a coordinación.',
+        'Si empeora: reevaluar ABCDE, tratar amenaza inmediata, actualizar prealerta y revisar destino.',
+      ],
+    },
+  },
 ]
 
 export const protocolById = Object.fromEntries(protocolFlows.map((protocol) => [protocol.id, protocol]))

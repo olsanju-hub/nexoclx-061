@@ -35,6 +35,15 @@ export const protocols = [
     bibliography: ['ssc-2021', 'sergas-sepsis', 'galicia-061-farmacologica', 'cima-sodium-chloride-09', 'cima-adrenalina'],
     verificationStatus: 'Oxígeno, cristaloide isotónico y adrenalina IM en anafilaxia quedan como pautas verificadas; destino, vasopresores y antibióticos requieren protocolo operativo específico.',
   },
+  {
+    id: 'trauma-grave-politrauma',
+    clinicalScope: 'Paciente traumático grave o politraumatizado en entorno extrahospitalario 061, con amenaza vital real o potencial y necesidad de traslado crítico.',
+    reviewedAt: '2026-05-22',
+    confidence: 'media-alta',
+    internalNotes: 'Basado en Manual de Emergencias 061 INGESA/Ceuta para evaluación inicial del politrauma y Galicia-061/CIMA para medicación; destino y activación dependen de red local.',
+    bibliography: ['ingesa-061-trauma', 'galicia-061-farmacologica', 'cima-morfina', 'cima-sodium-chloride-09'],
+    verificationStatus: 'ABCDE traumático, oxígeno, morfina y cristaloide isotónico quedan trazados; hospital útil, torniquete y criterios de código trauma se adaptan a protocolo local/centro coordinador.',
+  },
 ]
 
 export const protocolMetaById = Object.fromEntries(protocols.map((protocol) => [protocol.id, protocol]))

@@ -330,16 +330,17 @@ function Connections({ protocol, meta }) {
           {activeMedicationIds.map((id) => {
             const drug = medicationById[id]
             const useInProtocol = drug.protocolIndications?.[protocol.id] || drug.indications.join(', ')
+            const protocolDosing = drug.protocolDosing?.[protocol.id] || {}
             return (
               <details key={id}>
                 <summary>{drug.genericName}</summary>
                 <div className="drug-core">
                   <p className="drug-use">{useInProtocol}</p>
                   <dl>
-                    <div><dt>Dosis</dt><dd>{drug.dose}</dd></div>
-                    <div><dt>Vía</dt><dd>{drug.route}</dd></div>
-                    <div><dt>Repetir</dt><dd>{drug.frequency}</dd></div>
-                    <div><dt>Máx.</dt><dd>{drug.maximum}</dd></div>
+                    <div><dt>Dosis</dt><dd>{protocolDosing.dose || drug.dose}</dd></div>
+                    <div><dt>Vía</dt><dd>{protocolDosing.route || drug.route}</dd></div>
+                    <div><dt>Repetir</dt><dd>{protocolDosing.frequency || drug.frequency}</dd></div>
+                    <div><dt>Máx.</dt><dd>{protocolDosing.maximum || drug.maximum}</dd></div>
                     <div><dt>Evitar si</dt><dd>{drug.contraindications}</dd></div>
                   </dl>
                 </div>

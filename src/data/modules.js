@@ -7,7 +7,7 @@ export const procedures = [
     category: 'Transversal',
     summary: 'Secuencia de seguridad con intervención inmediata ante amenaza vital.',
     keywords: ['abcde', 'vía aérea', 'breathing', 'circulation', 'glucemia', 'evaluación'],
-    relatedProtocols: ['sca-dolor-toracico', 'ictus-agudo', 'insuficiencia-respiratoria', 'shock-sepsis'],
+    relatedProtocols: ['sca-dolor-toracico', 'ictus-agudo', 'insuficiencia-respiratoria', 'shock-sepsis', 'trauma-grave-politrauma'],
     source: ['ssc-2021'],
     sections: {
       indicacion: ['Todo paciente crítico, inestable, tiempo-dependiente o con riesgo de deterioro durante traslado.'],
@@ -24,7 +24,7 @@ export const procedures = [
     category: 'Comunicación',
     summary: 'Mensaje operativo para centro coordinador y hospital receptor.',
     keywords: ['sbar', 'prealerta', 'comunicación', 'centro coordinador', 'eta', 'traslado'],
-    relatedProtocols: ['sca-dolor-toracico', 'ictus-agudo', 'insuficiencia-respiratoria', 'shock-sepsis'],
+    relatedProtocols: ['sca-dolor-toracico', 'ictus-agudo', 'insuficiencia-respiratoria', 'shock-sepsis', 'trauma-grave-politrauma'],
     source: ['esc-acs-2023', 'aha-asa-ais-2026'],
     sections: {
       indicacion: ['Código tiempo-dependiente, paciente inestable o necesidad de recurso/destino específico.'],
@@ -41,7 +41,7 @@ export const procedures = [
     category: 'Traslado',
     summary: 'Antes de mover: monitor, vía aérea, acceso, medicación, prealerta y plan de deterioro.',
     keywords: ['traslado', 'crítico', 'ambulancia', 'monitor', 'prealerta', 'uci'],
-    relatedProtocols: ['sca-dolor-toracico', 'ictus-agudo', 'insuficiencia-respiratoria', 'shock-sepsis'],
+    relatedProtocols: ['sca-dolor-toracico', 'ictus-agudo', 'insuficiencia-respiratoria', 'shock-sepsis', 'trauma-grave-politrauma'],
     source: ['ssc-2021'],
     sections: {
       indicacion: ['Paciente inestable, tiempo-dependiente, primario o interhospitalario crítico con riesgo de deterioro durante transporte.'],
@@ -58,7 +58,7 @@ export const procedures = [
     category: 'Respiratorio',
     summary: 'Oxígeno titulado, dispositivos y escalada si fracaso respiratorio.',
     keywords: ['oxígeno', 'saturación', 'vmni', 'ventilación', 'epoc', 'hipoxemia'],
-    relatedProtocols: ['sca-dolor-toracico', 'insuficiencia-respiratoria', 'shock-sepsis'],
+    relatedProtocols: ['sca-dolor-toracico', 'insuficiencia-respiratoria', 'shock-sepsis', 'trauma-grave-politrauma'],
     source: ['gina-2025', 'gold-2026'],
     sections: {
       indicacion: ['Hipoxemia, insuficiencia respiratoria, shock, anafilaxia, situación crítica o trabajo respiratorio elevado.'],
@@ -75,7 +75,7 @@ export const procedures = [
     category: 'Hemodinámico',
     summary: 'Cristaloides con reevaluación y freno si perfil cardiogénico o sobrecarga.',
     keywords: ['fluidoterapia', 'cristaloide', 'bolo', 'shock', 'hipotensión', 'sepsis'],
-    relatedProtocols: ['shock-sepsis'],
+    relatedProtocols: ['shock-sepsis', 'trauma-grave-politrauma'],
     source: ['ssc-2021'],
     sections: {
       indicacion: ['Hipoperfusión compatible con shock distributivo/hipovolémico y sin datos de shock cardiogénico, EAP o sobrecarga.'],
