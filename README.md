@@ -22,9 +22,9 @@ Interfaz mobile-first, compacta y sobria. Usa fondo gris-azulado `#f2f2f7`, supe
 
 Implementado: Vite, React, JavaScript, CSS propio, PWA, manifest, service worker básico, iconos desde `public/assets/brand/nexoclx-061-icon-source.png`, búsqueda global, tabs de protocolos y build estático.
 
-Implementado en revisión transversal V1: relaciones homogéneas entre protocolos, procedimientos, cálculos, medicamentos de soporte y bibliografía activa. Los medicamentos usan estados internos normalizados: `verified`, `local-only`, `inactive` y `removed-from-active-flow`.
+Implementado en revisión transversal V1: relaciones homogéneas entre protocolos, procedimientos, cálculos, medicamentos de soporte y bibliografía activa. Los medicamentos usan estados internos normalizados: `verified`, `verified-external-protocol`, `inactive` y `removed-from-active-flow`.
 
-Pendiente: validación clínica local, criterios territoriales de activación/destino, dotación real y dosis protocolizadas no verificadas.
+Pendiente: validación clínica local, criterios territoriales de activación/destino y confirmación de dotación real. Las pautas activas de medicamentos de V1 tienen ficha completa y fuente trazable.
 
 Nota clínica: La adaptación a protocolo local 061 queda pendiente antes de uso asistencial.
 
@@ -44,7 +44,7 @@ La app no usa React Router. `src/App.jsx` mantiene el estado de vista actual, el
 
 Los protocolos de `protocolFlows.js` enlazan cálculos, procedimientos, medicamentos y referencias. `protocols.js` añade metadatos de revisión y confianza. `medications.js` conserva dosis, vía, precauciones, fuente, estado y protocolo relacionado. `bibliography.js` centraliza trazabilidad y vincula cada referencia activa a protocolos o procedimientos reales.
 
-No hay sección principal de medicamentos. En la pantalla principal de cada protocolo solo aparecen como tarjetas farmacológicas los medicamentos `verified`. Los tratamientos `local-only`, `inactive` o `removed-from-active-flow` no se muestran como pauta activa; quedan como nota secundaria o soporte interno.
+No hay sección principal de medicamentos. En la pantalla principal de cada protocolo solo aparecen como tarjetas farmacológicas los medicamentos `verified` o `verified-external-protocol`. Los tratamientos `inactive` o `removed-from-active-flow` no se muestran como pauta activa.
 
 ## Criterio clínico global
 
@@ -69,6 +69,8 @@ Fuentes base:
 - ESC 2021 Heart Failure.
 - Surviving Sepsis Campaign 2021.
 - CIMA/AEMPS para ácido acetilsalicílico, nitroglicerina, salbutamol, ipratropio y adrenalina.
+- Guía farmacológica de Urxencias Sanitarias de Galicia-061 como referencia operativa externa para uso extrahospitalario.
+- Protocolo SERGAS de sepsis como referencia operativa externa para cristaloides en sepsis/shock séptico.
 
 La carpeta `.local-biblio/` está ignorada por Git para bibliografía privada o no publicable.
 
@@ -118,7 +120,7 @@ src/
 - Checklist ABCDE: insuficiencia respiratoria y shock/sepsis.
 - Checklist SBAR: SCA, ictus, insuficiencia respiratoria y shock/sepsis.
 - Checklist traslado crítico: SCA, ictus, insuficiencia respiratoria y shock/sepsis.
-- Bolo de cristaloide por peso: shock/sepsis, con indicación y volumen pendientes de protocolo local 061.
+- Bolo de cristaloide por peso: shock/sepsis, como ayuda aritmética para pauta de cristaloide verificada con referencia externa.
 
 ## Procedimientos incluidos
 
@@ -128,7 +130,7 @@ src/
 - Oxigenoterapia y soporte respiratorio básico: SCA con hipoxemia, insuficiencia respiratoria y shock/sepsis.
 - Fluidoterapia inicial en paciente inestable: shock/sepsis.
 
-Estado de procedimientos: revisados en V1 como herramientas breves, operativas y transversales. No incluyen dosis farmacológicas no verificadas. Fluidoterapia mantiene el cálculo por peso como herramienta aritmética, no como indicación automática de volumen.
+Estado de procedimientos: revisados en V1 como herramientas breves, operativas y transversales. Fluidoterapia mantiene el cálculo por peso como ayuda aritmética y exige reevaluación tras cada carga.
 
 ## Fichas farmacológicas activas
 
@@ -136,17 +138,16 @@ Medicamentos como soporte interno, sin sección principal visible:
 
 Pautas visibles como tratamiento activo, todas con ficha completa y fuente CIMA/AEMPS cuando aplica:
 
-- SCA: oxígeno, ácido acetilsalicílico, nitroglicerina.
-- Ictus: oxígeno.
-- Insuficiencia respiratoria: oxígeno, salbutamol, bromuro de ipratropio, adrenalina IM si anafilaxia, nitroglicerina si EAP/congestión con seguridad hemodinámica.
-- Shock/sepsis: oxígeno, adrenalina IM solo si anafilaxia.
+- SCA: oxígeno, ácido acetilsalicílico, nitroglicerina, morfina y ticagrelor.
+- Ictus: oxígeno, glucosa hipertónica y midazolam.
+- Insuficiencia respiratoria: oxígeno, salbutamol, bromuro de ipratropio, metilprednisolona, adrenalina IM si anafilaxia, nitroglicerina si EAP/congestión y furosemida si EAP congestivo.
+- Shock/sepsis: oxígeno, cristaloide isotónico y adrenalina IM solo si anafilaxia.
 
-Tratamientos no operativos en V1, mantenidos como `local-only` y fuera de tarjetas activas:
+Tratamientos retirados del flujo activo en V1:
 
-- Analgesia en SCA, antiagregación adicional y fármacos de arritmias.
-- Corrección farmacológica de hipoglucemia y anticonvulsivante.
-- Corticoide sistémico y diurético en EAP.
-- Cristaloide como pauta de volumen cerrada, vasopresores y antibiótico prehospitalario.
+- Fármacos específicos de arritmias en SCA: requieren algoritmo concreto por arritmia y estabilidad.
+- Vasopresores: requieren concentración, monitorización, competencia del equipo y protocolo operativo específico.
+- Antibiótico prehospitalario: requiere antimicrobiano, dosis, vía, alergias y protocolo oficial verificable.
 
 ## Bibliografía base usada
 
@@ -154,10 +155,10 @@ La bibliografía activa está en `src/data/bibliography.js`, con `referenceId`, 
 
 Relación activa por protocolo:
 
-- SCA: ESC ACS 2023, CIMA/AEMPS ácido acetilsalicílico, CIMA/AEMPS nitroglicerina.
-- Ictus: AHA/ASA 2026 Acute Ischemic Stroke.
-- Insuficiencia respiratoria: GINA 2025, GOLD 2026, ESC Heart Failure 2021, CIMA/AEMPS salbutamol, CIMA/AEMPS ipratropio, CIMA/AEMPS adrenalina, CIMA/AEMPS nitroglicerina.
-- Shock/sepsis: Surviving Sepsis Campaign 2021, CIMA/AEMPS adrenalina.
+- SCA: ESC ACS 2023, Galicia-061, CIMA/AEMPS AAS, nitroglicerina, morfina y ticagrelor.
+- Ictus: AHA/ASA 2026, Galicia-061, CIMA/AEMPS glucosa hipertónica y midazolam.
+- Insuficiencia respiratoria: GINA 2025, GOLD 2026, ESC Heart Failure 2021, Galicia-061, CIMA/AEMPS salbutamol, ipratropio, metilprednisolona, adrenalina, nitroglicerina y furosemida.
+- Shock/sepsis: Surviving Sepsis Campaign 2021, SERGAS sepsis, Galicia-061, CIMA/AEMPS cloruro sódico 0,9% y adrenalina.
 
 Las fuentes de procedimientos transversales están enlazadas en `src/data/modules.js`; no se listan como bibliografía activa si no están conectadas a un protocolo o procedimiento real.
 
@@ -168,8 +169,9 @@ Las fuentes de procedimientos transversales están enlazadas en `src/data/module
 - 2026-05-22: añadidos cuatro protocolos piloto y relaciones con procedimientos, cálculos, medicamentos y bibliografía.
 - 2026-05-22: auditados individualmente los cuatro protocolos.
 - 2026-05-22: revisión transversal de conexiones clínicas, estados pendientes y bibliografía activa. Commit de revisión transversal: `chore: connect NexoClx 061 clinical data and tools`.
-- 2026-05-22: fase de medicamentos: las tarjetas activas muestran solo fármacos `verified`; los tratamientos dependientes de protocolo local quedan como `local-only`.
+- 2026-05-22: fase de medicamentos: las tarjetas activas muestran solo fármacos `verified` o `verified-external-protocol`.
 - 2026-05-22: fase de procedimientos: ABCDE, SBAR, traslado crítico, oxigenoterapia y fluidoterapia revisados como procedimientos transversales compactos.
+- 2026-05-22: completadas pautas farmacológicas con CIMA/AEMPS y referencias operativas oficiales externas; se retiran del flujo activo arritmias específicas, vasopresores y antibiótico prehospitalario.
 
 ## Pendiente funcional
 
@@ -182,15 +184,14 @@ Las fuentes de procedimientos transversales están enlazadas en `src/data/module
 
 - Validar criterios de activación con protocolo oficial del servicio 061 correspondiente.
 - Adaptar la V1 a protocolo local 061 antes de uso asistencial.
-- Confirmar dosis/criterios locales de analgesia, antiagregación adicional, corticoides, diuréticos, benzodiacepinas, vasopresores y antibióticos si entran en alcance operativo.
 - Confirmar competencias, dotación y presentación exacta de fármacos.
-- Confirmar volumen/tamaño de bolo de cristaloide, repetición y límites en paciente inestable.
 - Confirmar criterios territoriales de hospital útil: hemodinámica, unidad de ictus, trombectomía, UCI y recursos avanzados.
+- Añadir vasopresores, antibiótico prehospitalario o antiarrítmicos específicos solo si se incorpora protocolo operativo oficial completo.
 
 ## Pendiente bibliográfico
 
 - Añadir protocolos locales oficiales cuando estén disponibles.
-- Añadir CIMA/AEMPS y protocolo local para analgesia, antiagregación adicional, fármacos de arritmias, glucosa, anticonvulsivantes, corticoides, diuréticos, vasopresores y antibióticos solo si se incorporan como pauta verificada.
+- Añadir CIMA/AEMPS y protocolo operativo para antiarrítmicos, vasopresores y antibióticos solo si se incorporan como pauta verificada.
 - Mantener revisión clínica fechada por módulo.
 
 ## Requisitos

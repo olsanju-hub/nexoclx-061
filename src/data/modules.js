@@ -80,7 +80,7 @@ export const procedures = [
     sections: {
       indicacion: ['Hipoperfusión compatible con shock distributivo/hipovolémico y sin datos de shock cardiogénico, EAP o sobrecarga.'],
       preparacion: ['Acceso IV/IO si no retrasa traslado, TA seriada, SatO2, auscultación, control de hemorragia y plan de destino/UCI.'],
-      pasos: ['Confirmar patrón clínico antes de administrar volumen.', 'Usar el cálculo de bolo solo como herramienta aritmética cuando el volumen haya sido indicado por protocolo local 061 o coordinación.', 'Reevaluar perfusión, TA, respiración y crepitantes tras cada bolo.', 'Repetir solo si persiste hipoperfusión sin datos de sobrecarga y existe indicación local.', 'Frenar si sospecha cardiogénica, EAP, ingurgitación yugular, crepitantes o empeora la disnea.'],
+      pasos: ['Confirmar patrón clínico antes de administrar volumen.', 'En sepsis/shock séptico usar 30 ml/kg inicial; si precisa, cargas de 500 ml en 30 min con reevaluación.', 'Usar el cálculo de bolo como ayuda aritmética, no como sustituto de la valoración clínica.', 'Reevaluar perfusión, TA, respiración y crepitantes tras cada carga.', 'Frenar si sospecha cardiogénica, EAP, ingurgitación yugular, crepitantes o empeora la disnea.'],
       erroresCriticos: ['Bolos grandes sin reevaluación.', 'Usar el cálculo por peso como indicación automática.', 'No controlar hemorragia.', 'Retrasar traslado por fluidos no esenciales.'],
       reevaluacion: ['Tras cada intervención: TA, FC, relleno, piel, conciencia, SatO2, FR, auscultación, diuresis referida si existe y respuesta clínica.'],
       escalar: ['Shock persistente, necesidad de vasopresor, lactato alto si disponible, deterioro respiratorio, sospecha cardiogénica/obstructiva o necesidad de UCI/recurso avanzado.'],

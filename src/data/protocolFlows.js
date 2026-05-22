@@ -10,8 +10,8 @@ export const protocolFlows = [
     priority: 'tiempo-dependiente',
     calculators: ['killip', 'sbar-check', 'transfer-check'],
     procedures: ['abcde', 'sbar-prealerta', 'traslado-critico', 'oxigenoterapia'],
-    medications: ['oxygen', 'acetylsalicylic-acid', 'nitroglycerin', 'sca-analgesia-pending', 'additional-antiplatelet-pending', 'arrhythmia-drugs-pending'],
-    bibliography: ['esc-acs-2023', 'cima-aas', 'cima-nitroglicerina'],
+    medications: ['oxygen', 'acetylsalicylic-acid', 'nitroglycerin', 'morphine', 'ticagrelor', 'arrhythmia-drugs-removed'],
+    bibliography: ['esc-acs-2023', 'galicia-061-farmacologica', 'cima-aas', 'cima-nitroglicerina', 'cima-morfina', 'cima-ticagrelor'],
     tabs: {
       Sospecha: [
         'Sospechar si dolor opresivo, irradiación, vegetatismo, disnea, síncope o equivalentes.',
@@ -36,9 +36,10 @@ export const protocolFlows = [
       ],
       Tratamiento: [
         'Oxígeno solo si hipoxemia real, insuficiencia respiratoria o shock; evitar hiperoxia rutinaria si SatO2 adecuada.',
-        'Ácido acetilsalicílico si sospecha SCA y no hay alergia, sangrado activo, enfermedad hemorrágica ni sospecha de disección.',
-        'Nitroglicerina SL solo con dolor isquémico/EAP, paciente sentado, TA estable y sin shock, sospecha VD/disección ni PDE5 reciente.',
-        'Analgesia, antiagregación adicional y fármacos de arritmias requieren protocolo local 061 o indicación de coordinación.',
+        'Ácido acetilsalicílico 165-325 mg VO si sospecha SCA y no hay alergia, sangrado activo, enfermedad hemorrágica ni sospecha de disección.',
+        'Nitroglicerina SL 0,4-0,8 mg cada 5 min hasta 3 dosis si dolor isquémico/EAP, TA estable y sin shock, sospecha VD/disección ni PDE5 reciente.',
+        'Morfina IV titulada si dolor intenso persistente, con TA, FR, SatO2 y conciencia monitorizadas.',
+        'Ticagrelor 180 mg VO como antiagregación adicional si SCA sin alto riesgo hemorrágico y el circuito de código infarto lo contempla.',
         'Reevaluar dolor, TA, SatO2, ritmo y perfusión tras cada intervención.',
       ],
       Traslado: [
@@ -59,8 +60,8 @@ export const protocolFlows = [
     priority: 'tiempo-dependiente',
     calculators: ['gcs', 'befast', 'sbar-check', 'transfer-check'],
     procedures: ['abcde', 'sbar-prealerta', 'traslado-critico'],
-    medications: ['oxygen', 'glucose-correction-pending', 'anticonvulsant-pending'],
-    bibliography: ['aha-asa-ais-2026'],
+    medications: ['oxygen', 'glucose-hypertonic', 'midazolam'],
+    bibliography: ['aha-asa-ais-2026', 'galicia-061-farmacologica', 'cima-glucose-33', 'cima-midazolam'],
     tabs: {
       Sospecha: [
         'Sospechar si déficit neurológico focal brusco: desviación facial, alteración del lenguaje, pérdida de fuerza, visión alterada o ataxia brusca.',
@@ -84,8 +85,8 @@ export const protocolFlows = [
       ],
       Tratamiento: [
         'Oxígeno solo si hipoxemia o insuficiencia respiratoria; no oxígeno rutinario si SatO2 adecuada.',
-        'Hipoglucemia documentada: corregir solo con pauta local verificada; en V1 no se muestra fármaco/dosis operativa.',
-        'Convulsión: proteger vía aérea, evitar lesiones y usar fármaco solo si existe pauta local verificada.',
+        'Hipoglucemia documentada: glucosa hipertónica IV 10 g y reevaluar glucemia/respuesta.',
+        'Convulsión: proteger vía aérea; midazolam IV lento o IN/bucal según acceso y dotación, con soporte ventilatorio preparado.',
         'No bajar PA de forma rutinaria antes de neuroimagen salvo protocolo local, situación extrema o instrucción de coordinación.',
         'No antiagregar ni anticoagular antes de neuroimagen salvo protocolo oficial específico.',
       ],
@@ -106,8 +107,8 @@ export const protocolFlows = [
     priority: 'amenaza vital',
     calculators: ['abcde-check', 'sbar-check', 'transfer-check'],
     procedures: ['abcde', 'oxigenoterapia', 'sbar-prealerta', 'traslado-critico'],
-    medications: ['oxygen', 'salbutamol', 'ipratropium', 'systemic-corticosteroid-pending', 'adrenaline-im', 'nitroglycerin', 'diuretic-pending'],
-    bibliography: ['gina-2025', 'gold-2026', 'esc-hf-2021', 'cima-salbutamol', 'cima-ipratropio', 'cima-adrenalina', 'cima-nitroglicerina'],
+    medications: ['oxygen', 'salbutamol', 'ipratropium', 'methylprednisolone', 'adrenaline-im', 'nitroglycerin', 'furosemide'],
+    bibliography: ['gina-2025', 'gold-2026', 'esc-hf-2021', 'galicia-061-farmacologica', 'cima-salbutamol', 'cima-ipratropio', 'cima-methylprednisolone', 'cima-adrenalina', 'cima-nitroglicerina', 'cima-furosemide'],
     tabs: {
       Sospecha: [
         'Protocolo sindrómico: disnea grave/insuficiencia respiratoria; no cerrar etiología sin evolución, exploración y datos disponibles.',
@@ -131,9 +132,10 @@ export const protocolFlows = [
       ],
       Tratamiento: [
         'Hipoxemia/IR: oxígeno titulado; evitar oxígeno indiscriminado en EPOC/riesgo de hipercapnia si SatO2 permite objetivo controlado.',
-        'Broncoespasmo dominante: salbutamol nebulizado; añadir ipratropio si monoterapia beta-adrenérgica no consigue broncodilatación óptima.',
+        'Broncoespasmo dominante: salbutamol 2,5-5 mg nebulizado; repetir cada 20 min hasta 3 dosis si persiste broncoespasmo.',
+        'Añadir ipratropio 500 mcg nebulizado si salbutamol solo no consigue broncodilatación óptima; metilprednisolona 40 mg IV lenta en asma/EPOC.',
         'Anafilaxia: adrenalina IM adulta si compromiso respiratorio/circulatorio; reevaluar TA, pulso y respiración.',
-        'EAP/congestión dominante: nitroglicerina solo con seguridad hemodinámica; diurético requiere protocolo local 061.',
+        'EAP/congestión dominante: nitroglicerina si TA estable; furosemida IV si patrón congestivo sin shock/hipovolemia.',
         'VMNI: soporte si indicada; mala respuesta si persiste agotamiento, hipoxemia, shock, conciencia alterada o intolerancia, avisar a coordinación.',
       ],
       Traslado: [
@@ -153,8 +155,8 @@ export const protocolFlows = [
     priority: 'amenaza vital',
     calculators: ['shock-index', 'abcde-check', 'fluid-bolus', 'sbar-check', 'transfer-check'],
     procedures: ['abcde', 'fluidoterapia-inicial', 'sbar-prealerta', 'traslado-critico', 'oxigenoterapia'],
-    medications: ['oxygen', 'crystalloid-bolus', 'adrenaline-im', 'vasopressor-pending', 'antibiotic-pending'],
-    bibliography: ['ssc-2021', 'cima-adrenalina'],
+    medications: ['oxygen', 'crystalloid-bolus', 'adrenaline-im', 'vasopressor-removed', 'antibiotic-removed'],
+    bibliography: ['ssc-2021', 'sergas-sepsis', 'cima-sodium-chloride-09', 'cima-adrenalina', 'galicia-061-farmacologica'],
     tabs: {
       Sospecha: [
         'Protocolo sindrómico: paciente inestable/shock/hipoperfusión; no cerrar etiología antes de ABCDE y datos disponibles.',
@@ -179,7 +181,8 @@ export const protocolFlows = [
       Tratamiento: [
         'Oxígeno si hipoxemia, shock o insuficiencia respiratoria.',
         'Acceso IV/IO si no retrasa traslado; control de hemorragia si existe.',
-        'Cristaloide solo si patrón hipovolémico/distributivo lo justifica; tamaño de bolo y repetición requieren protocolo local 061.',
+        'Cristaloide isotónico si hipoperfusión compatible con shock hipovolémico/distributivo o sepsis/shock séptico, sin datos de sobrecarga.',
+        'En sepsis/shock séptico: 30 ml/kg inicial; si precisa, cargas de 500 ml en 30 min con reevaluación y sin datos de sobrecarga.',
         'Evitar fluidos agresivos si sospecha cardiogénica, EAP o sobrecarga; detener si empeora disnea, crepitantes o perfusión no mejora.',
         'Anafilaxia: adrenalina IM adulta si compromiso respiratorio/circulatorio; reevaluar TA, pulso y respiración.',
         'Vasopresor o antibiótico prehospitalario: solo con protocolo local, monitorización, competencia y dosis verificada; no rutina.',

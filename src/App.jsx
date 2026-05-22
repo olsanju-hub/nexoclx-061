@@ -30,7 +30,7 @@ const norm = (value) =>
 const statusLabels = {
   ...medicationStatusLabels,
   verified: 'verificado',
-  'local-only': 'requiere protocolo local 061',
+  'verified-external-protocol': 'verificado con referencia operativa externa',
   inactive: 'inactivo',
   'removed-from-active-flow': 'retirado del flujo activo',
 }
@@ -308,10 +308,12 @@ function ProtocolsView({
 }
 
 function Connections({ protocol, meta }) {
-  const activeMedicationIds = protocol.medications.filter((id) => medicationById[id]?.status === 'verified')
-  const localOnlyMedicationNames = protocol.medications
+  const activeMedicationIds = protocol.medications.filter((id) =>
+    ['verified', 'verified-external-protocol'].includes(medicationById[id]?.status),
+  )
+  const removedMedicationNames = protocol.medications
     .map((id) => medicationById[id])
-    .filter((drug) => drug && drug.status !== 'verified')
+    .filter((drug) => drug && !['verified', 'verified-external-protocol'].includes(drug.status))
     .map((drug) => drug.genericName)
 
   return (
@@ -336,17 +338,21 @@ function Connections({ protocol, meta }) {
                 <p><strong>Vía:</strong> {drug.route}</p>
                 <p><strong>Repetición/máximo:</strong> {drug.frequency} · {drug.maximum}</p>
                 <p><strong>Evitar/precaución:</strong> {drug.contraindications}</p>
-                <p><strong>Estado:</strong> {statusLabel(drug.status)}</p>
-                <p><strong>CIMA:</strong> {drug.cimaUrl}</p>
+                <p><strong>Fuente:</strong> {drug.source.join(', ')}</p>
+                {drug.operationalNote && <p><strong>Nota:</strong> {drug.operationalNote}</p>}
+                <p><strong>CIMA/AEMPS:</strong> {drug.cimaUrl}</p>
               </details>
             )
           })}
         </div>
-        {localOnlyMedicationNames.length > 0 && (
+        {removedMedicationNames.length > 0 && (
           <p className="local-note">
-            Tratamientos no operativos en V1, requieren protocolo local 061 o indicación del centro coordinador: {localOnlyMedicationNames.join(', ')}.
+            Tratamientos no mostrados como pauta activa por falta de fármaco, dosis o protocolo operativo suficiente en V1: {removedMedicationNames.join(', ')}.
           </p>
         )}
+        <p className="local-note">
+          Las pautas proceden de CIMA/AEMPS, guías oficiales o protocolos operativos oficiales. Adaptar a dotación, competencias y protocolo local del servicio 061 correspondiente.
+        </p>
       </section>
       <details className="secondary-panel">
         <summary>Revisión y notas</summary>
