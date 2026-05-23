@@ -214,6 +214,12 @@ Las fuentes de procedimientos transversales están enlazadas en `src/data/module
 - Añadir CIMA/AEMPS y protocolo operativo para antiarrítmicos, vasopresores y antibióticos solo si se incorporan como pauta verificada.
 - Mantener revisión clínica fechada por módulo.
 
+## Política de versiones
+
+- V1.0.x: solo bugs, correcciones de navegación, caché, enlaces internos o errores tipográficos menores. No incorpora protocolos, fármacos, dosis ni fuentes nuevas.
+- V1.1.x: adaptación local 061, circuitos territoriales, dotación real, competencias del equipo y hospitales útiles, sin ampliar el alcance clínico salvo que se documente explícitamente.
+- V1.2.x: ampliación clínica si se decide, siempre con fuente oficial, trazabilidad, revisión de medicamentos y actualización de relaciones entre protocolos, herramientas y bibliografía.
+
 ## Requisitos
 
 - Node.js 20+
