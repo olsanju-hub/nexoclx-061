@@ -4,6 +4,8 @@ App web PWA de apoyo rápido para asistencia extrahospitalaria urgente, soporte 
 
 **Versión estable actual:** V1.0.0.
 
+Historial de cambios: [CHANGELOG.md](./CHANGELOG.md).
+
 ## Estado del repositorio GitHub
 
 Estado actual: repositorio local creado desde cero y publicado en GitHub como `olsanju-hub/nexoclx-061`.

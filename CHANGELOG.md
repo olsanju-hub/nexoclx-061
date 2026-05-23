@@ -1,81 +1,87 @@
 # Changelog
 
-## v1.0.0 - 2026-05-23
+## [1.0.0] - 2026-05-23
 
-Release estable V1.0.0 de NexoClx 061 como PWA de apoyo rapido para asistencia extrahospitalaria urgente, soporte vital avanzado y traslado critico.
+### Estado
 
-### Protocolos incluidos
+Primera versión estable de NexoClx 061.
 
-- SCA / dolor toracico critico.
-- Ictus agudo / codigo ictus.
-- Insuficiencia respiratoria aguda / disnea grave.
-- Shock / sepsis / paciente inestable.
-- Parada cardiorrespiratoria / SVA adulto.
-- Trauma grave / politrauma.
+### Incluye
 
-### Procedimientos incluidos
+- 6 protocolos activos:
+  - SCA / dolor torácico crítico
+  - Ictus agudo / código ictus
+  - Insuficiencia respiratoria aguda / disnea grave
+  - Shock / sepsis / paciente inestable
+  - Parada cardiorrespiratoria / SVA adulto
+  - Trauma grave / politrauma
 
-- ABCDE extrahospitalario.
-- SBAR / prealerta hospitalaria.
-- Checklist de traslado critico.
-- Oxigenoterapia y soporte respiratorio basico.
-- Fluidoterapia inicial en paciente inestable.
+### Herramientas y procedimientos conectados
 
-### Calculos incluidos
+- ABCDE extrahospitalario
+- SBAR / prealerta hospitalaria
+- Checklist de traslado crítico
+- Oxigenoterapia
+- Fluidoterapia inicial
+- Glasgow Coma Scale
+- Shock Index
+- Killip clínico
+- BEFAST / Cincinnati
+- Bolo de cristaloide por peso
 
-- Glasgow Coma Scale.
-- Shock Index.
-- Killip clinico.
-- BEFAST / Cincinnati operativo.
-- Checklist ABCDE.
-- Checklist SBAR.
-- Checklist traslado critico.
-- Bolo de cristaloide por peso como ayuda aritmetica, no como indicacion automatica.
+### Medicamentos activos verificados
 
-### Medicamentos activos
+- Oxígeno
+- Ácido acetilsalicílico
+- Nitroglicerina
+- Morfina
+- Ticagrelor
+- Glucosa hipertónica
+- Midazolam
+- Salbutamol
+- Bromuro de ipratropio
+- Metilprednisolona
+- Adrenalina IM
+- Adrenalina IV/IO en SVA
+- Amiodarona
+- Furosemida
+- Cristaloide isotónico
 
-- Oxigeno.
-- Acido acetilsalicilico.
-- Nitroglicerina.
-- Morfina.
-- Ticagrelor.
-- Glucosa hipertonica.
-- Midazolam.
-- Salbutamol.
-- Bromuro de ipratropio.
-- Metilprednisolona.
-- Adrenalina IM.
-- Adrenalina IV/IO en SVA adulto.
-- Amiodarona en SVA adulto.
-- Furosemida.
-- Cristaloide isotonico.
+### Correcciones incluidas antes del cierre
+
+- Tarjetas farmacológicas compactadas para móvil.
+- Protocolos RCP/SVA adulto y Trauma grave visibles.
+- Enlaces internos desde protocolos a escalas, calculadoras y procedimientos corregidos.
+- Búsqueda ampliada para encontrar herramientas por nombre, id y variables.
+- Service worker actualizado hasta `nexoclx-061-shell-v4`.
 
 ### Fuentes principales
 
-- CIMA/AEMPS para fichas tecnicas de medicamentos.
-- Guia farmacologica de Urxencias Sanitarias de Galicia-061 como referencia operativa externa.
-- ESC ACS 2023.
-- AHA/ASA Acute Ischemic Stroke 2026.
-- ERC Adult Advanced Life Support 2025.
-- AHA Adult Advanced Life Support 2025.
-- GINA 2025.
-- GOLD 2026.
-- ESC Heart Failure 2021.
-- Surviving Sepsis Campaign 2021.
-- SERGAS sepsis.
-- Manual de Emergencias 061 INGESA/Ceuta para politrauma.
+- CIMA/AEMPS
+- Galicia-061
+- ESC ACS
+- AHA/ASA ictus
+- GINA
+- GOLD
+- ESC Heart Failure
+- Surviving Sepsis Campaign
+- SERGAS sepsis
+- ERC ALS
+- AHA ALS
+- INGESA/061 Ceuta trauma
 
-### Limites clinicos
+### Límites clínicos
 
-- No sustituye juicio clinico, protocolos oficiales del servicio, coordinacion medica ni valoracion individual.
-- La adaptacion a protocolo local 061 queda pendiente antes de uso asistencial.
-- Activacion de codigos, destino util, traslado en parada, red de trauma, hemodinamica, unidad de ictus/trombectomia y UCI dependen del centro coordinador y red local.
-- Dotacion, competencias del equipo y presentaciones reales de farmacos deben confirmarse localmente.
+- Herramienta de apoyo, no sustituto del protocolo local.
+- Las decisiones de destino, activación de códigos y traslado dependen del centro coordinador y de la red local.
+- La medicación debe ajustarse a dotación, competencias y protocolos vigentes.
+- No incluye pediatría, obstetricia, OVACE, intoxicaciones, quemados ni patología ampliada.
 
-### Pendientes V1.1/V1.2
+### Pendiente para V1.1/V1.2
 
-- Validacion con usuarios en ambulancia/movil real.
-- Mapa local de hospitales utiles y codigos tiempo-dependientes.
-- Criterios locales de codigo trauma, traslado en parada, no inicio/finalizacion de RCP y ECPR/hemodinamica pos-ROSC.
-- Persistencia local de checks si se decide necesaria.
-- Incorporar nuevos farmacos o protocolos solo con fuente oficial y trazabilidad completa.
+- Validación con protocolo local 061.
+- Mapa territorial de hospitales útiles.
+- Circuitos locales de código infarto, código ictus, trauma y UCI.
+- Revisión de dotación real.
+- Prueba de uso en dispositivo móvil real.
+- Eventual ampliación a pediatría, OVACE, intoxicaciones, quemados u obstetricia si se decide.
