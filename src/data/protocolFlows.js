@@ -105,7 +105,7 @@ export const protocolFlows = [
     summary: 'Hipoxemia, broncoespasmo, EAP, EPOC/asma, anafilaxia y soporte ventilatorio.',
     keywords: ['disnea', 'saturación baja', 'insuficiencia respiratoria', 'asma', 'epoc', 'broncoespasmo', 'eap', 'edema pulmonar', 'edema agudo de pulmón', 'anafilaxia', 'tep', 'vmni', 'oxígeno'],
     priority: 'amenaza vital',
-    calculators: ['abcde-check', 'sbar-check', 'transfer-check'],
+    calculators: ['abcde-check', 'shock-index', 'sbar-check', 'transfer-check'],
     procedures: ['abcde', 'oxigenoterapia', 'sbar-prealerta', 'traslado-critico'],
     medications: ['oxygen', 'salbutamol', 'ipratropium', 'methylprednisolone', 'adrenaline-im', 'nitroglycerin', 'furosemide'],
     bibliography: ['gina-2025', 'gold-2026', 'esc-hf-2021', 'galicia-061-farmacologica', 'cima-salbutamol', 'cima-ipratropio', 'cima-methylprednisolone', 'cima-adrenalina', 'cima-nitroglicerina', 'cima-furosemide'],

@@ -23,7 +23,7 @@ export const calculators = [
     title: 'Shock Index',
     category: 'Hemodinámico',
     status: 'verified',
-    relatedProtocols: ['shock-sepsis', 'trauma-grave-politrauma', 'parada-cardiorrespiratoria-sva-adulto'],
+    relatedProtocols: ['shock-sepsis', 'insuficiencia-respiratoria', 'trauma-grave-politrauma', 'parada-cardiorrespiratoria-sva-adulto'],
     variables: ['Frecuencia cardiaca', 'Tensión arterial sistólica'],
     formula: 'FC / TAS.',
     source: ['ssc-2021'],

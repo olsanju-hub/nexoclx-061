@@ -237,13 +237,35 @@ h3, .procedure-sections h2, .biblio-list h2 {
   font-size: 0.86rem;
 }
 .chips, .drug-grid { display: flex; flex-wrap: wrap; gap: 5px; }
-.chips span {
+.chips span,
+.chips button {
   color: var(--text-soft);
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 4px 7px;
   font-size: 0.72rem;
+}
+.chips button {
+  cursor: pointer;
+  font: inherit;
+  line-height: 1.2;
+}
+.chips button:hover,
+.chips button:focus-visible {
+  border-color: var(--accent-line);
+  color: var(--accent-600);
+  background: var(--accent-soft);
+}
+.return-link {
+  width: fit-content;
+  border: 1px solid var(--accent-line);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-600);
+  padding: 5px 9px;
+  font-weight: 760;
+  font-size: 0.78rem;
 }
 details {
   flex: 1 1 180px;

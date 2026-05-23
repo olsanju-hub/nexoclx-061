@@ -54,6 +54,7 @@ function App() {
   const [selectedProcedureId, setSelectedProcedureId] = useState(procedures[0].id)
   const [selectedCalculatorId, setSelectedCalculatorId] = useState(calculators[0].id)
   const [activeTab, setActiveTab] = useState(TAB_ORDER[0])
+  const [returnProtocolId, setReturnProtocolId] = useState(null)
 
   const protocol = protocolFlows.find((item) => item.id === selectedProtocolId)
   const procedure = procedureById[selectedProcedureId]
@@ -64,7 +65,14 @@ function App() {
     const procedureRows = procedures.map((item) => ({ ...item, type: 'procedimiento' }))
     const calculatorRows = calculators.map((item) => ({
       ...item,
-      keywords: [item.title, item.category, ...item.relatedProtocols],
+      keywords: [
+        item.id,
+        item.title,
+        item.category,
+        ...item.relatedProtocols,
+        ...(item.variables || []),
+        ...(item.fields || []).map((field) => (typeof field === 'string' ? field : field.label)),
+      ],
       summary: item.formula,
       type: 'cálculo',
     }))
@@ -91,14 +99,17 @@ function App() {
     if (item.type === 'protocolo') {
       setSelectedProtocolId(item.id)
       setActiveTab(TAB_ORDER[0])
+      setReturnProtocolId(null)
       setView('protocolos')
     }
     if (item.type === 'procedimiento') {
       setSelectedProcedureId(item.id)
+      setReturnProtocolId(null)
       setView('procedimientos')
     }
     if (item.type === 'cálculo') {
       setSelectedCalculatorId(item.id)
+      setReturnProtocolId(null)
       setView('calculos')
     }
     setQuery('')
@@ -144,6 +155,10 @@ function App() {
             setSelectedProtocolId={setSelectedProtocolId}
             activeTab={activeTab}
             setActiveTab={setActiveTab}
+            setSelectedCalculatorId={setSelectedCalculatorId}
+            setSelectedProcedureId={setSelectedProcedureId}
+            setReturnProtocolId={setReturnProtocolId}
+            setView={setView}
           />
         )}
 
@@ -152,6 +167,11 @@ function App() {
             procedure={procedure}
             selectedProcedureId={selectedProcedureId}
             setSelectedProcedureId={setSelectedProcedureId}
+            returnProtocolId={returnProtocolId}
+            setReturnProtocolId={setReturnProtocolId}
+            setSelectedProtocolId={setSelectedProtocolId}
+            setActiveTab={setActiveTab}
+            setView={setView}
           />
         )}
 
@@ -160,6 +180,11 @@ function App() {
             calculator={calculator}
             selectedCalculatorId={selectedCalculatorId}
             setSelectedCalculatorId={setSelectedCalculatorId}
+            returnProtocolId={returnProtocolId}
+            setReturnProtocolId={setReturnProtocolId}
+            setSelectedProtocolId={setSelectedProtocolId}
+            setActiveTab={setActiveTab}
+            setView={setView}
           />
         )}
 
@@ -272,6 +297,10 @@ function ProtocolsView({
   setSelectedProtocolId,
   activeTab,
   setActiveTab,
+  setSelectedCalculatorId,
+  setSelectedProcedureId,
+  setReturnProtocolId,
+  setView,
 }) {
   const meta = protocolMetaById[protocol.id]
   return (
@@ -315,13 +344,27 @@ function ProtocolsView({
           ))}
         </ul>
 
-        <Connections protocol={protocol} meta={meta} />
+        <Connections
+          protocol={protocol}
+          meta={meta}
+          setSelectedCalculatorId={setSelectedCalculatorId}
+          setSelectedProcedureId={setSelectedProcedureId}
+          setReturnProtocolId={setReturnProtocolId}
+          setView={setView}
+        />
       </article>
     </section>
   )
 }
 
-function Connections({ protocol, meta }) {
+function Connections({
+  protocol,
+  meta,
+  setSelectedCalculatorId,
+  setSelectedProcedureId,
+  setReturnProtocolId,
+  setView,
+}) {
   const activeMedicationIds = protocol.medications.filter((id) =>
     ['verified', 'verified-external-protocol'].includes(medicationById[id]?.status),
   )
@@ -334,8 +377,25 @@ function Connections({ protocol, meta }) {
     <div className="connections">
       <details className="secondary-panel">
         <summary>Apoyos operativos</summary>
-        <Connector title="Cálculos" items={protocol.calculators} />
-        <Connector title="Procedimientos" items={protocol.procedures} map={procedureById} />
+        <Connector
+          title="Cálculos"
+          items={protocol.calculators}
+          onOpen={(id) => {
+            setSelectedCalculatorId(id)
+            setReturnProtocolId(protocol.id)
+            setView('calculos')
+          }}
+        />
+        <Connector
+          title="Procedimientos"
+          items={protocol.procedures}
+          map={procedureById}
+          onOpen={(id) => {
+            setSelectedProcedureId(id)
+            setReturnProtocolId(protocol.id)
+            setView('procedimientos')
+          }}
+        />
         <Connector title="Bibliografía activa" items={protocol.bibliography} map={bibliographyById} />
       </details>
       <section className="treatment-block">
@@ -387,22 +447,63 @@ function Connections({ protocol, meta }) {
   )
 }
 
-function Connector({ title, items, map }) {
+function Connector({ title, items, map, onOpen }) {
   return (
     <section>
       <h3>{title}</h3>
       <div className="chips">
-        {items.map((id) => (
-          <span key={id}>
-            {map?.[id]?.title || calculators.find((item) => item.id === id)?.title || id}
-          </span>
-        ))}
+        {items.map((id) => {
+          const label = map?.[id]?.title || calculators.find((item) => item.id === id)?.title || id
+          return onOpen ? (
+            <button key={id} type="button" onClick={() => onOpen(id)}>
+              {label}
+            </button>
+          ) : (
+            <span key={id}>{label}</span>
+          )
+        })}
       </div>
     </section>
   )
 }
 
-function ProceduresView({ procedure, selectedProcedureId, setSelectedProcedureId }) {
+function ReturnToProtocol({
+  returnProtocolId,
+  setReturnProtocolId,
+  setSelectedProtocolId,
+  setActiveTab,
+  setView,
+}) {
+  if (!returnProtocolId) return null
+  const protocol = protocolFlows.find((item) => item.id === returnProtocolId)
+  if (!protocol) return null
+
+  return (
+    <button
+      className="return-link"
+      type="button"
+      onClick={() => {
+        setSelectedProtocolId(returnProtocolId)
+        setActiveTab(TAB_ORDER[0])
+        setReturnProtocolId(null)
+        setView('protocolos')
+      }}
+    >
+      Volver a {protocol.title}
+    </button>
+  )
+}
+
+function ProceduresView({
+  procedure,
+  selectedProcedureId,
+  setSelectedProcedureId,
+  returnProtocolId,
+  setReturnProtocolId,
+  setSelectedProtocolId,
+  setActiveTab,
+  setView,
+}) {
   return (
     <section className="split-view">
       <aside className="side-list">
@@ -413,6 +514,13 @@ function ProceduresView({ procedure, selectedProcedureId, setSelectedProcedureId
         />
       </aside>
       <article className="clinical-card">
+        <ReturnToProtocol
+          returnProtocolId={returnProtocolId}
+          setReturnProtocolId={setReturnProtocolId}
+          setSelectedProtocolId={setSelectedProtocolId}
+          setActiveTab={setActiveTab}
+          setView={setView}
+        />
         <div className="protocol-title">
           <span className="tag">{procedure.category}</span>
           <h1>{procedure.title}</h1>
@@ -434,7 +542,16 @@ function ProceduresView({ procedure, selectedProcedureId, setSelectedProcedureId
   )
 }
 
-function CalculatorsView({ calculator, selectedCalculatorId, setSelectedCalculatorId }) {
+function CalculatorsView({
+  calculator,
+  selectedCalculatorId,
+  setSelectedCalculatorId,
+  returnProtocolId,
+  setReturnProtocolId,
+  setSelectedProtocolId,
+  setActiveTab,
+  setView,
+}) {
   return (
     <section className="split-view">
       <aside className="side-list">
@@ -445,6 +562,13 @@ function CalculatorsView({ calculator, selectedCalculatorId, setSelectedCalculat
         />
       </aside>
       <article className="clinical-card">
+        <ReturnToProtocol
+          returnProtocolId={returnProtocolId}
+          setReturnProtocolId={setReturnProtocolId}
+          setSelectedProtocolId={setSelectedProtocolId}
+          setActiveTab={setActiveTab}
+          setView={setView}
+        />
         <div className="protocol-title">
           <span className="tag">{calculator.category}</span>
           <h1>{calculator.title}</h1>
