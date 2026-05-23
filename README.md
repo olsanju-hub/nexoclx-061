@@ -2,6 +2,8 @@
 
 App web PWA de apoyo rápido para asistencia extrahospitalaria urgente, soporte vital avanzado y traslado de paciente crítico. La pregunta de producto es: **qué necesito decidir ahora antes o durante el traslado**.
 
+**Versión estable actual:** V1.0.0.
+
 ## Estado del repositorio GitHub
 
 Estado actual: repositorio local creado desde cero y publicado en GitHub como `olsanju-hub/nexoclx-061`.
@@ -12,7 +14,7 @@ Este README es el índice maestro del proyecto. Debe actualizarse cuando cambien
 
 ## Descripción actual de la app
 
-V1 estable con cinco secciones: Inicio, Protocolos, Procedimientos, Cálculos y Bibliografía. Medicamentos no aparece como sección principal; se muestran solo conectados al punto clínico donde cambian conducta.
+V1.0.0 estable con cinco secciones: Inicio, Protocolos, Procedimientos, Cálculos y Bibliografía. Medicamentos no aparece como sección principal; se muestran solo conectados al punto clínico donde cambian conducta.
 
 ## Identidad, tono y estilo visual
 
@@ -22,7 +24,7 @@ Interfaz mobile-first, compacta y sobria. Usa fondo gris-azulado `#f2f2f7`, supe
 
 Implementado: Vite, React, JavaScript, CSS propio, PWA, manifest, service worker básico, iconos desde `public/assets/brand/nexoclx-061-icon-source.png`, búsqueda global, tabs de protocolos y build estático.
 
-Implementado en cierre transversal V1: seis protocolos activos con estructura homogénea, relaciones consistentes entre protocolos, procedimientos, cálculos, medicamentos de soporte y bibliografía activa. Los medicamentos usan estados internos normalizados: `verified`, `verified-external-protocol`, `inactive` y `removed-from-active-flow`.
+Implementado en cierre estable V1.0.0: seis protocolos activos con estructura homogénea, relaciones consistentes entre protocolos, procedimientos, cálculos, medicamentos de soporte y bibliografía activa. Los medicamentos usan estados internos normalizados: `verified`, `verified-external-protocol`, `inactive` y `removed-from-active-flow`.
 
 Pendiente: validación clínica local, criterios territoriales de activación/destino y confirmación de dotación real. Las pautas activas de medicamentos de V1 tienen ficha completa y fuente trazable.
 
@@ -115,7 +117,7 @@ src/
 5. Parada cardiorrespiratoria / SVA adulto.
 6. Trauma grave / politrauma.
 
-Estado V1: los seis protocolos están activos, visibles en la app publicada, abren con las cinco pestañas obligatorias y quedan cerrados como V1 estable. Nuevas ampliaciones clínicas se trabajarán en V1.2 o posterior.
+Estado V1.0.0: los seis protocolos están activos, visibles en la app publicada, abren con las cinco pestañas obligatorias y quedan cerrados como versión estable. Nuevas ampliaciones clínicas se trabajarán en V1.1/V1.2 o posterior.
 
 ## Cálculos incluidos
 
@@ -185,15 +187,16 @@ Las fuentes de procedimientos transversales están enlazadas en `src/data/module
 - 2026-05-22: añadida V1.1 con protocolo Trauma grave / politrauma, enlazado a ABCDE, SBAR, traslado crítico, GCS, Shock Index, oxigenoterapia, fluidoterapia, oxígeno, cristaloide y morfina.
 - 2026-05-22: añadida V1.1 con protocolo Parada cardiorrespiratoria / SVA adulto, enlazado a ERC/AHA 2025, CIMA/AEMPS adrenalina/amiodarona/glucosa, ABCDE, SBAR, traslado crítico, oxigenoterapia, GCS y Shock Index pos-ROSC.
 - 2026-05-23: cierre transversal V1 estable: auditada visibilidad, estructura de cinco pestañas, conexiones clínicas, búsqueda, PWA/cache y render móvil/desktop de los seis protocolos.
+- 2026-05-23: release V1.0.0 estable con README y CHANGELOG de versión.
 
-## Pendiente funcional para V1.2 o posterior
+## Pendiente funcional para V1.1/V1.2 o posterior
 
 - Pruebas de usuario en ambulancia/móvil real.
 - Persistencia local de checks marcados si se decide necesario.
 - Mapa local de hospitales útiles y códigos.
 - Seguimiento de despliegue GitHub Pages tras cada push a `main`.
 
-## Pendiente clínico para V1.2 o posterior
+## Pendiente clínico para V1.1/V1.2 o posterior
 
 - Validar criterios de activación con protocolo oficial del servicio 061 correspondiente.
 - Adaptar la V1 a protocolo local 061 antes de uso asistencial.
@@ -203,7 +206,7 @@ Las fuentes de procedimientos transversales están enlazadas en `src/data/module
 - Confirmar criterios territoriales de traslado en parada, finalización/no inicio de RCP, ECPR/hemodinámica pos-ROSC y destino útil con centro coordinador/local.
 - Añadir vasopresores, antibiótico prehospitalario o antiarrítmicos específicos solo si se incorpora protocolo operativo oficial completo.
 
-## Pendiente bibliográfico para V1.2 o posterior
+## Pendiente bibliográfico para V1.1/V1.2 o posterior
 
 - Añadir protocolos locales oficiales cuando estén disponibles.
 - Añadir CIMA/AEMPS y protocolo operativo para antiarrítmicos, vasopresores y antibióticos solo si se incorporan como pauta verificada.
@@ -240,6 +243,6 @@ Estado actual:
 
 No hay configuración de Vercel en esta V1.
 
-## Cierre V1
+## Cierre V1.0.0
 
-La V1 queda cerrada como herramienta operativa de apoyo rápido con seis protocolos activos, PWA publicada en GitHub Pages y navegación/búsqueda verificadas. Esta versión no sustituye protocolos oficiales ni coordinación médica; los criterios territoriales de activación, destino y competencias del equipo siguen dependiendo del servicio 061 correspondiente.
+La V1.0.0 queda cerrada como herramienta operativa de apoyo rápido con seis protocolos activos, PWA publicada en GitHub Pages y navegación/búsqueda verificadas. Esta versión no sustituye protocolos oficiales ni coordinación médica; los criterios territoriales de activación, destino y competencias del equipo siguen dependiendo del servicio 061 correspondiente.
