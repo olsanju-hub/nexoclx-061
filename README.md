@@ -2,7 +2,9 @@
 
 App web PWA de apoyo rápido para asistencia extrahospitalaria urgente, soporte vital avanzado y traslado de paciente crítico. La pregunta de producto es: **qué necesito decidir ahora antes o durante el traslado**.
 
-**Versión estable actual:** V1.0.0.
+**Versión publicada actual:** V1.0.1.
+
+V1.0.0 se mantiene como release estable inicial.
 
 Historial de cambios: [CHANGELOG.md](./CHANGELOG.md).
 
@@ -16,7 +18,7 @@ Este README es el índice maestro del proyecto. Debe actualizarse cuando cambien
 
 ## Descripción actual de la app
 
-V1.0.0 estable con cinco secciones: Inicio, Protocolos, Procedimientos, Cálculos y Bibliografía. Medicamentos no aparece como sección principal; se muestran solo conectados al punto clínico donde cambian conducta.
+V1.0.1 publicada con cinco secciones: Inicio, Protocolos, Procedimientos, Cálculos y Bibliografía. Medicamentos no aparece como sección principal; se muestran solo conectados al punto clínico donde cambian conducta. V1.0.1 corrige la apertura de protocolos en vista de detalle dedicada sin cambios clínicos.
 
 ## Identidad, tono y estilo visual
 

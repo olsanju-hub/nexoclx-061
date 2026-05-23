@@ -1,5 +1,37 @@
 # Changelog
 
+## [1.0.1] - 2026-05-23
+
+### Tipo
+
+Bugfix de navegación y usabilidad móvil.
+
+### Corregido
+
+- Al abrir un protocolo, la app ya no muestra encima el listado completo de protocolos.
+- Los protocolos se abren ahora en una vista de detalle dedicada.
+- En móvil, al abrir un protocolo se muestra directamente la cabecera, las pestañas y el contenido operativo.
+- La búsqueda se cierra correctamente al abrir un protocolo.
+- El retorno desde herramientas al protocolo de origen sigue funcionando.
+- Service worker actualizado a `nexoclx-061-shell-v5`.
+
+### Verificado
+
+- SCA desde lista: abre detalle sin listado encima.
+- Ictus desde búsqueda: abre detalle limpio.
+- Trauma desde categoría: abre detalle limpio.
+- Glasgow Coma Scale desde Trauma: abre y vuelve correctamente.
+- Móvil 390x844: correcto.
+- Desktop 1280x900: correcto.
+- GitHub Pages publicado correctamente.
+
+### Sin cambios clínicos
+
+- No se añadieron protocolos.
+- No se modificaron dosis.
+- No se modificaron medicamentos.
+- No se modificaron fuentes clínicas.
+
 ## [1.0.0] - 2026-05-23
 
 ### Estado
