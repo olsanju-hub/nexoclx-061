@@ -50,6 +50,7 @@ function App() {
   const [view, setView] = useState('inicio')
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('Todos')
+  const [protocolMode, setProtocolMode] = useState('list')
   const [selectedProtocolId, setSelectedProtocolId] = useState(protocolFlows[0].id)
   const [selectedProcedureId, setSelectedProcedureId] = useState(procedures[0].id)
   const [selectedCalculatorId, setSelectedCalculatorId] = useState(calculators[0].id)
@@ -100,6 +101,7 @@ function App() {
       setSelectedProtocolId(item.id)
       setActiveTab(TAB_ORDER[0])
       setReturnProtocolId(null)
+      setProtocolMode('detail')
       setView('protocolos')
     }
     if (item.type === 'procedimiento') {
@@ -115,6 +117,21 @@ function App() {
     setQuery('')
   }
 
+  const openProtocolList = () => {
+    setProtocolMode('list')
+    setReturnProtocolId(null)
+    setView('protocolos')
+  }
+
+  const openProtocolDetail = (id) => {
+    setSelectedProtocolId(id)
+    setActiveTab(TAB_ORDER[0])
+    setProtocolMode('detail')
+    setView('protocolos')
+  }
+
+  const isProtocolDetail = view === 'protocolos' && protocolMode === 'detail'
+
   return (
     <div className="app-shell">
       <header className="topbar">
@@ -128,13 +145,15 @@ function App() {
       </header>
 
       <main className="main-panel">
-        <SearchBox query={query} setQuery={setQuery} results={results} openItem={openItem} />
+        {!isProtocolDetail && <SearchBox query={query} setQuery={setQuery} results={results} openItem={openItem} />}
 
-        <p className="clinical-warning">
-          NexoClx 061 es una herramienta de apoyo clínico. No sustituye el juicio clínico, los
-          protocolos oficiales del servicio de emergencias, la coordinación médica ni la valoración
-          individual del paciente. {clinicalGovernanceNote}
-        </p>
+        {!isProtocolDetail && (
+          <p className="clinical-warning">
+            NexoClx 061 es una herramienta de apoyo clínico. No sustituye el juicio clínico, los
+            protocolos oficiales del servicio de emergencias, la coordinación médica ni la valoración
+            individual del paciente. {clinicalGovernanceNote}
+          </p>
+        )}
 
         {view === 'inicio' && (
           <Home
@@ -152,7 +171,9 @@ function App() {
             setCategory={setCategory}
             protocolCategories={protocolCategories}
             visibleProtocols={visibleProtocols}
-            setSelectedProtocolId={setSelectedProtocolId}
+            protocolMode={protocolMode}
+            openProtocolDetail={openProtocolDetail}
+            openProtocolList={openProtocolList}
             activeTab={activeTab}
             setActiveTab={setActiveTab}
             setSelectedCalculatorId={setSelectedCalculatorId}
@@ -170,6 +191,7 @@ function App() {
             returnProtocolId={returnProtocolId}
             setReturnProtocolId={setReturnProtocolId}
             setSelectedProtocolId={setSelectedProtocolId}
+            setProtocolMode={setProtocolMode}
             setActiveTab={setActiveTab}
             setView={setView}
           />
@@ -183,6 +205,7 @@ function App() {
             returnProtocolId={returnProtocolId}
             setReturnProtocolId={setReturnProtocolId}
             setSelectedProtocolId={setSelectedProtocolId}
+            setProtocolMode={setProtocolMode}
             setActiveTab={setActiveTab}
             setView={setView}
           />
@@ -197,7 +220,13 @@ function App() {
             key={item.id}
             type="button"
             className={view === item.id ? 'active' : ''}
-            onClick={() => setView(item.id)}
+            onClick={() => {
+              if (item.id === 'protocolos') {
+                openProtocolList()
+                return
+              }
+              setView(item.id)
+            }}
           >
             <span aria-hidden="true">{item.icon}</span>
             <small>{item.label}</small>
@@ -294,7 +323,9 @@ function ProtocolsView({
   setCategory,
   protocolCategories,
   visibleProtocols,
-  setSelectedProtocolId,
+  protocolMode,
+  openProtocolDetail,
+  openProtocolList,
   activeTab,
   setActiveTab,
   setSelectedCalculatorId,
@@ -303,9 +334,10 @@ function ProtocolsView({
   setView,
 }) {
   const meta = protocolMetaById[protocol.id]
-  return (
-    <section className="split-view">
-      <aside className="side-list">
+
+  if (protocolMode === 'list') {
+    return (
+      <section className="view-stack">
         <div className="filter-row">
           {protocolCategories.map((item) => (
             <button key={item} type="button" className={category === item ? 'active' : ''} onClick={() => setCategory(item)}>
@@ -316,14 +348,18 @@ function ProtocolsView({
         <ClinicalList
           title="Protocolos"
           items={visibleProtocols}
-          onOpen={(item) => {
-            setSelectedProtocolId(item.id)
-            setActiveTab(TAB_ORDER[0])
-          }}
+          onOpen={(item) => openProtocolDetail(item.id)}
         />
-      </aside>
+      </section>
+    )
+  }
 
+  return (
+    <section className="protocol-detail-view">
       <article className="clinical-card">
+        <button className="return-link" type="button" onClick={openProtocolList}>
+          ← Protocolos
+        </button>
         <div className="protocol-title">
           <span className={protocol.priority === 'amenaza vital' ? 'tag danger' : 'tag'}>{protocol.priority}</span>
           <h1>{protocol.title}</h1>
@@ -471,6 +507,7 @@ function ReturnToProtocol({
   returnProtocolId,
   setReturnProtocolId,
   setSelectedProtocolId,
+  setProtocolMode,
   setActiveTab,
   setView,
 }) {
@@ -485,6 +522,7 @@ function ReturnToProtocol({
       onClick={() => {
         setSelectedProtocolId(returnProtocolId)
         setActiveTab(TAB_ORDER[0])
+        setProtocolMode('detail')
         setReturnProtocolId(null)
         setView('protocolos')
       }}
@@ -501,6 +539,7 @@ function ProceduresView({
   returnProtocolId,
   setReturnProtocolId,
   setSelectedProtocolId,
+  setProtocolMode,
   setActiveTab,
   setView,
 }) {
@@ -518,6 +557,7 @@ function ProceduresView({
           returnProtocolId={returnProtocolId}
           setReturnProtocolId={setReturnProtocolId}
           setSelectedProtocolId={setSelectedProtocolId}
+          setProtocolMode={setProtocolMode}
           setActiveTab={setActiveTab}
           setView={setView}
         />
@@ -549,6 +589,7 @@ function CalculatorsView({
   returnProtocolId,
   setReturnProtocolId,
   setSelectedProtocolId,
+  setProtocolMode,
   setActiveTab,
   setView,
 }) {
@@ -566,6 +607,7 @@ function CalculatorsView({
           returnProtocolId={returnProtocolId}
           setReturnProtocolId={setReturnProtocolId}
           setSelectedProtocolId={setSelectedProtocolId}
+          setProtocolMode={setProtocolMode}
           setActiveTab={setActiveTab}
           setView={setView}
         />

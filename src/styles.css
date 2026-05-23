@@ -160,6 +160,7 @@ button { cursor: pointer; }
 .clinical-list b { color: var(--accent-500); font-size: 1.25rem; }
 
 .split-view { display: grid; gap: 9px; }
+.protocol-detail-view { display: grid; gap: 9px; }
 .side-list { display: grid; gap: 7px; align-content: start; }
 .filter-row {
   display: grid;
@@ -266,6 +267,7 @@ h3, .procedure-sections h2, .biblio-list h2 {
   padding: 5px 9px;
   font-weight: 760;
   font-size: 0.78rem;
+  margin-bottom: 8px;
 }
 details {
   flex: 1 1 180px;
