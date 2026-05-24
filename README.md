@@ -36,7 +36,7 @@ Nota clínica: La adaptación a protocolo local 061 queda pendiente antes de uso
 
 ## Estructura funcional
 
-- Inicio: buscador, accesos rápidos, protocolos frecuentes.
+- Inicio: buscador, accesos rápidos y herramientas operativas.
 - Protocolos: seis fichas con tabs fijas Sospecha, Valoración, Decisión, Tratamiento y Traslado.
 - Procedimientos: ABCDE, SBAR/prealerta, traslado crítico, oxigenoterapia y fluidoterapia inicial.
 - Cálculos: GCS, Shock Index, Killip, BEFAST, ABCDE, SBAR, traslado crítico y volumen de bolo.
