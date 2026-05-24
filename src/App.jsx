@@ -325,7 +325,7 @@ function ProtocolsView({
         <button className="return-link" type="button" onClick={openProtocolList}>
           ← Protocolos
         </button>
-        <ProtocolHeader protocol={protocol} meta={meta} />
+        <ProtocolHeader protocol={protocol} />
 
         <div className="tabs" role="tablist">
           {TAB_ORDER.map((tab) => (

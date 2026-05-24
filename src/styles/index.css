@@ -198,30 +198,11 @@ button { cursor: pointer; }
   font-weight: 800;
 }
 .tag.danger { color: var(--danger-500); background: var(--danger-soft); border-color: rgba(215,0,21,0.18); }
-.protocol-meta-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 6px;
-  margin: 7px 0;
-}
-.protocol-meta-grid div,
 .protocol-section-card {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(255,255,255,0.58);
   padding: 7px 8px;
-}
-.protocol-meta-grid dt {
-  color: var(--text-muted);
-  font-size: 0.68rem;
-  font-weight: 780;
-  text-transform: uppercase;
-}
-.protocol-meta-grid dd {
-  margin: 2px 0 0;
-  color: var(--text-soft);
-  font-size: 0.78rem;
-  font-weight: 720;
 }
 .protocol-section-card {
   margin-top: 7px;
@@ -469,5 +450,4 @@ output {
   .split-view { grid-template-columns: 320px minmax(0, 1fr); align-items: start; }
   .filter-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bottom-nav { left: 50%; transform: translateX(-50%); width: min(640px, calc(100% - 24px)); bottom: 10px; border: 1px solid var(--line); border-radius: 14px; }
-  .protocol-meta-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
