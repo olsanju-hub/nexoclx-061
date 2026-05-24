@@ -26,7 +26,7 @@ Interfaz mobile-first, compacta y sobria. Usa fondo gris-azulado `#f2f2f7`, supe
 
 ## Estado actual
 
-Implementado: Vite, React, JavaScript, CSS propio, PWA, manifest, service worker básico, iconos desde `public/assets/brand/nexoclx-061-icon-source.png`, búsqueda global, tabs de protocolos y build estático.
+Implementado: React, Vite, Tailwind, JavaScript, CSS propio, PWA, manifest, service worker básico, iconos desde `public/assets/brand/nexoclx-061-icon-source.png`, búsqueda global, tabs de protocolos y build estático.
 
 Implementado en cierre estable V1.0.0: seis protocolos activos con estructura homogénea, relaciones consistentes entre protocolos, procedimientos, cálculos, medicamentos de soporte y bibliografía activa. Los medicamentos usan estados internos normalizados: `verified`, `verified-external-protocol`, `inactive` y `removed-from-active-flow`.
 
@@ -98,7 +98,11 @@ public/
 src/
   App.jsx
   main.jsx
-  styles.css
+  components/protocols/ProtocolCard.jsx
+  components/protocols/ProtocolList.jsx
+  components/protocols/ProtocolHeader.jsx
+  components/protocols/ProtocolSection.jsx
+  styles/index.css
   data/bibliography.js
   data/calculators.js
   data/imageTemplates.js
@@ -106,7 +110,11 @@ src/
   data/modules.js
   data/protocolFlows.js
   data/protocols.js
+tailwind.config.js
+postcss.config.js
 ```
+
+La paleta granate y los colores semánticos actuales se conservan como tokens CSS y extensión Tailwind. Esta app actúa como referencia estructural para la presentación compacta de protocolos en la familia NexoClx.
 
 ## Índice funcional del proyecto
 

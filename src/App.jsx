@@ -5,6 +5,9 @@ import { medicationById, medicationStatusLabels } from './data/medications'
 import { modules, procedures, procedureById } from './data/modules'
 import { protocolMetaById } from './data/protocols'
 import { protocolFlows, TAB_ORDER } from './data/protocolFlows'
+import { ProtocolHeader } from './components/protocols/ProtocolHeader'
+import { ProtocolList } from './components/protocols/ProtocolList'
+import { ProtocolSection } from './components/protocols/ProtocolSection'
 
 const navItems = [
   { id: 'inicio', label: 'Inicio', icon: '⌂' },
@@ -299,22 +302,7 @@ function Home({ openItem, setView, setSelectedProcedureId, setSelectedCalculator
 }
 
 function ClinicalList({ title, items, onOpen }) {
-  return (
-    <section className="list-block">
-      <h2>{title}</h2>
-      <div className="clinical-list">
-        {items.map((item) => (
-          <button key={item.id} type="button" onClick={() => onOpen({ ...item, type: item.type || 'protocolo' })}>
-            <span>
-              <strong>{item.title}</strong>
-              <small>{item.category} · {item.summary}</small>
-            </span>
-            <b>›</b>
-          </button>
-        ))}
-      </div>
-    </section>
-  )
+  return <ProtocolList title={title} items={items} onOpen={onOpen} />
 }
 
 function ProtocolsView({
@@ -360,11 +348,7 @@ function ProtocolsView({
         <button className="return-link" type="button" onClick={openProtocolList}>
           ← Protocolos
         </button>
-        <div className="protocol-title">
-          <span className={protocol.priority === 'amenaza vital' ? 'tag danger' : 'tag'}>{protocol.priority}</span>
-          <h1>{protocol.title}</h1>
-          <p>{protocol.summary}</p>
-        </div>
+        <ProtocolHeader protocol={protocol} meta={meta} />
 
         <div className="tabs" role="tablist">
           {TAB_ORDER.map((tab) => (
@@ -374,11 +358,7 @@ function ProtocolsView({
           ))}
         </div>
 
-        <ul className="action-list">
-          {protocol.tabs[activeTab].map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
+        <ProtocolSection title={activeTab} items={protocol.tabs[activeTab]} />
 
         <Connections
           protocol={protocol}
