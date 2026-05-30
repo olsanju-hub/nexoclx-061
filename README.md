@@ -2,7 +2,7 @@
 
 App web PWA de apoyo rápido para asistencia extrahospitalaria urgente, soporte vital avanzado y traslado de paciente crítico. La pregunta de producto es: **qué necesito decidir ahora antes o durante el traslado**.
 
-**Versión publicada actual:** V1.0.2.
+**Versión actual publicada:** V1.0.2.
 
 V1.0.0 se mantiene como release estable inicial.
 
