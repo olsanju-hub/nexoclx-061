@@ -2,7 +2,7 @@
 
 App web PWA de apoyo rápido para asistencia extrahospitalaria urgente, soporte vital avanzado y traslado de paciente crítico. La pregunta de producto es: **qué necesito decidir ahora antes o durante el traslado**.
 
-**Versión actual publicada:** V1.0.2.
+**Versión actual publicada:** V1.1.0.
 
 V1.0.0 se mantiene como release estable inicial.
 
@@ -18,7 +18,7 @@ Este README es el índice maestro del proyecto. Debe actualizarse cuando cambien
 
 ## Descripción actual de la app
 
-V1.0.2 publicada con cinco secciones: Inicio, Protocolos, Procedimientos, Cálculos y Bibliografía. Medicamentos no aparece como sección principal; se muestran solo conectados al punto clínico donde cambian conducta. V1.0.2 corrige un bug clínico de Trauma grave/politrauma y separa adrenalina IM de adrenalina IV/IO en SVA.
+V1.1.0 publicada con seis secciones: Inicio, Protocolos, Códigos y circuitos 061, Procedimientos, Cálculos y Bibliografía. V1.1.0 añade circuitos operativos 061 para código infarto, código ictus, código trauma y traslado en parada; no añade patologías nuevas ni modifica medicamentos o dosis.
 
 ## Identidad, tono y estilo visual
 
@@ -38,6 +38,7 @@ Nota clínica: La adaptación a protocolo local 061 queda pendiente antes de uso
 
 - Inicio: buscador, accesos rápidos y herramientas operativas.
 - Protocolos: seis fichas con tabs fijas Sospecha, Valoración, Decisión, Tratamiento y Traslado.
+- Códigos y circuitos 061: código infarto, código ictus, código trauma y traslado en parada.
 - Procedimientos: ABCDE, SBAR/prealerta, traslado crítico, oxigenoterapia y fluidoterapia inicial.
 - Cálculos: GCS, Shock Index, Killip, BEFAST, ABCDE, XABCDE traumático, SBAR, traslado crítico y volumen de bolo.
 - Bibliografía: fuentes estructuradas y trazables.
@@ -48,13 +49,13 @@ La app no usa React Router. `src/App.jsx` mantiene el estado de vista actual, el
 
 ## Conexión clínica
 
-Los protocolos de `protocolFlows.js` enlazan cálculos, procedimientos, medicamentos y referencias. `protocols.js` añade metadatos de revisión y confianza. `medications.js` conserva dosis, vía, precauciones, fuente, estado y protocolo relacionado. `bibliography.js` centraliza trazabilidad y vincula cada referencia activa a protocolos o procedimientos reales.
+Los protocolos de `protocolFlows.js` enlazan circuitos operativos, cálculos, procedimientos, medicamentos y referencias. `protocols.js` añade metadatos de revisión y confianza. `medications.js` conserva dosis, vía, precauciones, fuente, estado y protocolo relacionado. `bibliography.js` centraliza trazabilidad y vincula cada referencia activa a protocolos, circuitos o procedimientos reales.
 
 No hay sección principal de medicamentos. En la pantalla principal de cada protocolo solo aparecen como tarjetas farmacológicas los medicamentos `verified` o `verified-external-protocol`. Los tratamientos `inactive` o `removed-from-active-flow` no se muestran como pauta activa.
 
 ## Criterio clínico global
 
-Contenido orientado a conducta extrahospitalaria: ABCDE, amenaza vital, código tiempo-dependiente, hospital útil, prealerta, traslado y vigilancia de complicaciones. No contiene seguimiento crónico ni capítulos docentes largos.
+Contenido orientado a conducta extrahospitalaria: ABCDE/XABCDE, amenaza vital, código tiempo-dependiente, hospital útil, prealerta, traslado y vigilancia de complicaciones. Los circuitos V1.1.0 son recursos operativos de activación/coordinación, no protocolos de patologías nuevas.
 
 ## Integración de bibliografía
 
@@ -69,6 +70,7 @@ Jerarquía de verificación farmacológica:
 Fuentes base:
 
 - ESC 2023 ACS.
+- AHA/ASA 2019 Acute Ischemic Stroke Update como contraste oficial previo.
 - AHA/ASA 2026 Acute Ischemic Stroke.
 - ERC 2025 Adult Advanced Life Support.
 - AHA 2025 Adult Advanced Life Support.
@@ -77,9 +79,19 @@ Fuentes base:
 - ESC 2021 Heart Failure.
 - Surviving Sepsis Campaign 2021.
 - NICE Major Trauma NG39.
+- IB-Salut/SAMU061, CAIB actividad SAMU061 2024, Estrategia balear de ictus, BOE Decreto-ley 1/2024, Carta de servicios SAMU061 y CAIB Código Politrauma como fuentes institucionales/operativas para circuitos 061, sin extrapolar criterios territoriales.
 - CIMA/AEMPS para ácido acetilsalicílico, nitroglicerina, morfina, ticagrelor, glucosa hipertónica, midazolam, salbutamol, ipratropio, metilprednisolona, adrenalina, amiodarona, furosemida y cloruro sódico 0,9%.
 - Guía farmacológica de Urxencias Sanitarias de Galicia-061 como referencia operativa externa para uso extrahospitalario.
 - Protocolo SERGAS de sepsis como referencia operativa externa para cristaloides en sepsis/shock séptico.
+
+Fuentes exactas V1.1.0 para “Códigos y circuitos 061”:
+
+- Código infarto: ESC ACS 2023, IB-Salut/SAMU061, CAIB actividad SAMU061 2024, Carta de servicios SAMU061 y BOE Decreto-ley 1/2024.
+- Código ictus: AHA/ASA 2019, AHA/ASA 2026, IB-Salut/SAMU061, CAIB actividad SAMU061 2024, Estrategia balear de ictus, Carta de servicios SAMU061 y BOE Decreto-ley 1/2024.
+- Código trauma: NICE Major Trauma NG39, IB-Salut/SAMU061, CAIB actividad SAMU061 2024, CAIB Código Politrauma, Carta de servicios SAMU061, BOE Decreto-ley 1/2024 e INGESA/061 Ceuta como apoyo operativo extrahospitalario no territorial.
+- Traslado en parada: ERC ALS 2025, AHA ALS 2025, IB-Salut/SAMU061, CAIB actividad SAMU061 2024, Carta de servicios SAMU061 y BOE Decreto-ley 1/2024.
+- Medicación citada en la app: CIMA/AEMPS según fichas activas en `src/data/bibliography.js`; V1.1.0 no añade fármacos ni dosis.
+- Fuentes revisadas y no usadas como normativas: Grupo Policlínica Ibiza para código infarto y Angels Initiative para código ictus 061 Baleares. No se usan para fijar destino automático ni criterio territorial.
 
 La carpeta `.local-biblio/` está ignorada por Git para bibliografía privada o no publicable.
 
@@ -132,6 +144,16 @@ La paleta granate y los colores semánticos actuales se conservan como tokens CS
 
 Estado V1.0.0: los seis protocolos están activos, visibles en la app publicada, abren con las cinco pestañas obligatorias y quedan cerrados como versión estable. Nuevas ampliaciones clínicas se trabajarán en V1.1/V1.2 o posterior.
 
+## Códigos y circuitos 061 incluidos
+
+- Código infarto: enlazado desde SCA / dolor torácico crítico, SBAR/prealerta, traslado crítico y Killip.
+- Código ictus: enlazado desde Ictus agudo / código ictus, BEFAST/Cincinnati, GCS, SBAR/prealerta y traslado crítico.
+- Código trauma: enlazado desde Trauma grave / politrauma, XABCDE traumático, GCS, Shock Index, SBAR/prealerta y traslado crítico.
+- Traslado en parada: enlazado desde Parada cardiorrespiratoria / SVA adulto, SBAR/prealerta, traslado crítico, oxigenoterapia, GCS pos-ROSC y Shock Index pos-ROSC con pulso.
+
+Los circuitos no fijan destino concreto ni criterios territoriales; dependen de centro coordinador, red local y protocolo oficial 061.
+Cada circuito incluye la limitación explícita: “Destino y activación definitiva según centro coordinador, red local y protocolo vigente.”
+
 ## Cálculos incluidos
 
 - GCS: ictus agudo, trauma grave/politrauma y fase pos-ROSC; no se usa durante parada.
@@ -180,12 +202,13 @@ La bibliografía activa está en `src/data/bibliography.js`, con `referenceId`, 
 
 Relación activa por protocolo:
 
-- SCA: ESC ACS 2023, Galicia-061, CIMA/AEMPS AAS, nitroglicerina, morfina y ticagrelor.
-- Ictus: AHA/ASA 2026, Galicia-061, CIMA/AEMPS glucosa hipertónica y midazolam.
+- SCA: ESC ACS 2023, IB-Salut/SAMU061, CAIB/BOE para circuitos, Galicia-061 farmacológica, CIMA/AEMPS AAS, nitroglicerina, morfina y ticagrelor.
+- Ictus: AHA/ASA 2019, AHA/ASA 2026, IB-Salut/SAMU061, Estrategia balear de ictus, CAIB/BOE para circuitos, Galicia-061 farmacológica, CIMA/AEMPS glucosa hipertónica y midazolam.
 - Insuficiencia respiratoria: GINA 2025, GOLD 2026, ESC Heart Failure 2021, Galicia-061, CIMA/AEMPS salbutamol, ipratropio, metilprednisolona, adrenalina, nitroglicerina y furosemida.
 - Shock/sepsis: Surviving Sepsis Campaign 2021, SERGAS sepsis, Galicia-061, CIMA/AEMPS cloruro sódico 0,9% y adrenalina.
-- Trauma grave/politrauma: Manual Emergencias 061 INGESA/Ceuta, Galicia-061, CIMA/AEMPS morfina y cloruro sódico 0,9%.
-- Parada cardiorrespiratoria/SVA adulto: ERC ALS 2025, AHA ALS 2025, CIMA/AEMPS adrenalina, amiodarona y glucosa hipertónica.
+- Trauma grave/politrauma: NICE NG39, IB-Salut/SAMU061, CAIB Código Politrauma, BOE Decreto-ley 1/2024, Manual Emergencias 061 INGESA/Ceuta, Galicia-061 farmacológica, CIMA/AEMPS morfina y cloruro sódico 0,9%.
+- Parada cardiorrespiratoria/SVA adulto: ERC ALS 2025, AHA ALS 2025, IB-Salut/SAMU061, CAIB/BOE para traslado en parada, CIMA/AEMPS adrenalina, amiodarona y glucosa hipertónica.
+- Circuitos 061: ESC ACS 2023, AHA/ASA 2019/2026, NICE NG39, ERC/AHA ALS 2025, IB-Salut/SAMU061, CAIB actividad SAMU061 2024, Estrategia balear de ictus, Carta de servicios SAMU061, CAIB Código Politrauma y BOE Decreto-ley 1/2024.
 
 Las fuentes de procedimientos transversales están enlazadas en `src/data/modules.js`; no se listan como bibliografía activa si no están conectadas a un protocolo o procedimiento real.
 
@@ -204,6 +227,7 @@ Las fuentes de procedimientos transversales están enlazadas en `src/data/module
 - 2026-05-23: cierre transversal V1 estable: auditada visibilidad, estructura de cinco pestañas, conexiones clínicas, búsqueda, PWA/cache y render móvil/desktop de los seis protocolos.
 - 2026-05-23: release V1.0.0 estable con README y CHANGELOG de versión.
 - 2026-05-30: V1.0.2 bugfix clínico. Trauma grave pasa de ABCDE simple a XABCDE traumático según NICE NG39, se separa adrenalina IV/IO en SVA de adrenalina IM para anafilaxia y se documenta auditoría clínica en `docs/clinical-audit-v1.0.2.md`. Service worker actualizado a `nexoclx-061-shell-v7`.
+- 2026-05-30: V1.1.0 añade sección “Códigos y circuitos 061” con código infarto, código ictus, código trauma y traslado en parada. No añade patologías, fármacos ni dosis. Service worker actualizado a `nexoclx-061-shell-v8`.
 
 ## Pendiente funcional para V1.1/V1.2 o posterior
 

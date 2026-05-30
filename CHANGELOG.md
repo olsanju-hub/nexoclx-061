@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.1.0] - 2026-05-30
+
+### Añadido
+
+- Sección “Códigos y circuitos 061”.
+- Código infarto.
+- Código ictus.
+- Código trauma.
+- Traslado en parada.
+- Enlaces desde protocolos, procedimientos y cálculos relacionados hacia los circuitos operativos.
+- Bibliografía V1.1.0 documentada antes del cierre de implementación: ESC ACS 2023, AHA/ASA 2019/2026, NICE NG39, ERC/AHA ALS 2025, IB-Salut/SAMU061, CAIB actividad SAMU061 2024, Estrategia balear de ictus, BOE Decreto-ley 1/2024, CAIB Código Politrauma y CIMA/AEMPS para medicación ya existente.
+- Service worker actualizado a `nexoclx-061-shell-v8`.
+
+### Sin cambios
+
+- No se añadieron patologías nuevas.
+- No se modificaron medicamentos.
+- No se modificaron dosis.
+- No se modificaron los 6 protocolos base salvo enlaces a circuitos.
+- No se movieron tags V1.0.0, V1.0.1 ni V1.0.2.
+
+### Limitaciones
+
+- Los destinos concretos dependen del centro coordinador y red local.
+- Cada circuito declara: “Destino y activación definitiva según centro coordinador, red local y protocolo vigente.”
+- Los criterios territoriales de activación, hemodinámica, unidad de ictus, trombectomía, código trauma, ECPR/hemodinámica y traslado especializado quedan pendientes de protocolo local 061.
+- Pendiente validación con protocolo local 061.
+
 ## [1.0.2] - 2026-05-30
 
 ### Tipo

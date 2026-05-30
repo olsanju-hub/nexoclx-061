@@ -1,5 +1,155 @@
 import { protocolFlows } from './protocolFlows.js'
 
+export const circuits = [
+  {
+    id: 'codigo-infarto',
+    title: 'Código infarto',
+    category: 'Códigos y circuitos 061',
+    summary: 'Activación y prealerta para SCA con elevación de ST o equivalente según circuito local.',
+    keywords: ['código infarto', 'infarto', 'scacest', 'stemi', 'hemodinámica', 'ecg', 'prealerta', 'centro coordinador', 'hospital útil'],
+    relatedProtocols: ['sca-dolor-toracico'],
+    relatedProcedures: ['sbar-prealerta', 'traslado-critico'],
+    relatedCalculators: ['killip'],
+    source: ['esc-acs-2023', 'ibsalut-samu061', 'caib-samu061-actividad-2024', 'caib-carta-servicios-samu061-2025', 'boe-balears-transporte-sanitario-2024'],
+    sections: {
+      cuandoActivarlo: [
+        'Sospecha de SCA con elevación de ST o situación equivalente definida por protocolo local/código infarto.',
+        'Dolor o equivalente isquémico con inestabilidad, arritmia, shock, edema pulmonar o complicación relevante.',
+      ],
+      datosMinimos: [
+        'ECG 12 derivaciones si disponible, hora de inicio de síntomas, constantes, estabilidad clínica y Killip si aporta gravedad.',
+        'Alertas que cambian manejo: sospecha de disección, sangrado activo, alergias, anticoagulación, PDE5 reciente y tratamiento ya administrado.',
+      ],
+      comunicar: [
+        'Centro coordinador: sospecha, ECG/hallazgos, hora de inicio, constantes, complicaciones, tratamientos, respuesta y ETA.',
+        'Prealertar al hospital útil cuando coordinación active circuito o indique destino.',
+      ],
+      noRetrasar: [
+        'No retrasar traslado por analítica, repetición innecesaria de ECG o completar tratamientos no esenciales.',
+        'No decidir destino concreto sin centro coordinador/protocolo local.',
+      ],
+      destino: [
+        'Hospital útil con hemodinámica/red de reperfusión según centro coordinador y circuito territorial.',
+      ],
+      limitaciones: [
+        'Destino y activación definitiva según centro coordinador, red local y protocolo vigente.',
+        'No fija criterios territoriales, estrategia de reperfusión, hospital concreto ni antiagregación adicional fuera del protocolo local.',
+      ],
+    },
+  },
+  {
+    id: 'codigo-ictus',
+    title: 'Código ictus',
+    category: 'Códigos y circuitos 061',
+    summary: 'Activación y prealerta para déficit focal brusco con destino útil según red local.',
+    keywords: ['código ictus', 'ictus', 'befast', 'cincinnati', 'trombectomía', 'trombólisis', 'última vez visto bien', 'glucemia', 'unidad de ictus', 'tc'],
+    relatedProtocols: ['ictus-agudo'],
+    relatedProcedures: ['sbar-prealerta', 'traslado-critico'],
+    relatedCalculators: ['befast', 'gcs'],
+    source: ['aha-asa-ais-2019', 'aha-asa-ais-2026', 'ibsalut-samu061', 'caib-samu061-actividad-2024', 'caib-estrategia-ictus-ib', 'caib-carta-servicios-samu061-2025', 'boe-balears-transporte-sanitario-2024'],
+    sections: {
+      cuandoActivarlo: [
+        'Sospecha clínica de ictus por déficit focal brusco con BEFAST/Cincinnati positivo o clínica compatible.',
+        'Activación siempre según protocolo local 061 o indicación del centro coordinador.',
+      ],
+      datosMinimos: [
+        'Hora de inicio o última vez visto bien, glucemia, déficit observado, TA/FC/SatO2 y GCS si conciencia alterada.',
+        'Anticoagulación/antiagregación, hora de última dosis si se conoce, situación basal y teléfono/testigo si está disponible.',
+      ],
+      comunicar: [
+        'Centro coordinador: hora, escala de sospecha, glucemia, constantes, GCS, anticoagulación, basal, crisis si existió y ETA.',
+        'Prealertar al destino indicado por coordinación con cambios neurológicos o deterioro en ruta.',
+      ],
+      noRetrasar: [
+        'No retrasar traslado por exploración extensa si la sospecha es clara y la glucemia está comprobada.',
+        'No administrar antiagregación/anticoagulación preimagen salvo protocolo oficial específico.',
+      ],
+      destino: [
+        'Unidad de ictus, TC disponible y/o centro con trombectomía solo según red local y centro coordinador.',
+      ],
+      limitaciones: [
+        'Destino y activación definitiva según centro coordinador, red local y protocolo vigente.',
+        'No fija ventanas, criterios de trombólisis, trombectomía ni bypass de centros sin protocolo territorial.',
+      ],
+    },
+  },
+  {
+    id: 'codigo-trauma',
+    title: 'Código trauma',
+    category: 'Códigos y circuitos 061',
+    summary: 'Activación y prealerta para trauma grave con XABCDE y hospital útil según red local.',
+    keywords: ['código trauma', 'trauma grave', 'politrauma', 'xabcde', 'hemorragia catastrófica', 'alta energía', 'gcs', 'shock index', 'anticoagulación', 'hospital útil'],
+    relatedProtocols: ['trauma-grave-politrauma'],
+    relatedProcedures: ['xabcde-trauma', 'sbar-prealerta', 'traslado-critico'],
+    relatedCalculators: ['gcs', 'shock-index', 'xabcde-trauma-check'],
+    source: ['nice-major-trauma-ng39', 'ibsalut-samu061', 'caib-samu061-actividad-2024', 'caib-codigo-politrauma-2024', 'caib-carta-servicios-samu061-2025', 'boe-balears-transporte-sanitario-2024'],
+    sections: {
+      cuandoActivarlo: [
+        'Trauma grave por mecanismo de alta energía, trauma penetrante mayor, shock/hipoperfusión, TCE grave, hemorragia masiva o sospecha de lesiones mayores.',
+        'Activación de código trauma solo si existe circuito local o lo indica el centro coordinador.',
+      ],
+      datosMinimos: [
+        'Mecanismo, hora, XABCDE, constantes, GCS, Shock Index si ayuda, sangrado, anticoagulación y lesiones sospechadas.',
+        'Tratamientos realizados: control de hemorragia, oxígeno, inmovilización selectiva, analgesia, fluidos y respuesta.',
+      ],
+      comunicar: [
+        'Prealerta estructurada con mecanismo, constantes iniciales/actuales, GCS, sospecha lesional, tratamiento, respuesta, anticoagulación y ETA.',
+        'Actualizar de inmediato si empeoran vía aérea, ventilación, perfusión, GCS o sangrado.',
+      ],
+      noRetrasar: [
+        'No retrasar traslado por exploraciones repetidas, inmovilización no esencial o procedimientos que no cambian amenaza vital inmediata.',
+        'Controlar hemorragia catastrófica y prevenir hipotermia sin perder destino/tiempo crítico.',
+      ],
+      destino: [
+        'Hospital útil según red local, disponibilidad de trauma/cirugía/UCI/TC/neurocirugía y decisión del centro coordinador.',
+      ],
+      limitaciones: [
+        'Destino y activación definitiva según centro coordinador, red local y protocolo vigente.',
+        'No inventa mapa territorial, centro trauma específico, hemoderivados, torniquete universal ni criterios locales de activación.',
+      ],
+    },
+  },
+  {
+    id: 'traslado-en-parada',
+    title: 'Traslado en parada',
+    category: 'Códigos y circuitos 061',
+    summary: 'Decisión operativa de traslado durante RCP o tras ROSC, siempre dependiente de coordinación.',
+    keywords: ['traslado en parada', 'parada', 'rcp', 'sva', 'rosc', 'pos-rosc', 'ecmo', 'hemodinámica', 'desfibrilador', 'monitor', 'compresiones'],
+    relatedProtocols: ['parada-cardiorrespiratoria-sva-adulto'],
+    relatedProcedures: ['sbar-prealerta', 'traslado-critico', 'oxigenoterapia'],
+    relatedCalculators: ['gcs', 'shock-index'],
+    source: ['erc-als-2025', 'aha-als-2025', 'ibsalut-samu061', 'caib-samu061-actividad-2024', 'caib-carta-servicios-samu061-2025', 'boe-balears-transporte-sanitario-2024'],
+    sections: {
+      cuandoActivarlo: [
+        'No asumir traslado automático durante RCP; trasladar en parada solo si centro coordinador/protocolo local lo indica.',
+        'Diferenciar parada en curso de fase pos-ROSC antes de decidir destino y prioridad.',
+      ],
+      datosMinimos: [
+        'Parada en curso: ritmo inicial/actual, tiempos sin flujo y bajo flujo si se conocen, descargas, fármacos, vía aérea, ventilación y causas reversibles.',
+        'Pos-ROSC: ECG si posible, TA/ritmo/SatO2, ventilación, GCS, temperatura si disponible, sospecha etiológica y estabilidad hemodinámica.',
+      ],
+      comunicar: [
+        'Centro coordinador y destino: estado RCP o pos-ROSC, soporte disponible, tratamientos, respuesta, limitaciones operativas y ETA.',
+        'Si se traslada en parada: confirmar destino avisado y capacidad de mantener RCP segura y continua.',
+      ],
+      noRetrasar: [
+        'No abandonar RCP de calidad por iniciar traslado sin indicación coordinada.',
+        'No retrasar traslado pos-ROSC por medidas no esenciales si el destino útil ya está indicado.',
+      ],
+      destino: [
+        'Hospital útil según sospecha, estabilidad, red local y centro coordinador; hemodinámica, ECMO/ECPR o recurso especializado solo si protocolo local lo contempla.',
+      ],
+      limitaciones: [
+        'Destino y activación definitiva según centro coordinador, red local y protocolo vigente.',
+        'No fija criterios de ECPR, hemodinámica, finalización/no inicio de RCP ni traslado especializado sin protocolo local.',
+      ],
+      condicionesMinimas: [
+        'RCP de alta calidad mantenible, desfibrilador/monitor, vía aérea/ventilación según dotación, seguridad del equipo, continuidad de compresiones y destino avisado.',
+      ],
+    },
+  },
+]
+
 export const procedures = [
   {
     id: 'abcde',
@@ -59,7 +209,7 @@ export const procedures = [
     summary: 'Antes de mover: monitor, vía aérea, acceso, medicación, prealerta y plan de deterioro.',
     keywords: ['traslado', 'crítico', 'ambulancia', 'monitor', 'prealerta', 'uci'],
     relatedProtocols: ['sca-dolor-toracico', 'ictus-agudo', 'insuficiencia-respiratoria', 'shock-sepsis', 'trauma-grave-politrauma', 'parada-cardiorrespiratoria-sva-adulto'],
-    source: ['ssc-2021', 'erc-als-2025'],
+    source: ['ssc-2021', 'erc-als-2025', 'nice-major-trauma-ng39'],
     sections: {
       indicacion: ['Paciente inestable, tiempo-dependiente, primario o interhospitalario crítico con riesgo de deterioro durante transporte.'],
       preparacion: ['Monitor/DEA con batería, oxígeno suficiente, aspiración, vía aérea, acceso IV/IO, medicación verificada, documentación, prealerta y destino confirmados.'],
@@ -124,7 +274,17 @@ export const modules = [
     keywords: protocol.keywords,
     status: 'implementado',
     type: 'protocolo',
-    related: [...protocol.procedures, ...protocol.calculators, ...protocol.medications],
+    related: [...(protocol.circuits || []), ...protocol.procedures, ...protocol.calculators, ...protocol.medications],
+  })),
+  ...circuits.map((circuit) => ({
+    id: circuit.id,
+    title: circuit.title,
+    category: circuit.category,
+    summary: circuit.summary,
+    keywords: circuit.keywords,
+    status: 'implementado',
+    type: 'circuito',
+    related: [...circuit.relatedProtocols, ...circuit.relatedProcedures, ...circuit.relatedCalculators],
   })),
   ...procedures.map((procedure) => ({
     id: procedure.id,
@@ -139,3 +299,4 @@ export const modules = [
 ]
 
 export const procedureById = Object.fromEntries(procedures.map((procedure) => [procedure.id, procedure]))
+export const circuitById = Object.fromEntries(circuits.map((circuit) => [circuit.id, circuit]))

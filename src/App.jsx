@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { bibliography, bibliographyById, clinicalGovernanceNote } from './data/bibliography'
 import { calculators } from './data/calculators'
 import { medicationById, medicationStatusLabels } from './data/medications'
-import { modules, procedures, procedureById } from './data/modules'
+import { circuitById, circuits, modules, procedures, procedureById } from './data/modules'
 import { protocolMetaById } from './data/protocols'
 import { protocolFlows, TAB_ORDER } from './data/protocolFlows'
 import { ProtocolHeader } from './components/protocols/ProtocolHeader'
@@ -12,6 +12,7 @@ import { ProtocolSection } from './components/protocols/ProtocolSection'
 const navItems = [
   { id: 'inicio', label: 'Inicio', icon: '⌂' },
   { id: 'protocolos', label: 'Protocolos', icon: '▤' },
+  { id: 'circuitos', label: 'Circuitos', icon: '⌁' },
   { id: 'procedimientos', label: 'Procedimientos', icon: '✓' },
   { id: 'calculos', label: 'Cálculos', icon: '∑' },
   { id: 'bibliografia', label: 'Bibliografía', icon: '§' },
@@ -46,17 +47,20 @@ function App() {
   const [category, setCategory] = useState('Todos')
   const [protocolMode, setProtocolMode] = useState('list')
   const [selectedProtocolId, setSelectedProtocolId] = useState(protocolFlows[0].id)
+  const [selectedCircuitId, setSelectedCircuitId] = useState(circuits[0].id)
   const [selectedProcedureId, setSelectedProcedureId] = useState(procedures[0].id)
   const [selectedCalculatorId, setSelectedCalculatorId] = useState(calculators[0].id)
   const [activeTab, setActiveTab] = useState(TAB_ORDER[0])
   const [returnProtocolId, setReturnProtocolId] = useState(null)
 
   const protocol = protocolFlows.find((item) => item.id === selectedProtocolId)
+  const circuit = circuitById[selectedCircuitId]
   const procedure = procedureById[selectedProcedureId]
   const calculator = calculators.find((item) => item.id === selectedCalculatorId)
 
   const searchable = useMemo(() => {
     const protocolRows = protocolFlows.map((item) => ({ ...item, type: 'protocolo' }))
+    const circuitRows = circuits.map((item) => ({ ...item, type: 'circuito' }))
     const procedureRows = procedures.map((item) => ({ ...item, type: 'procedimiento' }))
     const calculatorRows = calculators.map((item) => ({
       ...item,
@@ -71,7 +75,7 @@ function App() {
       summary: item.formula,
       type: 'cálculo',
     }))
-    return [...protocolRows, ...procedureRows, ...calculatorRows]
+    return [...protocolRows, ...circuitRows, ...procedureRows, ...calculatorRows]
   }, [])
 
   const results = useMemo(() => {
@@ -102,6 +106,11 @@ function App() {
       setSelectedProcedureId(item.id)
       setReturnProtocolId(null)
       setView('procedimientos')
+    }
+    if (item.type === 'circuito') {
+      setSelectedCircuitId(item.id)
+      setReturnProtocolId(null)
+      setView('circuitos')
     }
     if (item.type === 'cálculo') {
       setSelectedCalculatorId(item.id)
@@ -162,8 +171,23 @@ function App() {
             activeTab={activeTab}
             setActiveTab={setActiveTab}
             setSelectedCalculatorId={setSelectedCalculatorId}
+            setSelectedCircuitId={setSelectedCircuitId}
             setSelectedProcedureId={setSelectedProcedureId}
             setReturnProtocolId={setReturnProtocolId}
+            setView={setView}
+          />
+        )}
+
+        {view === 'circuitos' && (
+          <CircuitsView
+            circuit={circuit}
+            selectedCircuitId={selectedCircuitId}
+            setSelectedCircuitId={setSelectedCircuitId}
+            returnProtocolId={returnProtocolId}
+            setReturnProtocolId={setReturnProtocolId}
+            setSelectedProtocolId={setSelectedProtocolId}
+            setProtocolMode={setProtocolMode}
+            setActiveTab={setActiveTab}
             setView={setView}
           />
         )}
@@ -173,6 +197,7 @@ function App() {
             procedure={procedure}
             selectedProcedureId={selectedProcedureId}
             setSelectedProcedureId={setSelectedProcedureId}
+            setSelectedCircuitId={setSelectedCircuitId}
             returnProtocolId={returnProtocolId}
             setReturnProtocolId={setReturnProtocolId}
             setSelectedProtocolId={setSelectedProtocolId}
@@ -187,6 +212,7 @@ function App() {
             calculator={calculator}
             selectedCalculatorId={selectedCalculatorId}
             setSelectedCalculatorId={setSelectedCalculatorId}
+            setSelectedCircuitId={setSelectedCircuitId}
             returnProtocolId={returnProtocolId}
             setReturnProtocolId={setReturnProtocolId}
             setSelectedProtocolId={setSelectedProtocolId}
@@ -230,7 +256,7 @@ function SearchBox({ query, setQuery, results, openItem }) {
         id="search"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
-        placeholder="dolor torácico, código ictus, prealerta, hipotensión..."
+        placeholder="código infarto, código ictus, trauma, traslado en parada..."
       />
       {results.length > 0 && (
         <div className="search-results">
@@ -270,6 +296,7 @@ function Home({ setView, setSelectedProcedureId, setSelectedCalculatorId }) {
       </div>
 
       <div className="compact-row">
+        <button type="button" onClick={() => setView('circuitos')}>Códigos y circuitos 061</button>
         <button type="button" onClick={() => setView('procedimientos')}>Procedimientos operativos</button>
         <button type="button" onClick={() => setView('calculos')}>Cálculos que cambian conducta</button>
       </div>
@@ -293,6 +320,7 @@ function ProtocolsView({
   activeTab,
   setActiveTab,
   setSelectedCalculatorId,
+  setSelectedCircuitId,
   setSelectedProcedureId,
   setReturnProtocolId,
   setView,
@@ -340,6 +368,7 @@ function ProtocolsView({
           protocol={protocol}
           meta={meta}
           setSelectedCalculatorId={setSelectedCalculatorId}
+          setSelectedCircuitId={setSelectedCircuitId}
           setSelectedProcedureId={setSelectedProcedureId}
           setReturnProtocolId={setReturnProtocolId}
           setView={setView}
@@ -353,6 +382,7 @@ function Connections({
   protocol,
   meta,
   setSelectedCalculatorId,
+  setSelectedCircuitId,
   setSelectedProcedureId,
   setReturnProtocolId,
   setView,
@@ -369,6 +399,16 @@ function Connections({
     <div className="connections">
       <details className="secondary-panel">
         <summary>Apoyos operativos</summary>
+        <Connector
+          title="Códigos y circuitos 061"
+          items={protocol.circuits || []}
+          map={circuitById}
+          onOpen={(id) => {
+            setSelectedCircuitId(id)
+            setReturnProtocolId(protocol.id)
+            setView('circuitos')
+          }}
+        />
         <Connector
           title="Cálculos"
           items={protocol.calculators}
@@ -488,10 +528,61 @@ function ReturnToProtocol({
   )
 }
 
+function CircuitsView({
+  circuit,
+  selectedCircuitId,
+  setSelectedCircuitId,
+  returnProtocolId,
+  setReturnProtocolId,
+  setSelectedProtocolId,
+  setProtocolMode,
+  setActiveTab,
+  setView,
+}) {
+  return (
+    <section className="split-view">
+      <aside className="side-list">
+        <ClinicalList
+          title="Códigos y circuitos 061"
+          items={circuits}
+          onOpen={(item) => setSelectedCircuitId(item.id)}
+        />
+      </aside>
+      <article className="clinical-card">
+        <ReturnToProtocol
+          returnProtocolId={returnProtocolId}
+          setReturnProtocolId={setReturnProtocolId}
+          setSelectedProtocolId={setSelectedProtocolId}
+          setProtocolMode={setProtocolMode}
+          setActiveTab={setActiveTab}
+          setView={setView}
+        />
+        <div className="protocol-title">
+          <span className="tag">{circuit.category}</span>
+          <h1>{circuit.title}</h1>
+          <p>{circuit.summary}</p>
+        </div>
+        <div className="procedure-sections">
+          {Object.entries(circuit.sections).map(([key, values]) => (
+            <section key={key}>
+              <h2>{labelize(key)}</h2>
+              <ul className="action-list">
+                {values.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </section>
+          ))}
+        </div>
+        <small>Seleccionado: {selectedCircuitId} · Fuente: {circuit.source.join(', ')}</small>
+      </article>
+    </section>
+  )
+}
+
 function ProceduresView({
   procedure,
   selectedProcedureId,
   setSelectedProcedureId,
+  setSelectedCircuitId,
   returnProtocolId,
   setReturnProtocolId,
   setSelectedProtocolId,
@@ -532,6 +623,14 @@ function ProceduresView({
             </section>
           ))}
         </div>
+        <RelatedCircuits
+          title="Circuitos relacionados"
+          items={circuits.filter((item) => item.relatedProcedures.includes(selectedProcedureId))}
+          onOpen={(id) => {
+            setSelectedCircuitId(id)
+            setView('circuitos')
+          }}
+        />
         <small>Seleccionado: {selectedProcedureId} · Fuente: {procedure.source.join(', ')}</small>
       </article>
     </section>
@@ -542,6 +641,7 @@ function CalculatorsView({
   calculator,
   selectedCalculatorId,
   setSelectedCalculatorId,
+  setSelectedCircuitId,
   returnProtocolId,
   setReturnProtocolId,
   setSelectedProtocolId,
@@ -581,7 +681,31 @@ function CalculatorsView({
           {calculator.warnings && <p>Advertencia: {calculator.warnings}</p>}
           <small>Fuente: {calculator.source.join(', ')} · revisión {calculator.reviewedAt}</small>
         </section>
+        <RelatedCircuits
+          title="Circuitos relacionados"
+          items={circuits.filter((item) => item.relatedCalculators.includes(selectedCalculatorId))}
+          onOpen={(id) => {
+            setSelectedCircuitId(id)
+            setView('circuitos')
+          }}
+        />
       </article>
+    </section>
+  )
+}
+
+function RelatedCircuits({ title, items, onOpen }) {
+  if (!items.length) return null
+  return (
+    <section className="meta-box">
+      <h3>{title}</h3>
+      <div className="chips">
+        {items.map((item) => (
+          <button key={item.id} type="button" onClick={() => onOpen(item.id)}>
+            {item.title}
+          </button>
+        ))}
+      </div>
     </section>
   )
 }
@@ -704,6 +828,13 @@ function labelize(key) {
     erroresCriticos: 'Errores críticos',
     reevaluacion: 'Reevaluación',
     escalar: 'Cuándo escalar',
+    cuandoActivarlo: 'Cuándo activarlo',
+    datosMinimos: 'Qué datos mínimos recoger',
+    comunicar: 'Qué comunicar',
+    noRetrasar: 'Qué no debe retrasar el traslado',
+    destino: 'Destino útil según red local',
+    limitaciones: 'Limitaciones y dependencia local',
+    condicionesMinimas: 'Condiciones mínimas si se traslada',
   }
   return labels[key] || key
 }

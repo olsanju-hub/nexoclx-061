@@ -9,9 +9,10 @@ export const protocolFlows = [
     keywords: ['dolor torácico', 'infarto', 'código infarto', 'scacest', 'scasest', 'hemodinámica', 'nitratos', 'aspirina', 'vegetatismo'],
     priority: 'tiempo-dependiente',
     calculators: ['killip', 'sbar-check', 'transfer-check'],
+    circuits: ['codigo-infarto'],
     procedures: ['abcde', 'sbar-prealerta', 'traslado-critico', 'oxigenoterapia'],
     medications: ['oxygen', 'acetylsalicylic-acid', 'nitroglycerin', 'morphine', 'ticagrelor', 'arrhythmia-drugs-removed'],
-    bibliography: ['esc-acs-2023', 'galicia-061-farmacologica', 'cima-aas', 'cima-nitroglicerina', 'cima-morfina', 'cima-ticagrelor'],
+    bibliography: ['esc-acs-2023', 'ibsalut-samu061', 'caib-samu061-actividad-2024', 'caib-carta-servicios-samu061-2025', 'boe-balears-transporte-sanitario-2024', 'galicia-061-farmacologica', 'cima-aas', 'cima-nitroglicerina', 'cima-morfina', 'cima-ticagrelor'],
     tabs: {
       Sospecha: [
         'Sospechar si dolor opresivo, irradiación, vegetatismo, disnea, síncope o equivalentes.',
@@ -59,9 +60,10 @@ export const protocolFlows = [
     keywords: ['ictus', 'código ictus', 'cara torcida', 'pérdida de fuerza', 'lenguaje', 'hemiparesia', 'afasia', 'anticoagulación', 'trombectomía', 'glucemia', 'befast', 'cincinnati'],
     priority: 'tiempo-dependiente',
     calculators: ['gcs', 'befast', 'sbar-check', 'transfer-check'],
+    circuits: ['codigo-ictus'],
     procedures: ['abcde', 'sbar-prealerta', 'traslado-critico'],
     medications: ['oxygen', 'glucose-hypertonic', 'midazolam'],
-    bibliography: ['aha-asa-ais-2026', 'galicia-061-farmacologica', 'cima-glucose-33', 'cima-midazolam'],
+    bibliography: ['aha-asa-ais-2019', 'aha-asa-ais-2026', 'ibsalut-samu061', 'caib-samu061-actividad-2024', 'caib-estrategia-ictus-ib', 'caib-carta-servicios-samu061-2025', 'boe-balears-transporte-sanitario-2024', 'galicia-061-farmacologica', 'cima-glucose-33', 'cima-midazolam'],
     tabs: {
       Sospecha: [
         'Sospechar si déficit neurológico focal brusco: desviación facial, alteración del lenguaje, pérdida de fuerza, visión alterada o ataxia brusca.',
@@ -106,6 +108,7 @@ export const protocolFlows = [
     keywords: ['disnea', 'saturación baja', 'insuficiencia respiratoria', 'asma', 'epoc', 'broncoespasmo', 'eap', 'edema pulmonar', 'edema agudo de pulmón', 'anafilaxia', 'tep', 'vmni', 'oxígeno'],
     priority: 'amenaza vital',
     calculators: ['abcde-check', 'shock-index', 'sbar-check', 'transfer-check'],
+    circuits: [],
     procedures: ['abcde', 'oxigenoterapia', 'sbar-prealerta', 'traslado-critico'],
     medications: ['oxygen', 'salbutamol', 'ipratropium', 'methylprednisolone', 'adrenaline-im', 'nitroglycerin', 'furosemide'],
     bibliography: ['gina-2025', 'gold-2026', 'esc-hf-2021', 'galicia-061-farmacologica', 'cima-salbutamol', 'cima-ipratropio', 'cima-methylprednisolone', 'cima-adrenalina', 'cima-nitroglicerina', 'cima-furosemide'],
@@ -154,6 +157,7 @@ export const protocolFlows = [
     keywords: ['shock', 'sepsis', 'hipotensión', 'paciente inestable', 'hipoperfusión', 'lactato', 'moteado', 'taquicardia', 'hemorragia', 'anafilaxia', 'fluidoterapia'],
     priority: 'amenaza vital',
     calculators: ['shock-index', 'abcde-check', 'fluid-bolus', 'sbar-check', 'transfer-check'],
+    circuits: [],
     procedures: ['abcde', 'fluidoterapia-inicial', 'sbar-prealerta', 'traslado-critico', 'oxigenoterapia'],
     medications: ['oxygen', 'crystalloid-bolus', 'adrenaline-im', 'vasopressor-removed', 'antibiotic-removed'],
     bibliography: ['ssc-2021', 'sergas-sepsis', 'cima-sodium-chloride-09', 'cima-adrenalina', 'galicia-061-farmacologica'],
@@ -203,9 +207,10 @@ export const protocolFlows = [
     keywords: ['trauma', 'politrauma', 'accidente', 'atropello', 'precipitación', 'alta energía', 'hemorragia', 'exanguinante', 'xabcde', 'torniquete', 'tce', 'fractura pelvis', 'shock traumático', 'atrapamiento', 'eyección'],
     priority: 'amenaza vital',
     calculators: ['gcs', 'shock-index', 'xabcde-trauma-check', 'sbar-check', 'transfer-check'],
+    circuits: ['codigo-trauma'],
     procedures: ['xabcde-trauma', 'sbar-prealerta', 'traslado-critico', 'oxigenoterapia', 'fluidoterapia-inicial'],
     medications: ['oxygen', 'crystalloid-bolus', 'morphine'],
-    bibliography: ['nice-major-trauma-ng39', 'ingesa-061-trauma', 'galicia-061-farmacologica', 'cima-morfina', 'cima-sodium-chloride-09'],
+    bibliography: ['nice-major-trauma-ng39', 'ibsalut-samu061', 'caib-samu061-actividad-2024', 'caib-codigo-politrauma-2024', 'caib-carta-servicios-samu061-2025', 'boe-balears-transporte-sanitario-2024', 'ingesa-061-trauma', 'galicia-061-farmacologica', 'cima-morfina', 'cima-sodium-chloride-09'],
     tabs: {
       Sospecha: [
         'Sospechar trauma grave si mecanismo de alta energía: atropello, precipitación, accidente de tráfico grave, eyección, atrapamiento o fallecido en mismo vehículo.',
@@ -254,9 +259,10 @@ export const protocolFlows = [
     keywords: ['rcp', 'parada', 'parada cardiorrespiratoria', 'sva', 'soporte vital avanzado', 'desfibrilación', 'ritmo desfibrilable', 'asistolia', 'actividad eléctrica sin pulso', 'aesp', 'adrenalina', 'amiodarona', 'rosc', 'recuperación circulación espontánea', 'gasping'],
     priority: 'amenaza vital',
     calculators: ['gcs', 'shock-index', 'abcde-check', 'sbar-check', 'transfer-check'],
+    circuits: ['traslado-en-parada'],
     procedures: ['abcde', 'sbar-prealerta', 'traslado-critico', 'oxigenoterapia', 'fluidoterapia-inicial'],
     medications: ['oxygen', 'adrenaline-iv-io-sva', 'amiodarone', 'glucose-hypertonic'],
-    bibliography: ['erc-als-2025', 'aha-als-2025', 'cima-adrenalina', 'cima-amiodarona', 'cima-glucose-33'],
+    bibliography: ['erc-als-2025', 'aha-als-2025', 'ibsalut-samu061', 'caib-samu061-actividad-2024', 'caib-carta-servicios-samu061-2025', 'boe-balears-transporte-sanitario-2024', 'cima-adrenalina', 'cima-amiodarona', 'cima-glucose-33'],
     tabs: {
       Sospecha: [
         'Sospechar PCR si inconsciente, sin respuesta, no respira normal, gasping o ausencia de signos de vida.',

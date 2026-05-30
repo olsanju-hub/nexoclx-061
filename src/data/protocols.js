@@ -4,8 +4,8 @@ export const protocols = [
     clinicalScope: 'Adulto con dolor torácico o equivalente isquémico de alto riesgo en entorno extrahospitalario.',
     reviewedAt: '2026-05-30',
     confidence: 'media-alta',
-    internalNotes: 'Pautas farmacológicas trazadas con CIMA/AEMPS y Galicia-061 como referencia operativa externa; arritmias específicas quedan fuera del flujo activo.',
-    bibliography: ['esc-acs-2023', 'galicia-061-farmacologica', 'cima-aas', 'cima-nitroglicerina', 'cima-morfina', 'cima-ticagrelor'],
+    internalNotes: 'Pautas farmacológicas trazadas con CIMA/AEMPS y Galicia-061 como referencia operativa externa; circuito infarto V1.1 trazado con fuentes IB-Salut/CAIB/BOE.',
+    bibliography: ['esc-acs-2023', 'ibsalut-samu061', 'caib-samu061-actividad-2024', 'caib-carta-servicios-samu061-2025', 'boe-balears-transporte-sanitario-2024', 'galicia-061-farmacologica', 'cima-aas', 'cima-nitroglicerina', 'cima-morfina', 'cima-ticagrelor'],
     verificationStatus: 'Oxígeno, AAS, nitroglicerina, morfina y ticagrelor quedan como pautas verificadas; criterios de activación/destino se adaptan al código infarto local.',
   },
   {
@@ -14,7 +14,7 @@ export const protocols = [
     reviewedAt: '2026-05-30',
     confidence: 'alta para detección/traslado; media para criterios de destino hasta protocolo local',
     internalNotes: 'Actualizar cuando se cargue mapa territorial de unidades de ictus, TC, trombólisis y trombectomía; no fijar ventanas terapéuticas sin protocolo local.',
-    bibliography: ['aha-asa-ais-2026', 'galicia-061-farmacologica', 'cima-glucose-33', 'cima-midazolam'],
+    bibliography: ['aha-asa-ais-2019', 'aha-asa-ais-2026', 'ibsalut-samu061', 'caib-samu061-actividad-2024', 'caib-estrategia-ictus-ib', 'caib-carta-servicios-samu061-2025', 'boe-balears-transporte-sanitario-2024', 'galicia-061-farmacologica', 'cima-glucose-33', 'cima-midazolam'],
     verificationStatus: 'Oxígeno, glucosa hipertónica para hipoglucemia y midazolam para convulsión quedan como pautas verificadas; activación/destino y PA se adaptan al protocolo local.',
   },
   {
@@ -40,8 +40,8 @@ export const protocols = [
     clinicalScope: 'Paciente traumático grave o politraumatizado en entorno extrahospitalario 061, con amenaza vital real o potencial y necesidad de traslado crítico.',
     reviewedAt: '2026-05-30',
     confidence: 'media-alta',
-    internalNotes: 'XABCDE traumático basado en NICE NG39; INGESA/Ceuta se mantiene como referencia operativa 061 complementaria y Galicia-061/CIMA para medicación; destino y activación dependen de red local.',
-    bibliography: ['nice-major-trauma-ng39', 'ingesa-061-trauma', 'galicia-061-farmacologica', 'cima-morfina', 'cima-sodium-chloride-09'],
+    internalNotes: 'XABCDE traumático basado en NICE NG39; INGESA/Ceuta se mantiene como referencia operativa 061 complementaria, CAIB/BOE sostienen coordinación/destino y CIMA/Galicia-061 medicación.',
+    bibliography: ['nice-major-trauma-ng39', 'ibsalut-samu061', 'caib-samu061-actividad-2024', 'caib-codigo-politrauma-2024', 'caib-carta-servicios-samu061-2025', 'boe-balears-transporte-sanitario-2024', 'ingesa-061-trauma', 'galicia-061-farmacologica', 'cima-morfina', 'cima-sodium-chloride-09'],
     verificationStatus: 'XABCDE traumático, oxígeno, morfina y cristaloide isotónico restrictivo quedan trazados; hospital útil, torniquete y criterios de código trauma se adaptan a protocolo local/centro coordinador.',
   },
   {
@@ -50,7 +50,7 @@ export const protocols = [
     reviewedAt: '2026-05-30',
     confidence: 'alta para algoritmo SVA adulto; media para traslado en parada hasta protocolo local',
     internalNotes: 'Basado en ERC/AHA 2025 para SVA adulto; CIMA/AEMPS para adrenalina, amiodarona y glucosa; traslado en parada y finalización/no inicio quedan fuera del flujo activo salvo indicación local.',
-    bibliography: ['erc-als-2025', 'aha-als-2025', 'cima-adrenalina', 'cima-amiodarona', 'cima-glucose-33'],
+    bibliography: ['erc-als-2025', 'aha-als-2025', 'ibsalut-samu061', 'caib-samu061-actividad-2024', 'caib-carta-servicios-samu061-2025', 'boe-balears-transporte-sanitario-2024', 'cima-adrenalina', 'cima-amiodarona', 'cima-glucose-33'],
     verificationStatus: 'Reconocimiento de PCR, RCP, desfibrilación, adrenalina IV/IO, amiodarona, glucosa si hipoglucemia y pos-ROSC quedan trazados; traslado en parada, ECPR/hemodinámica y criterios de finalizar/no iniciar dependen de protocolo local/centro coordinador.',
   },
 ]
