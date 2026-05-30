@@ -143,7 +143,6 @@ function App() {
 
         {view === 'inicio' && (
           <Home
-            openItem={openItem}
             setView={setView}
             setSelectedProcedureId={setSelectedProcedureId}
             setSelectedCalculatorId={setSelectedCalculatorId}
@@ -247,7 +246,7 @@ function SearchBox({ query, setQuery, results, openItem }) {
   )
 }
 
-function Home({ openItem, setView, setSelectedProcedureId, setSelectedCalculatorId }) {
+function Home({ setView, setSelectedProcedureId, setSelectedCalculatorId }) {
   return (
     <section className="view-stack">
       <div className="section-head">

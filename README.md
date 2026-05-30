@@ -2,7 +2,7 @@
 
 App web PWA de apoyo rápido para asistencia extrahospitalaria urgente, soporte vital avanzado y traslado de paciente crítico. La pregunta de producto es: **qué necesito decidir ahora antes o durante el traslado**.
 
-**Versión publicada actual:** V1.0.1.
+**Versión publicada actual:** V1.0.2.
 
 V1.0.0 se mantiene como release estable inicial.
 
@@ -18,7 +18,7 @@ Este README es el índice maestro del proyecto. Debe actualizarse cuando cambien
 
 ## Descripción actual de la app
 
-V1.0.1 publicada con cinco secciones: Inicio, Protocolos, Procedimientos, Cálculos y Bibliografía. Medicamentos no aparece como sección principal; se muestran solo conectados al punto clínico donde cambian conducta. V1.0.1 corrige la apertura de protocolos en vista de detalle dedicada sin cambios clínicos.
+V1.0.2 publicada con cinco secciones: Inicio, Protocolos, Procedimientos, Cálculos y Bibliografía. Medicamentos no aparece como sección principal; se muestran solo conectados al punto clínico donde cambian conducta. V1.0.2 corrige un bug clínico de Trauma grave/politrauma y separa adrenalina IM de adrenalina IV/IO en SVA.
 
 ## Identidad, tono y estilo visual
 
@@ -39,7 +39,7 @@ Nota clínica: La adaptación a protocolo local 061 queda pendiente antes de uso
 - Inicio: buscador, accesos rápidos y herramientas operativas.
 - Protocolos: seis fichas con tabs fijas Sospecha, Valoración, Decisión, Tratamiento y Traslado.
 - Procedimientos: ABCDE, SBAR/prealerta, traslado crítico, oxigenoterapia y fluidoterapia inicial.
-- Cálculos: GCS, Shock Index, Killip, BEFAST, ABCDE, SBAR, traslado crítico y volumen de bolo.
+- Cálculos: GCS, Shock Index, Killip, BEFAST, ABCDE, XABCDE traumático, SBAR, traslado crítico y volumen de bolo.
 - Bibliografía: fuentes estructuradas y trazables.
 
 ## Lógica de navegación entre módulos
@@ -76,6 +76,7 @@ Fuentes base:
 - GOLD 2026.
 - ESC 2021 Heart Failure.
 - Surviving Sepsis Campaign 2021.
+- NICE Major Trauma NG39.
 - CIMA/AEMPS para ácido acetilsalicílico, nitroglicerina, morfina, ticagrelor, glucosa hipertónica, midazolam, salbutamol, ipratropio, metilprednisolona, adrenalina, amiodarona, furosemida y cloruro sódico 0,9%.
 - Guía farmacológica de Urxencias Sanitarias de Galicia-061 como referencia operativa externa para uso extrahospitalario.
 - Protocolo SERGAS de sepsis como referencia operativa externa para cristaloides en sepsis/shock séptico.
@@ -133,18 +134,20 @@ Estado V1.0.0: los seis protocolos están activos, visibles en la app publicada,
 
 ## Cálculos incluidos
 
-- GCS: ictus agudo, trauma grave/politrauma y pos-ROSC.
+- GCS: ictus agudo, trauma grave/politrauma y fase pos-ROSC; no se usa durante parada.
 - Shock Index: shock/sepsis/paciente inestable, trauma grave/politrauma y pos-ROSC inestable; no se usa durante parada.
 - Killip clínico: SCA/dolor torácico crítico.
 - BEFAST/Cincinnati operativo: ictus agudo.
-- Checklist ABCDE: insuficiencia respiratoria, shock/sepsis, trauma grave/politrauma y SVA adulto.
+- Checklist ABCDE: insuficiencia respiratoria, shock/sepsis y SVA adulto.
+- XABCDE traumático: trauma grave/politrauma, con hemorragia catastrófica/exanguinante antes de A.
 - Checklist SBAR: SCA, ictus, insuficiencia respiratoria, shock/sepsis, trauma grave/politrauma y SVA adulto.
 - Checklist traslado crítico: SCA, ictus, insuficiencia respiratoria, shock/sepsis, trauma grave/politrauma y SVA adulto.
 - Bolo de cristaloide por peso: shock/sepsis, como ayuda aritmética para pauta de cristaloide verificada con referencia externa.
 
 ## Procedimientos incluidos
 
-- ABCDE extrahospitalario: SCA, ictus, insuficiencia respiratoria, shock/sepsis, trauma grave/politrauma y SVA adulto.
+- ABCDE extrahospitalario: SCA, ictus, insuficiencia respiratoria, shock/sepsis y SVA adulto.
+- XABCDE traumático: trauma grave/politrauma, con control de hemorragia catastrófica/exanguinante antes de vía aérea.
 - SBAR/prealerta hospitalaria: SCA, ictus, insuficiencia respiratoria, shock/sepsis, trauma grave/politrauma y SVA adulto.
 - Checklist de traslado crítico: SCA, ictus, insuficiencia respiratoria, shock/sepsis, trauma grave/politrauma y SVA adulto.
 - Oxigenoterapia y soporte respiratorio básico: SCA con hipoxemia, insuficiencia respiratoria, shock/sepsis, trauma grave/politrauma y SVA adulto.
@@ -196,10 +199,11 @@ Las fuentes de procedimientos transversales están enlazadas en `src/data/module
 - 2026-05-22: fase de medicamentos: las tarjetas activas muestran solo fármacos `verified` o `verified-external-protocol`.
 - 2026-05-22: fase de procedimientos: ABCDE, SBAR, traslado crítico, oxigenoterapia y fluidoterapia revisados como procedimientos transversales compactos.
 - 2026-05-22: completadas pautas farmacológicas con CIMA/AEMPS y referencias operativas oficiales externas; se retiran del flujo activo arritmias específicas, vasopresores y antibiótico prehospitalario.
-- 2026-05-22: añadida V1.1 con protocolo Trauma grave / politrauma, enlazado a ABCDE, SBAR, traslado crítico, GCS, Shock Index, oxigenoterapia, fluidoterapia, oxígeno, cristaloide y morfina.
+- 2026-05-22: añadida V1.1 con protocolo Trauma grave / politrauma, enlazado inicialmente a ABCDE, SBAR, traslado crítico, GCS, Shock Index, oxigenoterapia, fluidoterapia, oxígeno, cristaloide y morfina.
 - 2026-05-22: añadida V1.1 con protocolo Parada cardiorrespiratoria / SVA adulto, enlazado a ERC/AHA 2025, CIMA/AEMPS adrenalina/amiodarona/glucosa, ABCDE, SBAR, traslado crítico, oxigenoterapia, GCS y Shock Index pos-ROSC.
 - 2026-05-23: cierre transversal V1 estable: auditada visibilidad, estructura de cinco pestañas, conexiones clínicas, búsqueda, PWA/cache y render móvil/desktop de los seis protocolos.
 - 2026-05-23: release V1.0.0 estable con README y CHANGELOG de versión.
+- 2026-05-30: V1.0.2 bugfix clínico. Trauma grave pasa de ABCDE simple a XABCDE traumático según NICE NG39, se separa adrenalina IV/IO en SVA de adrenalina IM para anafilaxia y se documenta auditoría clínica en `docs/clinical-audit-v1.0.2.md`. Service worker actualizado a `nexoclx-061-shell-v7`.
 
 ## Pendiente funcional para V1.1/V1.2 o posterior
 

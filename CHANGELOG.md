@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.0.2] - 2026-05-30
+
+### Tipo
+
+Bugfix clínico y auditoría de seguridad.
+
+### Corregido
+
+- Valoración primaria traumática actualizada de ABCDE simple a XABCDE traumático según NICE NG39.
+- Trauma grave / politrauma deja de enlazar la herramienta ABCDE general y enlaza una herramienta específica `XABCDE traumático`.
+- Fluidoterapia en trauma matizada para no normalizar TA de forma agresiva si hay sangrado activo no controlado, con excepción/objetivo local en TCE grave.
+- Adrenalina IM para anafilaxia separada de adrenalina IV/IO en SVA adulto para evitar confusión de vía y contexto.
+- GCS y Shock Index reforzados como herramientas pos-ROSC/inestabilidad con pulso, no durante parada.
+- Bibliografía de trauma actualizada con NICE Major Trauma NG39.
+- Documento de auditoría clínica creado en `docs/clinical-audit-v1.0.2.md`.
+- Service worker actualizado a `nexoclx-061-shell-v7`.
+
+### Sin cambios
+
+- No se añadieron protocolos.
+- No se eliminaron protocolos.
+- No se cambiaron colores.
+- No se amplió la app con nuevas patologías.
+- No se crearon criterios territoriales de activación/destino sin protocolo local.
+
 ## [1.0.1] - 2026-05-23
 
 ### Tipo

@@ -244,21 +244,12 @@ export const medications = [
   },
   {
     id: 'adrenaline-im',
-    genericName: 'Adrenalina',
+    genericName: 'Adrenalina IM',
     status: 'verified-external-protocol',
-    relatedProtocols: ['insuficiencia-respiratoria', 'shock-sepsis', 'parada-cardiorrespiratoria-sva-adulto'],
+    relatedProtocols: ['insuficiencia-respiratoria', 'shock-sepsis'],
     protocolIndications: {
       'insuficiencia-respiratoria': 'Anafilaxia con compromiso respiratorio/circulatorio.',
       'shock-sepsis': 'Anafilaxia con compromiso respiratorio/circulatorio dentro de paciente inestable.',
-      'parada-cardiorrespiratoria-sva-adulto': 'Parada cardiorrespiratoria adulta dentro del algoritmo SVA.',
-    },
-    protocolDosing: {
-      'parada-cardiorrespiratoria-sva-adulto': {
-        dose: '1 mg.',
-        route: 'Intravenosa o intraósea; diluir a 0,1 mg/ml para administración IV según ficha técnica.',
-        frequency: 'Repetir cada 3-5 min durante SVA adulto según ritmo y algoritmo.',
-        maximum: 'Sin máximo acumulado cerrado durante RCP; continuar según algoritmo y reevaluación.',
-      },
     },
     indications: ['Anafilaxia/shock anafiláctico'],
     dose: 'Adulto: 0,5 mg IM de solución 1 mg/ml.',
@@ -272,6 +263,26 @@ export const medications = [
     cimaUrl: 'https://cima.aemps.es/cima/dochtml/ft/81446/FT_81446.html',
     operationalNote: 'Referencia operativa externa; adaptar a protocolo local 061 si existe.',
     reviewedAt: '2026-05-22',
+  },
+  {
+    id: 'adrenaline-iv-io-sva',
+    genericName: 'Adrenalina IV/IO en SVA',
+    status: 'verified',
+    relatedProtocols: ['parada-cardiorrespiratoria-sva-adulto'],
+    protocolIndications: {
+      'parada-cardiorrespiratoria-sva-adulto': 'Parada cardiorrespiratoria adulta dentro del algoritmo SVA.',
+    },
+    indications: ['Parada cardiorrespiratoria adulta en SVA'],
+    dose: '1 mg.',
+    route: 'Intravenosa o intraósea; diluir a 0,1 mg/ml para administración IV según ficha técnica.',
+    frequency: 'Repetir cada 3-5 min durante SVA adulto según ritmo y algoritmo.',
+    maximum: 'Sin máximo acumulado cerrado durante RCP; continuar según algoritmo y reevaluación.',
+    contraindications: 'En parada cardiorrespiratoria no hay contraindicación absoluta dentro del algoritmo SVA.',
+    precautions: 'Uso IV/IO con monitorización, compresiones de calidad, desfibrilación cuando proceda y búsqueda de causas reversibles; no confundir con pauta IM de anafilaxia.',
+    renalHepaticAdjustment: 'No procede durante RCP.',
+    source: ['cima-adrenalina', 'erc-als-2025', 'aha-als-2025'],
+    cimaUrl: 'https://cima.aemps.es/cima/dochtml/ft/81446/FT_81446.html',
+    reviewedAt: '2026-05-30',
   },
   {
     id: 'amiodarone',
@@ -325,7 +336,7 @@ export const medications = [
     },
     protocolDosing: {
       'trauma-grave-politrauma': {
-        dose: 'Hemorragia controlada con shock: 1000 ml de suero fisiológico; si hemorragia no controlada, cargas prudentes con reevaluación.',
+        dose: 'Sin volumen universal. Si sangrado activo no controlado, enfoque restrictivo según protocolo local; si TCE grave domina, evitar hipotensión según objetivo local.',
         frequency: 'Reevaluar tras cada carga: TA, pulso, perfusión, conciencia, SatO2, respiración, sangrado y crepitantes.',
         maximum: 'Sin máximo fijo; evitar normalizar TA de forma agresiva si hemorragia no controlada, salvo TCE u otra indicación protocolizada.',
       },
