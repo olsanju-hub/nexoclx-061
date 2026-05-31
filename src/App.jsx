@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { bibliography, bibliographyById, clinicalGovernanceNote } from './data/bibliography'
 import { calculators } from './data/calculators'
 import { medicationById, medicationStatusLabels } from './data/medications'
-import { circuitById, circuits, modules, procedures, procedureById } from './data/modules'
+import { circuitById, circuits, procedures, procedureById } from './data/modules'
 import { protocolMetaById } from './data/protocols'
 import { protocolFlows, TAB_ORDER } from './data/protocolFlows'
 import { ProtocolHeader } from './components/protocols/ProtocolHeader'
@@ -15,14 +15,14 @@ const navItems = [
   { id: 'circuitos', label: 'Circuitos', icon: '⌁' },
   { id: 'procedimientos', label: 'Procedimientos', icon: '✓' },
   { id: 'calculos', label: 'Cálculos', icon: '∑' },
-  { id: 'bibliografia', label: 'Bibliografía', icon: '§' },
+  { id: 'bibliografia', label: 'Fuentes', icon: '§' },
 ]
 
 const quickBlocks = [
+  { label: 'Protocolos clínicos', view: 'protocolos' },
   { label: 'ABCDE', view: 'procedimientos', id: 'abcde' },
   { label: 'SBAR', view: 'procedimientos', id: 'sbar-prealerta' },
   { label: 'Traslado crítico', view: 'procedimientos', id: 'traslado-critico' },
-  { label: 'Shock Index', view: 'calculos', id: 'shock-index' },
 ]
 
 const norm = (value) =>
@@ -282,7 +282,7 @@ function Home({ setView, setSelectedProcedureId, setSelectedCalculatorId }) {
       <div className="quick-grid">
         {quickBlocks.map((item) => (
           <button
-            key={item.id}
+            key={item.id || item.view}
             type="button"
             onClick={() => {
               if (item.view === 'procedimientos') setSelectedProcedureId(item.id)
@@ -812,10 +812,6 @@ function BibliographyView() {
           </details>
         ))}
       </div>
-      <section className="meta-box">
-        <h3>Relación de módulos</h3>
-        <p>{modules.length} módulos catalogados. Referencias activas: {bibliography.filter((item) => item.status !== 'inactive').length}.</p>
-      </section>
     </section>
   )
 }
