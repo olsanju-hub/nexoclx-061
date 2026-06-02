@@ -13,9 +13,7 @@ const navItems = [
   { id: 'inicio', label: 'Inicio', icon: '⌂' },
   { id: 'protocolos', label: 'Protocolos', icon: '▤' },
   { id: 'circuitos', label: 'Circuitos', icon: '⌁' },
-  { id: 'procedimientos', label: 'Procedimientos', icon: '✓' },
-  { id: 'calculos', label: 'Cálculos', icon: '∑' },
-  { id: 'bibliografia', label: 'Fuentes', icon: '§' },
+  { id: 'mas', label: 'Más', icon: '＋' },
 ]
 
 const quickBlocks = [
@@ -148,7 +146,9 @@ function App() {
       </header>
 
       <main className="main-panel">
-        {!isProtocolDetail && <SearchBox query={query} setQuery={setQuery} results={results} openItem={openItem} />}
+        {!isProtocolDetail && !['mas', 'bibliografia'].includes(view) && (
+          <SearchBox query={query} setQuery={setQuery} results={results} openItem={openItem} />
+        )}
 
         {view === 'inicio' && (
           <Home
@@ -224,6 +224,7 @@ function App() {
         )}
 
         {view === 'bibliografia' && <BibliographyView />}
+        {view === 'mas' && <MoreView setView={setView} />}
       </main>
 
       <nav className="bottom-nav" aria-label="Navegación principal">
@@ -231,7 +232,7 @@ function App() {
           <button
             key={item.id}
             type="button"
-            className={view === item.id ? 'active' : ''}
+            className={view === item.id || (item.id === 'mas' && ['procedimientos', 'calculos', 'bibliografia'].includes(view)) ? 'active' : ''}
             onClick={() => {
               if (item.id === 'protocolos') {
                 openProtocolList()
@@ -797,6 +798,32 @@ function NumericCalc({ calculator, values, set, result }) {
       ))}
       <output key={result}>Resultado: {result}</output>
     </div>
+  )
+}
+
+function MoreView({ setView }) {
+  const items = [
+    { id: 'procedimientos', title: 'Procedimientos', note: 'Procedimientos operativos y apoyo a circuitos.' },
+    { id: 'calculos', title: 'Cálculos', note: 'Herramientas de cálculo vinculadas a decisiones clínicas.' },
+    { id: 'bibliografia', title: 'Fuentes', note: 'Bibliografía trazable y fuentes estructuradas.' },
+  ]
+
+  return (
+    <section className="view-stack">
+      <div className="section-head">
+        <h1>Más</h1>
+        <p>Accesos secundarios y trazabilidad.</p>
+      </div>
+      <div className="more-list">
+        {items.map((item) => (
+          <button key={item.id} type="button" onClick={() => setView(item.id)}>
+            <strong>{item.title}</strong>
+            <small>{item.note}</small>
+            <span aria-hidden="true">›</span>
+          </button>
+        ))}
+      </div>
+    </section>
   )
 }
 
