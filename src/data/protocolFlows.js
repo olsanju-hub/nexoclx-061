@@ -187,6 +187,7 @@ export const protocolFlows = [
         'Acceso IV/IO si no retrasa traslado; control de hemorragia si existe.',
         'Cristaloide isotónico si hipoperfusión compatible con shock hipovolémico/distributivo o sepsis/shock séptico, sin datos de sobrecarga.',
         'En sepsis/shock séptico: 30 ml/kg inicial; si precisa, cargas de 500 ml en 30 min con reevaluación y sin datos de sobrecarga.',
+        'No retrasar el traslado por completar volumen; administrar bolos con reevaluación clínica, detener si aparecen signos de sobrecarga y coordinar con centro coordinador/protocolo local.',
         'Evitar fluidos agresivos si sospecha cardiogénica, EAP o sobrecarga; detener si empeora disnea, crepitantes o perfusión no mejora.',
         'Anafilaxia: adrenalina IM adulta si compromiso respiratorio/circulatorio; reevaluar TA, pulso y respiración.',
         'Vasopresor o antibiótico prehospitalario: solo con protocolo local, monitorización, competencia y dosis verificada; no rutina.',
