@@ -362,7 +362,7 @@ function ProtocolsView({
           ))}
         </div>
 
-        <ProtocolSection title={activeTab} items={protocol.tabs[activeTab]} />
+        <ProtocolSection key={activeTab} title={activeTab} items={protocol.tabs[activeTab]} />
 
         <Connections
           protocol={protocol}
@@ -736,7 +736,7 @@ function CalculatorRunner({ calculator }) {
             </select>
           </label>
         ))}
-        <output>Resultado: {total}</output>
+        <output key={total}>Resultado: {total}</output>
       </div>
     )
   }
@@ -766,7 +766,7 @@ function CalculatorRunner({ calculator }) {
             </select>
           </label>
         ))}
-        <output>Resultado: {values.killip || 'I'}</output>
+        <output key={values.killip || 'I'}>Resultado: {values.killip || 'I'}</output>
       </div>
     )
   }
@@ -788,7 +788,7 @@ function NumericCalc({ calculator, values, set, result }) {
           />
         </label>
       ))}
-      <output>Resultado: {result}</output>
+      <output key={result}>Resultado: {result}</output>
     </div>
   )
 }

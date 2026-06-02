@@ -451,3 +451,178 @@ output {
   .filter-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bottom-nav { left: 50%; transform: translateX(-50%); width: min(640px, calc(100% - 24px)); bottom: 10px; border: 1px solid var(--line); border-radius: 14px; }
 }
+
+@keyframes clinical-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes clinical-panel {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes clinical-result {
+  0% {
+    border-color: rgba(168, 50, 58, 0.26);
+    box-shadow: 0 0 0 3px rgba(168, 50, 58, 0.12);
+  }
+  100% {
+    border-color: var(--accent-line);
+    box-shadow: 0 0 0 0 rgba(168, 50, 58, 0);
+  }
+}
+
+button,
+input,
+select,
+a,
+summary,
+output,
+.clinical-card,
+.list-block,
+.protocol-section-card {
+  transition:
+    background-color 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    color 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+a:focus-visible,
+summary:focus-visible {
+  outline: 3px solid rgba(168, 50, 58, 0.2);
+  outline-offset: 2px;
+}
+
+.search-wrap,
+.view-stack,
+.split-view,
+.protocol-detail-view,
+.clinical-card,
+.list-block,
+.biblio-list {
+  animation: clinical-enter 190ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.search-results,
+.protocol-section-card,
+details > :not(summary) {
+  animation: clinical-panel 190ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.brand:hover,
+.quick-grid button:hover,
+.compact-row button:hover,
+.filter-row button:hover,
+.tabs button:hover,
+.chips button:hover,
+.bottom-nav button:hover {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+}
+
+.quick-grid button:hover,
+.compact-row button:hover,
+.return-link:hover {
+  box-shadow: 0 6px 18px rgba(168, 50, 58, 0.08);
+  transform: translateY(-1px);
+}
+
+.clinical-list button:hover,
+.search-results button:hover {
+  background: var(--accent-soft);
+}
+
+.list-block:hover,
+.clinical-card:hover,
+.protocol-section-card:hover {
+  border-color: rgba(168, 50, 58, 0.16);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.055);
+}
+
+button:active,
+.return-link:active,
+.clinical-list button:active,
+.bottom-nav button:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.search-wrap input:hover,
+.calc-box input:hover,
+.calc-box select:hover {
+  border-color: var(--accent-line);
+}
+
+.search-wrap input:focus,
+.calc-box input:focus,
+.calc-box select:focus {
+  border-color: var(--accent-line);
+  box-shadow: 0 0 0 3px rgba(168, 50, 58, 0.11);
+  outline: none;
+}
+
+details {
+  overflow: clip;
+}
+
+summary:hover {
+  color: var(--accent-500);
+}
+
+output {
+  animation: clinical-result 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (hover: none) {
+  .quick-grid button:hover,
+  .compact-row button:hover,
+  .list-block:hover,
+  .clinical-card:hover,
+  .protocol-section-card:hover {
+    box-shadow: none;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+
+  .search-wrap,
+  .search-results,
+  .view-stack,
+  .split-view,
+  .protocol-detail-view,
+  .clinical-card,
+  .list-block,
+  .biblio-list,
+  .protocol-section-card,
+  details > :not(summary) {
+    transform: none !important;
+  }
+}
