@@ -155,6 +155,7 @@ function App() {
             setView={setView}
             setSelectedProcedureId={setSelectedProcedureId}
             setSelectedCalculatorId={setSelectedCalculatorId}
+            openProtocolDetail={openProtocolDetail}
           />
         )}
 
@@ -272,7 +273,7 @@ function SearchBox({ query, setQuery, results, openItem }) {
   )
 }
 
-function Home({ setView, setSelectedProcedureId, setSelectedCalculatorId }) {
+function Home({ setView, setSelectedProcedureId, setSelectedCalculatorId, openProtocolDetail }) {
   return (
     <section className="view-stack">
       <div className="section-head">
@@ -300,6 +301,12 @@ function Home({ setView, setSelectedProcedureId, setSelectedCalculatorId }) {
         <button type="button" onClick={() => setView('procedimientos')}>Procedimientos operativos</button>
         <button type="button" onClick={() => setView('calculos')}>Cálculos que cambian conducta</button>
       </div>
+
+      <ClinicalList
+        title="Protocolos clínicos"
+        items={protocolFlows.slice(0, 6)}
+        onOpen={(item) => openProtocolDetail(item.id)}
+      />
     </section>
   )
 }
