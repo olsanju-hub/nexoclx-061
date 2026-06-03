@@ -16,13 +16,6 @@ const navItems = [
   { id: 'mas', label: 'Más', icon: '＋' },
 ]
 
-const quickBlocks = [
-  { label: 'Protocolos clínicos', view: 'protocolos' },
-  { label: 'ABCDE', view: 'procedimientos', id: 'abcde' },
-  { label: 'SBAR', view: 'procedimientos', id: 'sbar-prealerta' },
-  { label: 'Traslado crítico', view: 'procedimientos', id: 'traslado-critico' },
-]
-
 const norm = (value) =>
   value
     .toLowerCase()
@@ -145,18 +138,13 @@ function App() {
         </button>
       </header>
 
-      <main className="main-panel">
-        {!isProtocolDetail && !['mas', 'bibliografia'].includes(view) && (
+      <main className={`main-panel${view === 'inicio' ? ' main-panel-home' : ''}`}>
+        {!isProtocolDetail && view !== 'inicio' && !['mas', 'bibliografia'].includes(view) && (
           <SearchBox query={query} setQuery={setQuery} results={results} openItem={openItem} />
         )}
 
         {view === 'inicio' && (
-          <Home
-            setView={setView}
-            setSelectedProcedureId={setSelectedProcedureId}
-            setSelectedCalculatorId={setSelectedCalculatorId}
-            openProtocolDetail={openProtocolDetail}
-          />
+          <Home query={query} setQuery={setQuery} results={results} openItem={openItem} setView={setView} openProtocolList={openProtocolList} />
         )}
 
         {view === 'protocolos' && (
@@ -227,25 +215,27 @@ function App() {
         {view === 'mas' && <MoreView setView={setView} />}
       </main>
 
-      <nav className="bottom-nav" aria-label="Navegación principal">
-        {navItems.map((item) => (
-          <button
-            key={item.id}
-            type="button"
-            className={view === item.id || (item.id === 'mas' && ['procedimientos', 'calculos', 'bibliografia'].includes(view)) ? 'active' : ''}
-            onClick={() => {
-              if (item.id === 'protocolos') {
-                openProtocolList()
-                return
-              }
-              setView(item.id)
-            }}
-          >
-            <span aria-hidden="true">{item.icon}</span>
-            <small>{item.label}</small>
-          </button>
-        ))}
-      </nav>
+      {view !== 'inicio' ? (
+        <nav className="bottom-nav" aria-label="Navegación principal">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className={view === item.id || (item.id === 'mas' && ['procedimientos', 'calculos', 'bibliografia'].includes(view)) ? 'active' : ''}
+              onClick={() => {
+                if (item.id === 'protocolos') {
+                  openProtocolList()
+                  return
+                }
+                setView(item.id)
+              }}
+            >
+              <span aria-hidden="true">{item.icon}</span>
+              <small>{item.label}</small>
+            </button>
+          ))}
+        </nav>
+      ) : null}
     </div>
   )
 }
@@ -253,12 +243,12 @@ function App() {
 function SearchBox({ query, setQuery, results, openItem }) {
   return (
     <section className="search-wrap" aria-label="Búsqueda clínica">
-      <label htmlFor="search">Buscar decisión clínica</label>
+      <label htmlFor="search">Buscar protocolo, síntoma, cálculo...</label>
       <input
         id="search"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
-        placeholder="código infarto, código ictus, trauma, traslado en parada..."
+        placeholder="código infarto, ictus, shock, traslado..."
       />
       {results.length > 0 && (
         <div className="search-results">
@@ -274,40 +264,33 @@ function SearchBox({ query, setQuery, results, openItem }) {
   )
 }
 
-function Home({ setView, setSelectedProcedureId, setSelectedCalculatorId, openProtocolDetail }) {
+function Home({ query, setQuery, results, openItem, setView, openProtocolList }) {
+  const sections = [
+    { id: 'protocolos', title: 'Protocolos', note: 'Listado completo de protocolos extrahospitalarios.' },
+    { id: 'circuitos', title: 'Circuitos', note: 'Códigos y circuitos de coordinación 061.' },
+    { id: 'procedimientos', title: 'Procedimientos', note: 'Procedimientos operativos y apoyo a circuitos.' },
+    { id: 'calculos', title: 'Cálculos', note: 'Herramientas de cálculo vinculadas a decisiones clínicas.' },
+    { id: 'bibliografia', title: 'Fuentes', note: 'Bibliografía trazable y fuentes estructuradas.' },
+  ]
+
   return (
     <section className="view-stack">
       <div className="section-head">
-        <h1>Qué decidir ahora</h1>
+        <h1>NexoClx 061</h1>
+        <p>Extrahospitalaria y traslado crítico.</p>
       </div>
 
-      <div className="quick-grid">
-        {quickBlocks.map((item) => (
-          <button
-            key={item.id || item.view}
-            type="button"
-            onClick={() => {
-              if (item.view === 'procedimientos') setSelectedProcedureId(item.id)
-              if (item.view === 'calculos') setSelectedCalculatorId(item.id)
-              setView(item.view)
-            }}
-          >
-            {item.label}
+      <SearchBox query={query} setQuery={setQuery} results={results} openItem={openItem} />
+      <div className="more-list" aria-label="Secciones disponibles">
+        {sections.map((item) => (
+          <button key={item.id} type="button" onClick={() => (item.id === 'protocolos' ? openProtocolList() : setView(item.id))}>
+            <strong>{item.title}</strong>
+            <small>{item.note}</small>
+            <span aria-hidden="true">›</span>
           </button>
         ))}
       </div>
-
-      <div className="compact-row">
-        <button type="button" onClick={() => setView('circuitos')}>Códigos y circuitos 061</button>
-        <button type="button" onClick={() => setView('procedimientos')}>Procedimientos operativos</button>
-        <button type="button" onClick={() => setView('calculos')}>Cálculos que cambian conducta</button>
-      </div>
-
-      <ClinicalList
-        title="Protocolos clínicos"
-        items={protocolFlows.slice(0, 6)}
-        onOpen={(item) => openProtocolDetail(item.id)}
-      />
+      <p className="home-note">Consulta por búsqueda o abre una sección disponible.</p>
     </section>
   )
 }
