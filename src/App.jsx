@@ -136,6 +136,27 @@ function App() {
             <small>extrahospitalaria y traslado crítico</small>
           </span>
         </button>
+        {view !== 'inicio' && (
+          <nav className="top-nav" aria-label="Navegación principal">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                className={view === item.id || (item.id === 'mas' && ['procedimientos', 'calculos', 'bibliografia'].includes(view)) ? 'active' : ''}
+                onClick={() => {
+                  if (item.id === 'protocolos') {
+                    openProtocolList()
+                    return
+                  }
+                  setView(item.id)
+                }}
+              >
+                <span aria-hidden="true">{item.icon}</span>
+                <small>{item.label}</small>
+              </button>
+            ))}
+          </nav>
+        )}
       </header>
 
       <main className={`main-panel${view === 'inicio' ? ' main-panel-home' : ''}`}>
@@ -266,31 +287,30 @@ function SearchBox({ query, setQuery, results, openItem }) {
 
 function Home({ query, setQuery, results, openItem, setView, openProtocolList }) {
   const sections = [
-    { id: 'protocolos', title: 'Protocolos', note: 'Listado completo de protocolos extrahospitalarios.' },
-    { id: 'circuitos', title: 'Circuitos', note: 'Códigos y circuitos de coordinación 061.' },
-    { id: 'procedimientos', title: 'Procedimientos', note: 'Procedimientos operativos y apoyo a circuitos.' },
-    { id: 'calculos', title: 'Cálculos', note: 'Herramientas de cálculo vinculadas a decisiones clínicas.' },
-    { id: 'bibliografia', title: 'Fuentes', note: 'Bibliografía trazable y fuentes estructuradas.' },
+    { id: 'protocolos', title: 'Protocolos', icon: '▤', note: 'Listado completo de protocolos extrahospitalarios.' },
+    { id: 'circuitos', title: 'Circuitos', icon: '⌁', note: 'Códigos y circuitos de coordinación 061.' },
+    { id: 'procedimientos', title: 'Procedimientos', icon: '□', note: 'Procedimientos operativos y apoyo a circuitos.' },
+    { id: 'calculos', title: 'Cálculos', icon: '◎', note: 'Herramientas de cálculo vinculadas a decisiones clínicas.' },
+    { id: 'bibliografia', title: 'Fuentes', icon: '§', note: 'Bibliografía trazable y fuentes estructuradas.' },
   ]
 
   return (
     <section className="view-stack">
-      <div className="section-head">
-        <h1>NexoClx 061</h1>
+      <div className="home-intro-line">
         <p>Extrahospitalaria y traslado crítico.</p>
       </div>
 
       <SearchBox query={query} setQuery={setQuery} results={results} openItem={openItem} />
-      <div className="more-list" aria-label="Secciones disponibles">
+      <div className="home-section-map" aria-label="Secciones disponibles">
         {sections.map((item) => (
           <button key={item.id} type="button" onClick={() => (item.id === 'protocolos' ? openProtocolList() : setView(item.id))}>
+            <span className="home-section-icon" aria-hidden="true">{item.icon}</span>
             <strong>{item.title}</strong>
             <small>{item.note}</small>
-            <span aria-hidden="true">›</span>
+            <span className="home-section-chevron" aria-hidden="true">›</span>
           </button>
         ))}
       </div>
-      <p className="home-note">Consulta por búsqueda o abre una sección disponible.</p>
     </section>
   )
 }
