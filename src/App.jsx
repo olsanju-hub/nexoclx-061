@@ -35,13 +35,12 @@ const statusLabel = (status) => statusLabels[status] || status || 'sin estado'
 function App() {
   const [view, setView] = useState('inicio')
   const [query, setQuery] = useState('')
-  const [category, setCategory] = useState('Todos')
   const [protocolMode, setProtocolMode] = useState('list')
   const [selectedProtocolId, setSelectedProtocolId] = useState(protocolFlows[0].id)
   const [selectedCircuitId, setSelectedCircuitId] = useState(circuits[0].id)
   const [selectedProcedureId, setSelectedProcedureId] = useState(procedures[0].id)
   const [selectedCalculatorId, setSelectedCalculatorId] = useState(calculators[0].id)
-  const [activeTab, setActiveTab] = useState(TAB_ORDER[0])
+  const [, setActiveTab] = useState(TAB_ORDER[0])
   const [returnProtocolId, setReturnProtocolId] = useState(null)
 
   const protocol = protocolFlows.find((item) => item.id === selectedProtocolId)
@@ -77,13 +76,7 @@ function App() {
       .slice(0, 8)
   }, [query, searchable])
 
-  const protocolCategories = ['Todos', ...new Set(protocolFlows.map((item) => item.category))]
-  const visibleProtocols = protocolFlows.filter(
-    (item) =>
-      category === 'Todos' ||
-      item.category === category ||
-      norm([item.title, item.summary, ...item.keywords].join(' ')).includes(norm(category)),
-  )
+  const visibleProtocols = protocolFlows
 
   const openItem = (item) => {
     if (item.type === 'protocolo') {
@@ -171,15 +164,10 @@ function App() {
         {view === 'protocolos' && (
           <ProtocolsView
             protocol={protocol}
-            category={category}
-            setCategory={setCategory}
-            protocolCategories={protocolCategories}
             visibleProtocols={visibleProtocols}
             protocolMode={protocolMode}
             openProtocolDetail={openProtocolDetail}
             openProtocolList={openProtocolList}
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
             setSelectedCalculatorId={setSelectedCalculatorId}
             setSelectedCircuitId={setSelectedCircuitId}
             setSelectedProcedureId={setSelectedProcedureId}
@@ -264,12 +252,12 @@ function App() {
 function SearchBox({ query, setQuery, results, openItem }) {
   return (
     <section className="search-wrap" aria-label="Búsqueda clínica">
-      <label htmlFor="search">Buscar protocolo, síntoma, cálculo...</label>
+      <label htmlFor="search">Buscar</label>
       <input
         id="search"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
-        placeholder="código infarto, ictus, shock, traslado..."
+        placeholder="ictus, shock, SCA, traslado..."
       />
       {results.length > 0 && (
         <div className="search-results">
@@ -287,26 +275,20 @@ function SearchBox({ query, setQuery, results, openItem }) {
 
 function Home({ query, setQuery, results, openItem, setView, openProtocolList }) {
   const sections = [
-    { id: 'protocolos', title: 'Protocolos', icon: '▤', note: 'Listado completo de protocolos extrahospitalarios.' },
-    { id: 'circuitos', title: 'Circuitos', icon: '⌁', note: 'Códigos y circuitos de coordinación 061.' },
-    { id: 'procedimientos', title: 'Procedimientos', icon: '□', note: 'Procedimientos operativos y apoyo a circuitos.' },
-    { id: 'calculos', title: 'Cálculos', icon: '◎', note: 'Herramientas de cálculo vinculadas a decisiones clínicas.' },
-    { id: 'bibliografia', title: 'Fuentes', icon: '§', note: 'Bibliografía trazable y fuentes estructuradas.' },
+    { id: 'protocolos', title: 'Protocolos', icon: '▤' },
+    { id: 'circuitos', title: 'Circuitos 061', icon: '⌁' },
+    { id: 'calculos', title: 'Cálculos', icon: '◎' },
+    { id: 'bibliografia', title: 'Fuentes', icon: '§' },
   ]
 
   return (
     <section className="view-stack">
-      <div className="home-intro-line">
-        <p>Extrahospitalaria y traslado crítico.</p>
-      </div>
-
       <SearchBox query={query} setQuery={setQuery} results={results} openItem={openItem} />
       <div className="home-section-map" aria-label="Secciones disponibles">
         {sections.map((item) => (
           <button key={item.id} type="button" onClick={() => (item.id === 'protocolos' ? openProtocolList() : setView(item.id))}>
             <span className="home-section-icon" aria-hidden="true">{item.icon}</span>
             <strong>{item.title}</strong>
-            <small>{item.note}</small>
             <span className="home-section-chevron" aria-hidden="true">›</span>
           </button>
         ))}
@@ -321,15 +303,10 @@ function ClinicalList({ title, items, onOpen }) {
 
 function ProtocolsView({
   protocol,
-  category,
-  setCategory,
-  protocolCategories,
   visibleProtocols,
   protocolMode,
   openProtocolDetail,
   openProtocolList,
-  activeTab,
-  setActiveTab,
   setSelectedCalculatorId,
   setSelectedCircuitId,
   setSelectedProcedureId,
@@ -341,13 +318,6 @@ function ProtocolsView({
   if (protocolMode === 'list') {
     return (
       <section className="view-stack">
-        <div className="filter-row">
-          {protocolCategories.map((item) => (
-            <button key={item} type="button" className={category === item ? 'active' : ''} onClick={() => setCategory(item)}>
-              {item}
-            </button>
-          ))}
-        </div>
         <ClinicalList
           title="Protocolos"
           items={visibleProtocols}
@@ -365,15 +335,19 @@ function ProtocolsView({
         </button>
         <ProtocolHeader protocol={protocol} />
 
-        <div className="tabs" role="tablist">
+        <nav className="phase-jump" aria-label="Secciones del protocolo">
           {TAB_ORDER.map((tab) => (
-            <button key={tab} type="button" className={activeTab === tab ? 'active' : ''} onClick={() => setActiveTab(tab)}>
+            <a key={tab} href={`#${protocol.id}-${tab}`}>
               {tab}
-            </button>
+            </a>
+          ))}
+        </nav>
+
+        <div className="protocol-sections">
+          {TAB_ORDER.map((tab) => (
+            <ProtocolSection key={tab} id={`${protocol.id}-${tab}`} title={tab} items={protocol.tabs[tab]} />
           ))}
         </div>
-
-        <ProtocolSection key={activeTab} title={activeTab} items={protocol.tabs[activeTab]} />
 
         <Connections
           protocol={protocol}
@@ -731,6 +705,7 @@ function CalculatorRunner({ calculator }) {
         {calculator.fields.map((field) => (
           <label key={field}><input type="checkbox" /> {field}</label>
         ))}
+        <output>Resultado: checklist operativo</output>
       </div>
     )
   }
@@ -748,6 +723,7 @@ function CalculatorRunner({ calculator }) {
           </label>
         ))}
         <output key={total}>Resultado: {total}</output>
+        <p className="calc-interpretation">{calculator.warnings}</p>
       </div>
     )
   }
@@ -778,6 +754,7 @@ function CalculatorRunner({ calculator }) {
           </label>
         ))}
         <output key={values.killip || 'I'}>Resultado: {values.killip || 'I'}</output>
+        <p className="calc-interpretation">{calculator.warnings}</p>
       </div>
     )
   }
@@ -800,6 +777,7 @@ function NumericCalc({ calculator, values, set, result }) {
         </label>
       ))}
       <output key={result}>Resultado: {result}</output>
+      <p className="calc-interpretation">{calculator.warnings}</p>
     </div>
   )
 }
@@ -844,7 +822,7 @@ function BibliographyView() {
             <p>{item.institution} · {item.year} · {item.type}</p>
             <p>{item.note}</p>
             <p>Uso: {[...(item.relatedProtocols || []), ...(item.relatedProcedures || [])].join(', ')}</p>
-            <a href={item.url} target="_blank" rel="noreferrer">Abrir fuente</a>
+            <a href={item.url}>Abrir fuente</a>
             <small>Confianza: {item.confidence} · revisión {item.reviewedAt} · {item.pendingQuestions}</small>
           </details>
         ))}
