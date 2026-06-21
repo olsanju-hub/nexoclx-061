@@ -1,0 +1,19 @@
+{
+  "name": "NexoClx 061",
+  "context": "Emergencias extrahospitalarias y traslado critico",
+  "colors": {
+    "bg": "#f2f2f7",
+    "surface": "#ffffff",
+    "text": "#1c1c1e",
+    "textSoft": "#3c3c43",
+    "muted": "#6c6c72",
+    "accent": "#a8323a",
+    "accentStrong": "#8f2630",
+    "accentSoft": "#f6e7e9",
+    "danger": "#d70015",
+    "dangerSoft": "#fde7ea",
+    "success": "#168a55",
+    "warning": "#b7791f",
+    "info": "#0a84ff"
+  }
+}

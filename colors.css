@@ -1,0 +1,17 @@
+:root {
+  --app-name: "NexoClx 061";
+  --clinical-context: "Emergencias extrahospitalarias y traslado critico";
+  --color-bg: #f2f2f7;
+  --color-surface: #ffffff;
+  --color-text: #1c1c1e;
+  --color-text-soft: #3c3c43;
+  --color-muted: #6c6c72;
+  --color-accent: #a8323a;
+  --color-accent-strong: #8f2630;
+  --color-accent-soft: #f6e7e9;
+  --color-danger: #d70015;
+  --color-danger-soft: #fde7ea;
+  --color-success: #168a55;
+  --color-warning: #b7791f;
+  --color-info: #0a84ff;
+}
