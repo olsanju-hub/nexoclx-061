@@ -24,41 +24,41 @@ export const primarySections = [
   {
     id: routes.protocols,
     title: 'Protocolos',
-    description: 'Módulo no operativo.',
+    description: 'Guías para asistencia extrahospitalaria.',
     icon: FileText,
   },
   {
     id: routes.circuits,
     title: 'Circuitos',
-    description: 'Módulo no operativo.',
+    description: 'Activación, prealerta y destino útil.',
     icon: Route,
   },
   {
     id: routes.procedures,
     title: 'Procedimientos',
-    description: 'Módulo no operativo.',
+    description: 'Actuaciones técnicas en escena y traslado.',
     icon: Stethoscope,
   },
   {
     id: routes.calculations,
     title: 'Cálculos',
-    description: 'Módulo no operativo.',
+    description: 'Apoyo operativo vinculado al protocolo.',
     icon: Calculator,
   },
   {
     id: routes.sources,
     title: 'Fuentes',
-    description: 'Pendiente de bibliografía validada.',
+    description: 'Guías y documentos consultados.',
     icon: BookOpen,
   },
 ];
 
 export const secondarySections = [
-  { id: routes.protocols, title: 'Protocolos', description: 'Módulo no operativo.', icon: FolderOpen },
-  { id: routes.circuits, title: 'Circuitos', description: 'Módulo no operativo.', icon: Route },
-  { id: routes.procedures, title: 'Procedimientos', description: 'Módulo no operativo.', icon: Stethoscope },
-  { id: routes.calculations, title: 'Cálculos', description: 'Módulo no operativo.', icon: Calculator },
-  { id: routes.sources, title: 'Fuentes', description: 'Pendiente de bibliografía validada.', icon: Library },
+  { id: routes.protocols, title: 'Protocolos', description: 'Guías para asistencia extrahospitalaria.', icon: FolderOpen },
+  { id: routes.circuits, title: 'Circuitos', description: 'Activación, prealerta y destino útil.', icon: Route },
+  { id: routes.procedures, title: 'Procedimientos', description: 'Actuaciones técnicas en escena y traslado.', icon: Stethoscope },
+  { id: routes.calculations, title: 'Cálculos', description: 'Apoyo operativo vinculado al protocolo.', icon: Calculator },
+  { id: routes.sources, title: 'Fuentes', description: 'Guías y documentos consultados.', icon: Library },
 ];
 
 export const bottomNavItems = [

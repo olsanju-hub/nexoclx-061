@@ -1,20 +1,18 @@
 import { ContentBlock } from '../components/detail/ContentBlock.jsx';
-import { EmptyClinicalState } from '../components/feedback/EmptyClinicalState.jsx';
 
-export function Tools({ app }) {
+export function Tools() {
   return (
     <div className="screen">
       <div className="section-heading">
         <h1>Herramientas</h1>
-        <p>Módulo no operativo. Pendiente de contenido clínico validado.</p>
+        <p>Apoyo operativo vinculado al protocolo Dolor torácico.</p>
       </div>
-      <ContentBlock title="Estado del módulo">
-        <p>Módulo no operativo. Pendiente de contenido clínico validado.</p>
+      <ContentBlock title="ECG y transmisión">
+        <p>ECG prehospitalario, reevaluación y transmisión al sistema receptor si está disponible.</p>
       </ContentBlock>
-      <ContentBlock title="Validación pendiente">
-        <p>Contenido pendiente de validación bibliográfica.</p>
+      <ContentBlock title="Prealerta y destino">
+        <p>Comunicación estructurada y selección de hospital útil según estabilidad, ECG y sospecha tiempo-dependiente.</p>
       </ContentBlock>
-      <EmptyClinicalState text="Módulo no operativo. Pendiente de contenido clínico validado." />
     </div>
   );
 }

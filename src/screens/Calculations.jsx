@@ -1,17 +1,15 @@
 import { ContentBlock } from '../components/detail/ContentBlock.jsx';
-import { EmptyClinicalState } from '../components/feedback/EmptyClinicalState.jsx';
 
 export function Calculations() {
   return (
     <div className="screen">
       <div className="section-heading">
         <h1>Cálculos</h1>
-        <p>Módulo no operativo. Pendiente de contenido clínico validado.</p>
+        <p>Apoyo operativo vinculado al protocolo Dolor torácico.</p>
       </div>
-      <ContentBlock title="Estado del módulo">
-        <p>Módulo no operativo. Pendiente de contenido clínico validado.</p>
+      <ContentBlock title="Asistencia 061">
+        <p>La vista prioriza ECG prehospitalario, estabilidad, prealerta y traslado frente a escalas largas durante la escena.</p>
       </ContentBlock>
-      <EmptyClinicalState text="Contenido pendiente de validación bibliográfica." />
     </div>
   );
 }
