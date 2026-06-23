@@ -15,7 +15,7 @@ import { routes } from '../app/routes.js';
 export const appConfig = {
   name: 'NexoClx 061',
   context: 'Emergencias extrahospitalarias y traslado critico',
-  icon: '/icons/icon-192.png',
+  icon: `${import.meta.env.BASE_URL}icons/icon-192.png`,
   accent: '#a8323a',
   homeVariant: 'balanced-five',
 };
