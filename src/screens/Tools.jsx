@@ -26,7 +26,7 @@ export function Tools() {
     <div className="screen">
       <div className="section-heading">
         <h1>Herramientas</h1>
-        <p>Apoyo operativo vinculado al protocolo Dolor torácico.</p>
+        <p>Prealerta y traslado.</p>
       </div>
       <ContentBlock title="Checklist de prealerta">
         <div className="checklist-grid">

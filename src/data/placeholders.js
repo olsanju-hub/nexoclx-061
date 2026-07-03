@@ -72,7 +72,7 @@ export const placeholderProtocols = [
     ],
     interactive: {
       title: 'Decisión rápida 061',
-      intro: 'Marca los datos presentes para orientar prealerta, código y traslado.',
+      intro: 'Marca los datos presentes.',
       checks: [
         'Inestabilidad, síncope, disnea, arritmia, dolor activo o necesidad de vigilancia estrecha.',
         'ECG compatible con elevación del ST o equivalente según red asistencial.',

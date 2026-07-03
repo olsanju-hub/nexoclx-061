@@ -42,7 +42,7 @@ export const primarySections = [
   {
     id: routes.calculations,
     title: 'Cálculos',
-    description: 'Apoyo operativo vinculado al protocolo.',
+    description: 'Selector operativo.',
     icon: Calculator,
   },
   {
@@ -57,7 +57,7 @@ export const secondarySections = [
   { id: routes.protocols, title: 'Protocolos', description: 'Guías para asistencia extrahospitalaria.', icon: FolderOpen },
   { id: routes.circuits, title: 'Circuitos', description: 'Activación, prealerta y destino útil.', icon: Route },
   { id: routes.procedures, title: 'Procedimientos', description: 'Actuaciones técnicas en escena y traslado.', icon: Stethoscope },
-  { id: routes.calculations, title: 'Cálculos', description: 'Apoyo operativo vinculado al protocolo.', icon: Calculator },
+  { id: routes.calculations, title: 'Cálculos', description: 'Selector operativo.', icon: Calculator },
   { id: routes.sources, title: 'Fuentes', description: 'Guías y documentos consultados.', icon: Library },
 ];
 
