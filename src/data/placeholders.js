@@ -70,6 +70,22 @@ export const placeholderProtocols = [
       'Prealerta estructurada al hospital receptor.',
       'Selección de hospital útil según estabilidad, ECG y sospecha tiempo-dependiente.',
     ],
+    interactive: {
+      title: 'Decisión rápida 061',
+      intro: 'Marca los datos presentes para orientar prealerta, código y traslado.',
+      checks: [
+        'Inestabilidad, síncope, disnea, arritmia, dolor activo o necesidad de vigilancia estrecha.',
+        'ECG compatible con elevación del ST o equivalente según red asistencial.',
+        'Sospecha de TEP, síndrome aórtico agudo, neumotórax, pericarditis o miocarditis.',
+        'Necesidad de centro con reperfusión, imagen urgente o cuidados críticos.',
+        'Cambio clínico relevante durante el traslado.',
+      ],
+      positiveTitle: 'Prealerta y traslado al hospital útil',
+      positiveBody: 'Con cualquier dato marcado, coordina destino, transmite ECG si procede y entrega información estructurada al receptor.',
+      negativeTitle: 'Reevaluar y documentar transferencia',
+      negativeBody: 'Si no hay datos marcados, mantén reevaluación, registro de inicio/evolución, ECG si procede y transferencia estructurada.',
+      copyPrefix: 'Dolor torácico 061',
+    },
     sources: placeholderSources,
   },
 ];
