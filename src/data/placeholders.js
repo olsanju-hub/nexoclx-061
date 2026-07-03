@@ -7,6 +7,15 @@ export const placeholderSources = [
   'ACC/AHA. 2022 Guideline for the Diagnosis and Management of Aortic Disease. https://www.ahajournals.org/doi/10.1161/CIR.0000000000001106',
 ];
 
+export const hypertensionSources = [
+  'ESC. 2024 Guidelines for the management of elevated blood pressure and hypertension. https://www.escardio.org/guidelines/clinical-practice-guidelines/all-esc-practice-guidelines/elevated-blood-pressure-and-hypertension/',
+  'European Society of Hypertension. 2023 ESH Guidelines for the management of arterial hypertension. Journal of Hypertension. https://journals.lww.com/jhypertension/fulltext/2023/12000/2023_esh_guidelines_for_the_management_of_arterial.2.aspx',
+  'NICE. Hypertension in adults: diagnosis and management, NG136. https://www.nice.org.uk/guidance/ng136/chapter/recommendations',
+  'Peacock WF, et al. Treatment of hypertensive emergencies. Ann Transl Med. 2017. https://pmc.ncbi.nlm.nih.gov/articles/PMC5440310/',
+  'AHA. Systems of Care for ST-Segment-Elevation Myocardial Infarction. Circulation 2021. https://www.ahajournals.org/doi/10.1161/CIR.0000000000001025',
+  'ACC/AHA. 2022 Guideline for the Diagnosis and Management of Aortic Disease. https://www.ahajournals.org/doi/10.1161/CIR.0000000000001106',
+];
+
 export const placeholderProtocols = [
   {
     id: 'dolor-toracico',
@@ -87,5 +96,102 @@ export const placeholderProtocols = [
       copyPrefix: 'Dolor torácico 061',
     },
     sources: placeholderSources,
+  },
+  {
+    id: 'hta',
+    title: 'HTA',
+    description: 'Crisis hipertensiva extrahospitalaria, prealerta y traslado al hospital útil.',
+    status: 'Guía clínica',
+    sections: [
+      {
+        step: '01',
+        title: 'Escena y ABCDE',
+        body: 'La decisión prehospitalaria se basa en estabilidad, síntomas de daño agudo y tiempo hasta hospital útil.',
+        items: [
+          'Asegura escena, confirma constantes, nivel de conciencia, glucemia si alteración neurológica y saturación.',
+          'Busca dolor torácico, disnea, edema pulmonar, focalidad neurológica, convulsión, confusión, dolor dorsal brusco o embarazo.',
+          'Monitoriza y reevalúa si hay síntomas, cifras muy elevadas, deterioro clínico o necesidad de traslado prioritario.',
+        ],
+      },
+      {
+        step: '02',
+        title: 'Selector de emergencia hipertensiva',
+        body: 'Considera emergencia hipertensiva cuando la HTA se acompaña de daño agudo sospechado o establecido.',
+        items: [
+          'Sospecha SCA o edema agudo de pulmón ante dolor torácico, disnea, crepitantes, hipoxemia o cambios ECG.',
+          'Sospecha ictus o encefalopatía ante focalidad, confusión, convulsiones, cefalea intensa o alteración visual.',
+          'Sospecha disección aórtica ante dolor brusco torácico/dorsal, asimetría vascular, síncope o déficit neurológico.',
+        ],
+      },
+      {
+        step: '03',
+        title: 'Prealerta y hospital útil',
+        body: 'La prioridad es coordinar destino con capacidad para resolver la causa tiempo-dependiente probable.',
+        items: [
+          'Prealerta con cifras repetidas, síntomas, tiempo de inicio, ECG si existe, exploración neurológica, saturación y evolución.',
+          'Selecciona centro útil para SCA, ictus, disección, edema pulmonar o cuidados críticos según sospecha principal.',
+          'No retrases el traslado para normalizar cifras si hay daño agudo o necesidad de tratamiento hospitalario.',
+        ],
+      },
+      {
+        step: '04',
+        title: 'Tratamiento durante asistencia y traslado',
+        body: 'El tratamiento prehospitalario debe ser protocolizado, monitorizado y dependiente del órgano afectado.',
+        items: [
+          'Asegura soporte ABCDE, posición, oxígeno si hipoxemia, acceso venoso si procede y monitorización.',
+          'Evita descensos bruscos no indicados cuando no hay daño agudo de órgano diana.',
+          'Si existe protocolo médico para fármaco intravenoso, titula con monitorización y comunica respuesta al receptor.',
+        ],
+      },
+    ],
+    tools: [
+      'Checklist ABCDE y daño agudo de órgano diana.',
+      'Selector de hospital útil según SCA, ictus, disección, edema pulmonar o críticos.',
+      'Resumen copiable de prealerta y transferencia.',
+    ],
+    treatment: [
+      {
+        title: 'Soporte y traslado',
+        body: 'Primer escalón común en la crisis hipertensiva extrahospitalaria.',
+        items: [
+          'Monitorización, reevaluación seriada, ECG si hay dolor torácico/disnea o sospecha de SCA, y acceso venoso si se prevé tratamiento.',
+          'Oxígeno si hipoxemia y soporte específico según ABCDE y patología dominante.',
+          'Prealerta y traslado prioritario si hay sospecha de daño agudo de órgano diana.',
+        ],
+      },
+      {
+        title: 'Tratamiento intravenoso protocolizado',
+        body: 'Solo cuando el recurso y la dirección médica lo contemplen para emergencia hipertensiva.',
+        items: [
+          'Labetalol intravenoso: bolo inicial 0,3-1 mg/kg con máximo inicial 20 mg, seguido de perfusión 0,4-1 mg/kg/h según respuesta y monitorización.',
+          'Evitar tratamiento crónico ambulatorio durante el traslado salvo indicación médica específica.',
+          'Documentar dosis, hora, respuesta tensional, frecuencia cardiaca, síntomas y eventos adversos.',
+        ],
+      },
+      {
+        title: 'Transferencia',
+        body: 'La información transmitida debe permitir continuar el tratamiento sin reiniciar la valoración.',
+        items: [
+          'Comunica tiempo de inicio, cifras repetidas, síntomas, exploración, ECG, tratamientos administrados y respuesta.',
+          'Indica motivo de hospital útil: SCA, ictus, disección, edema pulmonar, embarazo/eclampsia o necesidad de críticos.',
+        ],
+      },
+    ],
+    interactive: {
+      title: 'Decisión rápida HTA 061',
+      intro: 'Marca los datos presentes.',
+      checks: [
+        'Dolor torácico, disnea, edema pulmonar, focalidad neurológica, convulsión, confusión, alteración visual o dolor dorsal brusco.',
+        'ECG, exploración o evolución sugieren SCA, ictus, disección aórtica, edema pulmonar o críticos.',
+        'Necesidad de prealerta, coordinación médica o hospital útil específico.',
+        'Tratamiento intravenoso protocolizado o monitorización avanzada durante el traslado.',
+      ],
+      positiveTitle: 'Prealerta y traslado prioritario',
+      positiveBody: 'Coordina destino, transmite datos críticos, monitoriza y traslada al hospital útil sin retrasar por normalización tensional.',
+      negativeTitle: 'Reevaluar y transferir de forma estructurada',
+      negativeBody: 'Si no hay daño agudo, evita descenso brusco, reevalúa, documenta cifras repetidas y deriva según circuito asistencial.',
+      copyPrefix: 'HTA 061',
+    },
+    sources: hypertensionSources,
   },
 ];
