@@ -4,6 +4,12 @@ NexoClx 061 es una app independiente de la familia NexoClx para emergencias extr
 
 La familia NexoClx está formada por AP, Urg, 061 y Ped. No se deben fusionar apps ni crear un selector común.
 
+## Modelo de conducta
+
+Cada tema debe responder: "estoy ante esta patología en este paciente, ¿qué hago ahora?". La secuencia de trabajo es patología -> escena/ABCDE -> gravedad -> soporte -> código/prealerta -> tratamiento prehospitalario si procede -> reevaluación -> traslado/hospital útil -> transferencia -> fuentes documentadas internamente.
+
+La interfaz debe priorizar actuación, destino y transferencia. No debe mostrar capítulos, pasos de lectura ni bibliografía como parte del flujo clínico.
+
 ## Identidad
 
 - Contexto: emergencias extrahospitalarias y traslado crítico.
@@ -44,8 +50,9 @@ Cada tema debe ser una herramienta:
 - sospecha o nivel operativo;
 - estabilización y soporte;
 - código, prealerta, traslado u hospital útil;
+- reevaluación y transferencia;
 - resumen copiable de prealerta/transferencia;
-- fuentes al final.
+- fuentes documentadas en reportes o README, no como bloque visible de la herramienta.
 
 Si un bloque solo se lee, convertirlo en checklist operativo, selector de activación, panel de traslado o detalle secundario.
 
@@ -59,13 +66,15 @@ Si depende de protocolo territorial no publicado, documentar omisión en `report
 
 No mencionar cálculos o scores si no se calculan realmente y si no son útiles en escena. Si un cálculo operativo es necesario y tiene fórmula validada, crear campos, resultado, interpretación y conducta.
 
-## Fuentes
+## Fuentes internas
 
 Fuentes aceptables: guías de sociedades científicas, organismos oficiales, consensos publicados, redes asistenciales oficiales y documentos referenciados.
 
 Fuentes preferentes: AHA/ACC, ESC/ESH, AHA/ERC, SEMES, SEC, CHEST y documentos oficiales nacionales o autonómicos.
 
 No usar blogs, webs comerciales, apuntes, contenido generado por IA, presentaciones sin respaldo, protocolos locales no publicados ni textos sin trazabilidad.
+
+Las fuentes sostienen la herramienta por detrás. No añadir "Fuentes" o "Bibliografía" como card, paso o bloque visible dentro de cada herramienta clínica.
 
 ## Activación y traslado
 
@@ -88,6 +97,7 @@ No rediseñar. Mantener patrón visual family-discovery-aesthetic, tipografía, 
 - No mostrar textos internos, pendientes, mocks ni placeholders.
 - No mostrar contenido clínico sin fuente.
 - No mencionar cálculos si no se calculan.
+- No mostrar bibliografía como ítem del flujo de la herramienta.
 - No tocar Vercel.
 
 ## Validación antes de commit/push

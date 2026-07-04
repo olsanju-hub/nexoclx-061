@@ -236,7 +236,7 @@ export const placeholderProtocols = [
         title: 'Tratamiento intravenoso protocolizado',
         body: 'Solo cuando el recurso y la dirección médica lo contemplen para emergencia hipertensiva.',
         items: [
-          'Labetalol intravenoso: bolo inicial 0,3-1 mg/kg con máximo inicial 20 mg, seguido de perfusión 0,4-1 mg/kg/h según respuesta y monitorización.',
+          'Tratamiento intravenoso titulado solo si el recurso y la dirección médica lo contemplan, con monitorización y protocolo vigente.',
           'Evitar tratamiento crónico ambulatorio durante el traslado salvo indicación médica específica.',
           'Documentar dosis, hora, respuesta tensional, frecuencia cardiaca, síntomas y eventos adversos.',
         ],
