@@ -16,6 +16,13 @@ export const hypertensionSources = [
   'ACC/AHA. 2022 Guideline for the Diagnosis and Management of Aortic Disease. https://www.ahajournals.org/doi/10.1161/CIR.0000000000001106',
 ];
 
+export const strokeSources = [
+  'AHA/ASA. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke. https://www.ahajournals.org/doi/10.1161/STR.0000000000000513',
+  'European Academy of Neurology and European Stroke Organization. Consensus statement and practical guidance for pre-hospital management of stroke. https://onlinelibrary.wiley.com/doi/full/10.1111/ene.13539',
+  'Ministerio de Sanidad. Estrategia en Ictus del Sistema Nacional de Salud. Actualización 2024. https://www.sanidad.gob.es/areas/calidadAsistencial/estrategias/ictus/docs/Estrategia_en_Ictus_del_SNS._Actualizacion_2024_accesible.pdf',
+  'Comunidad de Madrid. Código Ictus. https://www.comunidad.madrid/salud/codigo-ictus',
+];
+
 export const placeholderProtocols = [
   {
     id: 'dolor-toracico',
@@ -146,13 +153,9 @@ export const placeholderProtocols = [
       ],
       incompleteOutcome: {
         status: 'Datos',
-        title: 'Completa ECG o estado operativo',
-        body: 'Para decidir prealerta/código hay que conocer el ECG o si aún no se ha realizado.',
-        actions: [
-          'Seleccionar ECG prehospitalario.',
-          'Marcar inestabilidad, dolor activo o necesidad de hospital útil si existen.',
-          'Actualizar la salida si cambia el estado durante traslado.',
-        ],
+        title: 'Faltan datos obligatorios',
+        body: 'Completa los campos marcados para orientar prealerta, código o traslado.',
+        actions: [],
       },
       defaultOutcome: {
         status: 'Reevaluar',
@@ -314,13 +317,9 @@ export const placeholderProtocols = [
       ],
       incompleteOutcome: {
         status: 'Datos',
-        title: 'Completa cifras tensionales',
-        body: 'La herramienta necesita TA para orientar vigilancia, prealerta o traslado por crisis hipertensiva.',
-        actions: [
-          'Introducir presión sistólica y diastólica.',
-          'Marcar síntomas torácicos, respiratorios, neurológicos o aórticos si aparecen.',
-          'Indicar si existe protocolo de intravenoso monitorizado.',
-        ],
+        title: 'Faltan datos obligatorios',
+        body: 'Completa los campos marcados para orientar vigilancia, prealerta o traslado.',
+        actions: [],
       },
       defaultOutcome: {
         status: 'Traslado',
@@ -334,5 +333,120 @@ export const placeholderProtocols = [
       },
     },
     sources: hypertensionSources,
+  },
+  {
+    id: 'acv',
+    title: 'ACV',
+    description: 'Reconocimiento prehospitalario, código ictus, hospital útil y transferencia.',
+    status: 'Herramienta clínica',
+    sections: [
+      {
+        step: '01',
+        title: 'Escena y reconocimiento',
+        body: 'Confirmar seguridad, ABCDE, glucemia si procede, hora de inicio o última vez visto bien y déficit neurológico actual.',
+        items: [
+          'Usar una escala breve de reconocimiento prehospitalario mejora la identificación temprana de ictus.',
+          'La prealerta al hospital receptor reduce tiempos de evaluación y facilita tratamiento tiempo-dependiente.',
+          'Los imitadores no deben retrasar traslado si persiste déficit focal o hay duda razonable.',
+        ],
+      },
+      {
+        step: '02',
+        title: 'Hospital útil',
+        body: 'El destino debe priorizar capacidad de imagen urgente, código ictus y tratamiento de reperfusión si el tiempo y la situación basal lo permiten.',
+        items: [
+          'Comunicar hora de inicio, última vez visto bien, déficit, glucemia, anticoagulación, situación basal y evolución.',
+          'Sospecha de gran vaso exige valorar centro útil con trombectomía o coordinación con red de ictus.',
+          'No retrasar traslado por normalizar cifras o completar datos no esenciales.',
+        ],
+      },
+    ],
+    tools: [
+      'Checklist FAST/BEFAST y gravedad neurológica.',
+      'Selector de prealerta, código ictus y hospital útil.',
+      'Resumen copiable de transferencia.',
+    ],
+    assessment: {
+      title: 'Herramienta ACV 061',
+      intro: 'Orienta prealerta, código ictus y traslado al hospital útil.',
+      copyPrefix: 'ACV 061',
+      fields: [
+        {
+          id: 'onset',
+          type: 'select',
+          label: 'Inicio o última vez visto bien',
+          required: true,
+          options: [
+            { value: 'under-4-5', label: 'Menos de 4,5 h' },
+            { value: 'under-24', label: '4,5-24 h' },
+            { value: 'over-24', label: 'Más de 24 h' },
+            { value: 'unknown', label: 'Desconocido' },
+            { value: 'resolved', label: 'Síntomas resueltos' },
+          ],
+        },
+        { id: 'faceArmSpeech', type: 'checkbox', label: 'Asimetría facial, brazo caído o alteración del habla/lenguaje' },
+        { id: 'otherDeficit', type: 'checkbox', label: 'Déficit visual, coordinación, sensibilidad, fuerza o campo visual de inicio brusco' },
+        { id: 'lvoSigns', type: 'checkbox', label: 'Sospecha de gran vaso: afasia, desviación mirada, hemiparesia intensa o negligencia' },
+        { id: 'airwayBreathingCirculation', type: 'checkbox', label: 'Compromiso ABCDE, bajo nivel de conciencia, crisis o vómitos' },
+        { id: 'anticoagulated', type: 'checkbox', label: 'Anticoagulación o trastorno hemorrágico conocido' },
+        { id: 'glucoseChecked', type: 'checkbox', label: 'Glucemia capilar realizada si está disponible' },
+        { id: 'usefulHospitalAvailable', type: 'checkbox', label: 'Centro útil/código ictus disponible según red' },
+      ],
+      outcomes: [
+        {
+          any: ['airwayBreathingCirculation'],
+          status: 'Crítico',
+          tone: 'alert',
+          title: 'Estabilización y prealerta neurocrítica',
+          body: 'Hay compromiso clínico. Priorizar ABCDE, monitorización, prealerta y traslado al centro útil.',
+          actions: [
+            'Asegurar vía aérea, ventilación, perfusión y glucemia según contexto.',
+            'Prealertar con déficit, hora de inicio, situación basal, anticoagulación y evolución.',
+            'Trasladar al hospital útil definido por la red asistencial.',
+          ],
+        },
+        {
+          any: ['faceArmSpeech', 'otherDeficit', 'lvoSigns'],
+          status: 'Código',
+          tone: 'alert',
+          title: 'Activar código ictus / prealerta',
+          body: 'El déficit neurológico brusco requiere coordinación inmediata y traslado tiempo-dependiente.',
+          actions: [
+            'Activar código ictus según red territorial.',
+            'Elegir hospital útil; si hay sospecha de gran vaso, coordinar centro con capacidad de trombectomía o red de derivación.',
+            'Comunicar última vez visto bien, escala breve, glucemia si existe, anticoagulación y situación basal.',
+          ],
+        },
+        {
+          any: [{ id: 'onset', equals: 'resolved' }],
+          status: 'AIT',
+          tone: 'alert',
+          title: 'Síntomas resueltos: traslado/valoración urgente',
+          body: 'La resolución no elimina riesgo precoz; requiere circuito urgente de AIT/ictus.',
+          actions: [
+            'Registrar hora de inicio y resolución.',
+            'Trasladar o derivar según circuito local de AIT.',
+            'No demorar por ausencia de déficit actual si el episodio fue compatible.',
+          ],
+        },
+      ],
+      incompleteOutcome: {
+        status: 'Datos',
+        title: 'Faltan datos obligatorios',
+        body: 'Completa el inicio o última vez visto bien para orientar prealerta y traslado.',
+        actions: [],
+      },
+      defaultOutcome: {
+        status: 'Reevaluar',
+        title: 'Sin criterio de código ictus registrado',
+        body: 'Mantener reevaluación neurológica y orientar destino según clínica, estabilidad y circuito asistencial.',
+        actions: [
+          'Revisar glucemia, constantes y evolución durante el traslado.',
+          'Actualizar prealerta si aparece déficit focal, bajo nivel de conciencia o sospecha de gran vaso.',
+          'Transferir información estructurada al receptor.',
+        ],
+      },
+    },
+    sources: strokeSources,
   },
 ];
