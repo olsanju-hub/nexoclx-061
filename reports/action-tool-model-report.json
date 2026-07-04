@@ -42,6 +42,7 @@
   "estetica_modificada": false,
   "navegacion_modificada": false,
   "vercel_tocado": false,
+  "nota_despliegue": "Actualizada la accion actions/deploy-pages de v4 a v5 tras fallo externo del paso deploy de GitHub Pages; no se modifico codigo de la app.",
   "riesgos_pendientes": [
     "Si se reintroduce tratamiento IV por peso, implementar calculadora con peso y protocolo publicado."
   ]
