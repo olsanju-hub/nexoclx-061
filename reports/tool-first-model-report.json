@@ -1,0 +1,52 @@
+{
+  "fecha": "2026-07-04",
+  "app": "NexoClx 061",
+  "readme_creado_actualizado": true,
+  "temas_revisados": ["Dolor torácico", "HTA"],
+  "decision_pertinencia": {
+    "Dolor torácico": "Pertinente en 061 como escena, ECG prehospitalario, código/prealerta, traslado y hospital útil.",
+    "HTA": "Pertinente en 061 solo como crisis/emergencia hipertensiva extrahospitalaria, alarma, prealerta, soporte y traslado."
+  },
+  "dolor_toracico_corregido_AP": false,
+  "dolor_toracico_corregido_Urg": false,
+  "dolor_toracico_corregido_061": true,
+  "hta_corregida_AP": false,
+  "hta_corregida_Urg": false,
+  "hta_corregida_061": true,
+  "justificacion_no_mantenido": [],
+  "archivos_modificados": ["README.md", "src/data/placeholders.js", "src/screens/ProtocolDetail.jsx", "reports/tool-first-model-report.json"],
+  "fuentes_usadas": [
+    "ACC/AHA/ACEP/NAEMSP/SCAI 2025 ACS Guideline",
+    "AHA Systems of Care for STEMI 2021",
+    "ESC 2023 ACS Guideline",
+    "ACC/AHA 2022 Aortic Disease Guideline",
+    "ESC 2024 elevated blood pressure and hypertension",
+    "ESH 2023 arterial hypertension",
+    "NICE NG136 hypertension",
+    "Peacock WF et al. Treatment of hypertensive emergencies. Ann Transl Med. 2017"
+  ],
+  "fuente_por_bloque_clinico": {
+    "dolor_toracico_061": ["AHA STEMI systems of care 2021", "2025 ACC/AHA ACS", "ESC 2023 ACS", "ACC/AHA 2022 aortic disease"],
+    "hta_061": ["ESC 2024", "ESH 2023", "NICE NG136", "Peacock WF et al. 2017"]
+  },
+  "fuente_por_tratamiento_dosis": {
+    "soporte_ABCDE": ["ESC 2024", "ESH 2023"],
+    "labetalol_IV_protocolizado": ["Peacock WF et al. 2017"]
+  },
+  "dosis_anadidas": ["labetalol IV solo si protocolo/direccion medica lo contempla"],
+  "escalones_terapeuticos_anadidos": ["soporte ABCDE", "prealerta/hospital útil", "intravenoso protocolizado si procede"],
+  "tratamientos_coadyuvantes_anadidos": ["monitorizacion", "ECG prehospitalario", "oxigeno si hipoxemia", "transferencia estructurada"],
+  "calculos_implementados": [],
+  "calculos_omitidos": ["Escalas largas no útiles en escena: omitidas"],
+  "contenido_omitido_por_falta_de_fuente": ["Tratamiento crónico de HTA", "Dosis prehospitalarias no respaldadas por protocolo publicado"],
+  "calculadoras_nuevas": false,
+  "formulas_modificadas": false,
+  "build": "pass",
+  "errores_consola": [],
+  "overflow_horizontal": false,
+  "colores_base_modificados": false,
+  "navegacion_global_modificada": false,
+  "estetica_modificada": false,
+  "vercel_tocado": false,
+  "riesgos_pendientes": ["Validar cualquier tratamiento IV prehospitalario con dirección médica local."]
+}

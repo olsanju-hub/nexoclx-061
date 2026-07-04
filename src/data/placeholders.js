@@ -106,6 +106,7 @@ export const placeholderProtocols = [
           id: 'ecg',
           type: 'select',
           label: 'ECG prehospitalario',
+          required: true,
           options: [
             { value: 'not-done', label: 'No realizado todavía' },
             { value: 'normal', label: 'Sin cambios agudos' },
@@ -143,6 +144,16 @@ export const placeholderProtocols = [
           ],
         },
       ],
+      incompleteOutcome: {
+        status: 'Datos',
+        title: 'Completa ECG o estado operativo',
+        body: 'Para decidir prealerta/código hay que conocer el ECG o si aún no se ha realizado.',
+        actions: [
+          'Seleccionar ECG prehospitalario.',
+          'Marcar inestabilidad, dolor activo o necesidad de hospital útil si existen.',
+          'Actualizar la salida si cambia el estado durante traslado.',
+        ],
+      },
       defaultOutcome: {
         status: 'Reevaluar',
         title: 'Transferencia estructurada sin activación específica',
@@ -256,8 +267,8 @@ export const placeholderProtocols = [
       intro: 'Introduce datos de escena para decidir emergencia hipertensiva, prealerta y traslado.',
       copyPrefix: 'HTA 061',
       fields: [
-        { id: 'sbp', type: 'number', label: 'Presión sistólica', min: 70, max: 300, unit: 'mmHg' },
-        { id: 'dbp', type: 'number', label: 'Presión diastólica', min: 40, max: 180, unit: 'mmHg' },
+        { id: 'sbp', type: 'number', label: 'Presión sistólica', min: 70, max: 300, unit: 'mmHg', required: true },
+        { id: 'dbp', type: 'number', label: 'Presión diastólica', min: 40, max: 180, unit: 'mmHg', required: true },
         { id: 'chestResp', type: 'checkbox', label: 'Dolor torácico, disnea, edema pulmonar o cambios ECG' },
         { id: 'neuro', type: 'checkbox', label: 'Focalidad, convulsión, confusión o alteración visual' },
         { id: 'aortic', type: 'checkbox', label: 'Dolor torácico/dorsal brusco, síncope o asimetría vascular' },
@@ -301,6 +312,16 @@ export const placeholderProtocols = [
           ],
         },
       ],
+      incompleteOutcome: {
+        status: 'Datos',
+        title: 'Completa cifras tensionales',
+        body: 'La herramienta necesita TA para orientar vigilancia, prealerta o traslado por crisis hipertensiva.',
+        actions: [
+          'Introducir presión sistólica y diastólica.',
+          'Marcar síntomas torácicos, respiratorios, neurológicos o aórticos si aparecen.',
+          'Indicar si existe protocolo de intravenoso monitorizado.',
+        ],
+      },
       defaultOutcome: {
         status: 'Traslado',
         title: 'Reevaluación y transferencia estructurada',
