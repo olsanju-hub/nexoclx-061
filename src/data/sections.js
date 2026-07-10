@@ -1,10 +1,8 @@
 import {
-  BookOpen,
   Calculator,
   FileText,
   FolderOpen,
   HeartPulse,
-  Library,
   MoreHorizontal,
   Route,
   Stethoscope,
@@ -45,12 +43,6 @@ export const primarySections = [
     description: 'Estructura preparada para futuros cálculos.',
     icon: Calculator,
   },
-  {
-    id: routes.sources,
-    title: 'Fuentes',
-    description: 'Estructura preparada para futuras fuentes.',
-    icon: BookOpen,
-  },
 ];
 
 export const secondarySections = [
@@ -58,7 +50,6 @@ export const secondarySections = [
   { id: routes.circuits, title: 'Circuitos', description: 'Estructura preparada para futuros circuitos.', icon: Route },
   { id: routes.procedures, title: 'Procedimientos', description: 'Estructura preparada para futuros procedimientos.', icon: Stethoscope },
   { id: routes.calculations, title: 'Cálculos', description: 'Estructura preparada para futuros cálculos.', icon: Calculator },
-  { id: routes.sources, title: 'Fuentes', description: 'Estructura preparada para futuras fuentes.', icon: Library },
 ];
 
 export const bottomNavItems = [
@@ -73,7 +64,6 @@ export const desktopNavItems = [
   { id: routes.circuits, label: 'Circuitos' },
   { id: routes.procedures, label: 'Procedimientos' },
   { id: routes.calculations, label: 'Cálculos' },
-  { id: routes.sources, label: 'Fuentes' },
 ];
 
 export const sectionIcons = {
